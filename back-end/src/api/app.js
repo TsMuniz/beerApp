@@ -1,13 +1,13 @@
 require('express-async-errors');
 const express = require('express');
-const loginRoute = require('../routes/loginRouter');
-const userRoute = require('../routes/userRoute');
+const { userRoute, loginRoute, registerRoute } = require('../routes');
 
 const app = express();
 app.use(express.json());
 
 app.use('/user', userRoute);
 app.use('/login', loginRoute);
+app.use('/register', registerRoute);
 
 app.use((error, _req, res, _next) => {
     const { cause, message } = error;
