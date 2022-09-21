@@ -1,5 +1,5 @@
 import React from 'react';
-import './InputPassword.css';
+import PropTypes from 'prop-types';
 
 function InputPassword({ placeholder, dataTestid }) {
   const [inputPassword, setInputPassword] = React.useState('');
