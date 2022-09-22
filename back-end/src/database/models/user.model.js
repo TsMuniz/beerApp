@@ -13,10 +13,10 @@ const User = (sequelize, DataTypes) => {
     }
 );  
 
-//     User.associate = (models) => {
-//     User.hasMany(models.sales,
-//       { foreignKey: 'userId'});
-//   };
+    User.associate = ({ Sale }) => {
+        User.hasMany(Sale, { foreignKey: 'userId' });
+        User.hasMany(Sale, { foreignKey: 'sellerId' });
+    };
     return User;
 };
   
