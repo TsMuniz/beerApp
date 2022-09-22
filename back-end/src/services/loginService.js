@@ -6,8 +6,8 @@ const { User } = require('../database/models');
 const loginService = {
     async validateLoginBody(body) {
         const schema = Joi.object({
-          email: Joi.string().min(8).required(),
-          password: Joi.string().required(),
+          email: Joi.string().email().required(),
+          password: Joi.string().min(8).required(),
         });
     
         const { error } = schema.validate(body);
@@ -24,7 +24,7 @@ const loginService = {
         if (userInfo.password === userHashedPassword) {
             return token;
         }
-        throw new Error('Unauthorized', { cause: 402 });
+        throw new Error('Unauthorized', { cause: 401 });
     },
 };
 
