@@ -15,6 +15,18 @@ const userController = {
         const userCreated = await userService.findOne(+id);
         return res.status(200).json(userCreated);
     },
+
+    async update(req, res) {
+        const { id } = req.params;        
+        const newUser = await userService.update(+id, req.body);
+        return res.status(202).json(newUser);
+    },
+
+    async delete(req, res) {
+        const { id } = req.params;        
+        const deletedProduct = await userService.delete(+id);
+        return res.status(202).json({ deletedProduct: deletedProduct.name });
+    },
 };
 
 module.exports = userController;
