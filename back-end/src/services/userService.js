@@ -5,14 +5,13 @@ const { User } = require('../database/models');
 const userService = {
     async validateRegisterBody(body) {
         const schema = Joi.object({
-          email: Joi.string().min(8).required(),
-          password: Joi.string().required(),
+          email: Joi.string().email().required(),
+          password: Joi.string().min(6).required(),
           role: Joi.string().required(),
-          name: Joi.string().alphanum().min(4).required(), 
+          name: Joi.string().min(12).required(), 
         });
     
         const { error } = schema.validate(body);
-        console.log(error);
         if (error) { throw new Error(error.message, { cause: 400 }); }
     },
 
@@ -31,6 +30,34 @@ const userService = {
     async findOne(id) {
         const createdUser = await User.findByPk(id);
         if (createdUser) return createdUser;
+        throw new Error('Not Found', { cause: 404 });
+    },
+
+    async delete(id) {
+        const product = await this.findOne(id);
+
+        if (product) {
+            await User.destroy({ where: { id } });
+            return product;
+        }
+    },
+
+    async update(id, body) {
+        const user = await this.findOne(id, { raw: true });
+        const updatedUser = { ...user.dataValues, ...body };
+        const { name, email, role, password } = updatedUser;
+        
+        if (body.password && user) {
+            const hashedPassword = md5(body.password);
+            updatedUser.password = hashedPassword;
+            await User.update({ name, email, role, password: hashedPassword }, { where: { id } });
+            return updatedUser;
+        }
+
+        if (user) {
+            await User.update({ name, email, role, password }, { where: { id } });
+            return updatedUser;
+        }
     },
 };
 
