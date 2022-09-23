@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(100),
         allowNull: false
       },
       price: {
@@ -18,10 +18,10 @@ module.exports = {
         allowNull: false
       },
       urlImage: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING(200),
+        allowNull: false,
+        fields: 'url_image'
       }
-
     });
   },
 
