@@ -20,9 +20,14 @@ const loginService = {
             throw new Error('Not Found', { cause: 404 });
         }
         const userHashedPassword = md5(user.password);
-        const token = createToken(userInfo);
+        const token = await createToken(userInfo);
         if (userInfo.password === userHashedPassword) {
-            return token;
+            return {
+                name: userInfo.name,
+                email: userInfo.email,
+                role: userInfo.role,
+                token
+            };
         }
         throw new Error('Unauthorized', { cause: 401 });
     },
