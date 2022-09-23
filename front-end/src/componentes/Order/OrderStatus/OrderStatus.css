@@ -1,0 +1,25 @@
+.order-status {
+  align-content: center;
+  align-self: center;
+  border-radius: 3px;
+  display: flex;
+  font-size: 1rem;
+  grid-area: order-status;
+  justify-content: center;
+  justify-self: center;
+  text-align: center;
+  width: 100px;
+}
+
+.order-status-pendente {
+  background-color: #e7d954;
+}
+
+.order-status-preparando {
+  background-color: #98e64b;
+}
+
+.order-status-entregue {
+  background-color: #30e4ba;
+}
+

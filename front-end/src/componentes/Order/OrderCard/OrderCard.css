@@ -1,0 +1,30 @@
+.order-card {
+  background-color: #e6eeec;
+  display: grid;
+  grid-template-areas: 'order-number order-status order-data'
+    'order-number order-address order-address';
+  width: 400px;
+}
+
+.order-number {
+  background-color: #f2fffc;
+  font-size: 0.8rem;
+  grid-area: order-number;
+  line-height: 0.3rem;
+  padding: 0 8px;
+  text-align: center;
+}
+
+.order-card .box p {
+  background-color: aqua;
+  grid-area: order-data;
+  margin: 3px;
+  padding: 3px 5px;
+  text-align: center;
+}
+
+.address {
+  font-size: 0.8rem;
+  grid-area: order-address;
+  margin: 5px;
+}
