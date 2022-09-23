@@ -1,6 +1,6 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 function FormLogin() {
   const [email, setEmail] = React.useState('');
@@ -35,46 +35,47 @@ function FormLogin() {
         return setErrorMessage('email ou senha invalidos');
       } return setErrorMessage(false);
     }
-  }
+  };
 
   return (
     isLogged ? (
       <Navigate to="/customer/products" />
-    ) : (<form>
-      <input
-        type="text"
-        name="email"
-        placeholder="Ex: email@email.com"
-        data-testid="common_login__input-email"
-        onChange={ ({ target }) => {setEmail(target.value); } }
-        value={ email }
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="******"
-        data-testid="common_login__input-password"
-        onChange={ ({ target }) => {setPassword(target.value); } }
-        value={ password }
-      />
-      <button
-        type="button"
-        disabled={ isDisableBtn }
-        data-testid="common_login__button-login"
-        onClick={ login }
-      >
-        LOGIN
-      </button>
-      <button
-        type="button"
-        data-testid="common_login__button-register"
-      >
-        Ainda não tenho conta
-      </button>
-      <p data-testid="common_login__element-invalid-email">
-        { errorMessage }
-      </p>
-    </form>)
+    ) : (
+      <form>
+        <input
+          type="text"
+          name="email"
+          placeholder="Ex: email@email.com"
+          data-testid="common_login__input-email"
+          onChange={ ({ target }) => { setEmail(target.value); } }
+          value={ email }
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="******"
+          data-testid="common_login__input-password"
+          onChange={ ({ target }) => { setPassword(target.value); } }
+          value={ password }
+        />
+        <button
+          type="button"
+          disabled={ isDisableBtn }
+          data-testid="common_login__button-login"
+          onClick={ login }
+        >
+          LOGIN
+        </button>
+        <button
+          type="button"
+          data-testid="common_login__button-register"
+        >
+          Ainda não tenho conta
+        </button>
+        <p data-testid="common_login__element-invalid-email">
+          { errorMessage }
+        </p>
+      </form>)
   );
 }
 
