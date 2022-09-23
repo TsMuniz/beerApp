@@ -12,9 +12,9 @@ const Product = (sequelize, DataTypes) => {
     }
 );  
 
-Product.associate = ({ Sale, Product }) => {
-    Product.hasMany(Sale, {foreignKey: "productId"})
-  };
+// Product.associate = ({ Sale, Product }) => {
+//     Product.hasMany(Sale, {foreignKey: "productId"})
+//   };
     return Product;
 };
   

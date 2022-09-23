@@ -8,7 +8,6 @@ const SalesProduct = (sequelize, DataTypes) => {
     {
         tablename: 'salesProducts',
         timestamps: false, 
-        underscored: true
     }
 );  
 

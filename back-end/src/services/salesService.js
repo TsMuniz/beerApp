@@ -21,7 +21,7 @@ const salesService = {
     },
 
     async findAll() {
-        const sales = await Sale.findAll({ include: Product });
+        const sales = await Sale.findAll();
         return sales;
     },
 
@@ -67,17 +67,18 @@ const salesService = {
         const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = body;
 
         const createdPost = await sequelize.transaction(async (t) => {
-          const post = await Sale.create({
+          const sale = await Sale.create({
             userId, sellerId, totalPrice, deliveryAddress, deliveryNumber,
           }, { transaction: t });
 
           await SalesProduct.bulkCreate(products.map(({  productId, quantity }) => (
             { 
+                saleId: Number(sale.id),
                 productId: Number(productId),
                 quantity: Number(quantity),
             }
           )), { transaction: t });
-          return post;
+          return sale;
         });
         return createdPost;
       },
