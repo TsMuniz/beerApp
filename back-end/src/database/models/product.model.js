@@ -1,9 +1,9 @@
 const Product = (sequelize, DataTypes) => {
     const Product = sequelize.define('Product', 
     {
-        name: DataTypes.STRING,        
+        name: DataTypes.STRING(100),        
         price: DataTypes.STRING,        
-        urlImage: DataTypes.STRING,        
+        urlImage: DataTypes.STRING(200),        
     },
     {
         tablename: 'products',
@@ -11,7 +11,9 @@ const Product = (sequelize, DataTypes) => {
         underscored: true
     }
 );  
-
+    Product.associate = ({ Sale }) => {
+        Product.hasMany(Sale, { foreignKey: 'productId' });
+    };
     return Product;
 };
   
