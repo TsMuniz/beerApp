@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import api from '../../helpers/api'
 
 function FormLogin() {
   const [email, setEmail] = React.useState('');
@@ -8,6 +8,7 @@ function FormLogin() {
   const [isDisableBtn, setIsDisableBtn] = React.useState(true);
   const [isLogged, setIsLogged] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState(false);
+  const [user, setUser] = React.useState([]);
 
   const MIN = 6;
   const HTTP_NOT_FOUND = 404;
@@ -22,26 +23,45 @@ function FormLogin() {
     } validateLogin();
   }, [email, password]);
 
-  const login = async () => {
+  // async function redirectUser(user) {
+  //   console.log(user);
+  //   switch (user.role) {
+  //   case 'customer':
+  //     redirect('/customer/products');
+  //     break;
+  //   case 'seller':
+  //     redirect('/seller/orders');
+  //     break;
+  //   case 'admin':
+  //     redirect('/admin/manage');
+  //     break;
+  //   default:
+  //     redirect('notFound');
+  //   }
+  // }
+  
+  async function handleSubmit(event) {
     try {
-      const response = await axios.post('http://localhost:3001/login', { email, password });
-
-      if (response.status === HTTP_OK) {
+      event.preventDefault();
+      const response = await api.post('/login', { email, password });
+      console.log(response.data)
+      if (response.status === HTTP_OK){
         setIsLogged(true);
         setErrorMessage(false);
+        setUser(response.data);
+        }
+      } catch (error) {
+        if (error.response.status === HTTP_NOT_FOUND) {
+          return setErrorMessage('email ou senha invalidos')
+        } return setErrorMessage(false);
       }
-    } catch (error) {
-      if (error.response.status === HTTP_NOT_FOUND) {
-        return setErrorMessage('email ou senha invalidos');
-      } return setErrorMessage(false);
     }
-  };
 
   return (
     isLogged ? (
       <Navigate to="/customer/products" />
     ) : (
-      <form>
+      <form onSubmit={ handleSubmit }>
         <input
           type="text"
           name="email"
@@ -59,10 +79,9 @@ function FormLogin() {
           value={ password }
         />
         <button
-          type="button"
+          type="submit"
           disabled={ isDisableBtn }
           data-testid="common_login__button-login"
-          onClick={ login }
         >
           LOGIN
         </button>

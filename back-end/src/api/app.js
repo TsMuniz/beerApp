@@ -1,9 +1,11 @@
 require('express-async-errors');
 const express = require('express');
+const cors = require('cors');
 const { userRoute, loginRoute, registerRoute, 
   salesRoute, productRouter } = require('../routes');
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use('/user', userRoute);
