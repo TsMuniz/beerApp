@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { Sale } = require('../database/models');
+const { Sale, User, Product } = require('../database/models');
 
 const saleStatus = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
 
@@ -9,7 +9,7 @@ const salesService = {
           userId: Joi.number().required(),
           sellerId: Joi.number().required(),
           totalPrice: Joi.number().required(),
-          deliveryAdress: Joi.string().required(),
+          deliveryAddress: Joi.string().required(),
           deliveryNumber: Joi.number().required(),
           status: Joi.string().allow(...saleStatus).required(),
         });
@@ -20,12 +20,44 @@ const salesService = {
     },
 
     async findAll() {
-        const sales = await Sale.findAll();
+        const sales = await Sale.findAll({ include: Product });
         return sales;
     },
 
+    async checkCustomer(id) {
+        const customer = await User.findByPk(+id);
+        if (!customer) throw new Error('Not Found', { cause: 404 });
+        console.log(customer);
+        if (customer.dataValues.role !== 'customer') { 
+            throw new Error('Forneça a id de um cliente!', { cause: 401 }); 
+        }
+    },
+
+    async checkSeller(id) {
+        const seller = await User.findByPk(+id);
+        if (!seller) throw new Error('Not Found', { cause: 404 });
+        if (seller.dataValues.role !== 'seller') { 
+            throw new Error('Forneça a id de um vendedor!', { cause: 401 }); 
+        }
+    },
+
     async create(body) {
-        const createdSale = await Sale.create({ ...body });
+        const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = body;
+        this.checkCustomer(userId);
+        this.checkSeller(sellerId);
+        const createdSale = await Sale.create({
+                userId: Number(userId),
+                sellerId: Number(sellerId),
+                totalPrice: Number(totalPrice), 
+                deliveryAddress,
+                deliveryNumber, 
+            });
+        const product = await Sale.findByPk(createdSale.dataValues.id);    
+        products.map(({ saleId, productId, quantity }) => product.setProduct({ 
+                saleId: Number(saleId),
+                productId: Number(productId),
+                quantity: Number(quantity),
+            }));   
         return createdSale;
     },
 
