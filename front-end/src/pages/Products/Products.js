@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../helpers/api';
+import BotaoVerdeEscuro from '../../componentes/BotaoVerdeEscuro/BotaoVerdeEscuro';
 
 function Products() {
   const [products, setProducts] = React.useState([]);
@@ -28,7 +29,7 @@ function Products() {
   return (
     <>
       <ul>
-        { products.map((product, index) => (
+        {products.map((product, index) => (
           <li key={ index }>
             <p
               data-testid={ `customer_products__element-card-title-${product.id}` }
@@ -38,7 +39,7 @@ function Products() {
             <span
               data-testid={ `customer_products__element-card-price-${product.id}` }
             >
-              { product.price }
+              {product.price}
             </span>
             <img
               src={ product.urlImage }
@@ -65,15 +66,13 @@ function Products() {
               -
             </button>
           </li>
-        )) }
+        ))}
       </ul>
-      <button
-        type="button"
+      <BotaoVerdeEscuro
+        placeholder="Ver Carrinho: R$ 0"
         data-testid="customer_products__checkout-bottom-value"
         onClick={ () => navigate('/customer/checkout') }
-      >
-        Ver Carrinho: R$ 0
-      </button>
+      />
     </>
   );
 }

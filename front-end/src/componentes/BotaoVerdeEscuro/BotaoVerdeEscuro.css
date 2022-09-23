@@ -1,6 +1,7 @@
 .botaoVerdeEscuro {
   background-color: #036B52;
   border-radius: 5%;
-  height: 27px;
-  width: 100px;
+  color: white;
+  height: 10%;
+  width: 30%;
 }
