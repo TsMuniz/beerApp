@@ -1,38 +1,52 @@
 import React from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function FormLogin() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isDisableBtn, setIsDisableBtn] = React.useState(true);
+  const [isLogged, setIsLogged] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState(false);
 
   const MIN = 6;
+  const HTTP_NOT_FOUND = 404;
+  const HTTP_OK = 200;
 
-  const validateLogin = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const isEmailValid = emailRegex.test(email);
-    if (isEmailValid && password.length >= MIN) {
-      setIsDisableBtn(false);
-    } else setIsDisableBtn(true);
-  };
+  useEffect(() => {
+    function validateLogin() {
+      const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+      if (emailRegex.test(email) && password.length >= MIN) {
+        return setIsDisableBtn(false);
+      } return setIsDisableBtn(true);
+    } validateLogin();
+  }, [email, password]);
 
-  const handleChangeEmail = (event) => {
-    setEmail(event.target.value);
-    validateLogin();
-  };
+  const login = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/login', { email, password });
 
-  const handleChangePassword = (event) => {
-    setPassword(event.target.value);
-    validateLogin();
-  };
+      if (response.status === HTTP_OK) {
+        setIsLogged(true);
+        setErrorMessage(false);
+      }
+    } catch (error) {
+      if (error.response.status === HTTP_NOT_FOUND) {
+        return setErrorMessage('email ou senha invalidos');
+      } return setErrorMessage(false);
+    }
+  }
 
   return (
-    <form>
+    isLogged ? (
+      <Navigate to="/customer/products" />
+    ) : (<form>
       <input
         type="text"
         name="email"
         placeholder="Ex: email@email.com"
         data-testid="common_login__input-email"
-        onChange={ handleChangeEmail }
+        onChange={ ({ target }) => {setEmail(target.value); } }
         value={ email }
       />
       <input
@@ -40,23 +54,27 @@ function FormLogin() {
         name="password"
         placeholder="******"
         data-testid="common_login__input-password"
-        onChange={ handleChangePassword }
+        onChange={ ({ target }) => {setPassword(target.value); } }
         value={ password }
       />
       <button
         type="button"
         disabled={ isDisableBtn }
         data-testid="common_login__button-login"
+        onClick={ login }
       >
         LOGIN
       </button>
       <button
         type="button"
-        data-testid=""
+        data-testid="common_login__button-register"
       >
         Ainda não tenho conta
       </button>
-    </form>
+      <p data-testid="common_login__element-invalid-email">
+        { errorMessage }
+      </p>
+    </form>)
   );
 }
 
