@@ -1,20 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+// import React, { useContext, useEffect } from 'react';
 
-function Cart() {
-  const { cart } = useContext(myContext);
+// function Cart() {
+//   const { cart } = useContext(myContext);
 
-  useEffect(() => {
-  }, []);
+//   useEffect(() => {
+//   }, []);
 
-  return (
-    <ul>
-      { cart.map((item) => (
-        <li key={ item }>
-          {item}
-        </li>
-      )) }
-    </ul>
-  );
-}
+//   return (
+//     <ul>
+//       { cart.map((item) => (
+//         <li key={ item }>
+//           {item}
+//         </li>
+//       )) }
+//     </ul>
+//   );
+// }
 
 export default Cart;

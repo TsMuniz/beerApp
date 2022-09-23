@@ -5,7 +5,7 @@ import BotaoVerdeEscuro from '../../componentes/BotaoVerdeEscuro/BotaoVerdeEscur
 
 function Products() {
   const [products, setProducts] = React.useState([]);
-  const [cart, setCart] = React.useState();
+  const [setCart] = React.useState();
 
   const navigate = useNavigate();
 
