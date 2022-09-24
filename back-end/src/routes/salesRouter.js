@@ -4,8 +4,8 @@ const salesController = require('../controllers/salesController');
 
 const salesRoute = Router();
 
+salesRoute.post('/', salesController.create);
 salesRoute.get('/', salesController.findAll);
 salesRoute.get('/:id', salesController.findOne);
-salesRoute.post('/', salesController.create);
 
 module.exports = salesRoute;
