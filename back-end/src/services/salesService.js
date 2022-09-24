@@ -39,7 +39,6 @@ const salesService = {
     async checkCustomer(id) {
         const customer = await User.findByPk(+id);
         if (!customer) throw new Error('Not Found', { cause: 404 });
-        console.log(customer);
         if (customer.dataValues.role !== 'customer') { 
             throw new Error('Forneça a id de um cliente!', { cause: 401 }); 
         }
@@ -54,12 +53,17 @@ const salesService = {
     },
 
     async create(body) {
-        const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = body;
-        this.checkCustomer(userId);
-        this.checkSeller(sellerId);
+        const { userId, sellerId, deliveryAddress, deliveryNumber, products } = body;
+        this.checkCustomer(userId); this.checkSeller(sellerId);
+        const totalPrice = products.reduce((acc, product) => acc + Number(product.price), 0);
+        console.log('price', totalPrice);
         const createdSale = await sequelize.transaction(async (t) => {
             const sale = await Sale.create({
-                userId, sellerId, totalPrice, deliveryAddress, deliveryNumber,
+                userId,
+                sellerId,
+                totalPrice,
+                deliveryAddress,
+                deliveryNumber,
             }, { transaction: t });
 
             await SalesProduct.bulkCreate(products.map(({ productId, quantity }) => ({ 
