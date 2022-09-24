@@ -26,7 +26,7 @@ const loginService = {
                 name: userInfo.name,
                 email: userInfo.email,
                 role: userInfo.role,
-                token
+                token,
             };
         }
         throw new Error('Unauthorized', { cause: 401 });

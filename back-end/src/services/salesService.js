@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const { sequelize } = require('../database/models');
-const { Sale, User, Product, SalesProduct } = require('../database/models');
+const { Sale, User, SalesProduct, Product } = require('../database/models');
 
 const saleStatus = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
 
@@ -20,8 +20,18 @@ const salesService = {
         if (error) { throw new Error(error.message, { cause: 400 }); }
     },
 
-    async findAll() {
-        const sales = await SalesProduct.findAll({include: [{model:Product, as: 'products'}]});
+    async findAll() {    
+
+        const sales = await SalesProduct.findAll({
+            include: [{
+                model: Product,
+                as: 'products',
+            }, {
+                model: Sale,
+                as: 'sales',
+            }],
+        });
+
         return sales;
     },
 
@@ -45,53 +55,26 @@ const salesService = {
         }
     },
 
-    // async create(body) {
-    //     const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = body;
-    //     this.checkCustomer(userId);
-    //     this.checkSeller(sellerId);
-    //     const createdSale = await Sale.create({
-    //             userId: Number(userId),
-    //             sellerId: Number(sellerId),
-    //             totalPrice: Number(totalPrice), 
-    //             deliveryAddress,
-    //             deliveryNumber, 
-    //         });
-            
-    //     const product = await Sale.findByPk(createdSale.dataValues.id);    
-    //     products.map(({ saleId, productId, quantity }) => product.setProduct({ 
-    //              saleId: Number(saleId),
-    //              productId: Number(productId),
-    //            quantity: Number(quantity),
-    //         }));   
-    //     return createdSale;
-    // },
 
-    create: async (body) => {
-        const { 
-            userId,
-            sellerId, 
-            totalPrice,
-            deliveryAddress,
-            deliveryNumber,
-            products 
-        } = body;
 
+    async create(body) {
+        const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = body;
+        
         const createdSale = await sequelize.transaction(async (t) => {
-          const sale = await Sale.create({
-            userId, sellerId, totalPrice, deliveryAddress, deliveryNumber,
-          }, { transaction: t });
+            const sale = await Sale.create({
+                userId, sellerId, totalPrice, deliveryAddress, deliveryNumber,
+            }, { transaction: t });
 
-          await SalesProduct.bulkCreate(products.map(({  productId, quantity }) => (
-            { 
-                saleId: Number(sale.id),
-                productId: Number(productId),
-                quantity: Number(quantity),
-            }
-          )), { transaction: t });
-          return sale;
+            await SalesProduct.bulkCreate(products.map(({ productId, quantity }) => ({ 
+                saleId: sale.id, productId, quantity, 
+            })), { transaction: t });
+            
+            return sale;
         });
+        
         return createdSale;
-      },
+    },
+
 
     async findOne(id) {
         const sale = await Sale.findByPk(id);

@@ -1,16 +1,17 @@
 import React from 'react';
-import './App.css';
-import rockGlass from './images/rockGlass.svg';
+import { Routes, Route } from 'react-router-dom';
+import Login from './pages/Login/Login';
+import Cadastro from './pages/Cadastro/Cadastro';
 
 function App() {
   return (
-    <div className="App">
-      <span className="logo">TRYBE</span>
-      <object className="rocksGlass" type="image/svg+xml" data={ rockGlass }>
-        Glass
-      </object>
-    </div>
+    <Routes>
+      <Route path="/login" element={ <Login /> } />
+      <Route exact path="/" element={ <Login /> } />
+      <Route path="/register" element={ <Cadastro /> } />
+    </Routes>
   );
 }
 
 export default App;
+document.getElementById('root');
