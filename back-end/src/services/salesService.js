@@ -21,9 +21,12 @@ const salesService = {
     },
 
     async findAll() {
-        const sales = await Sale.findAll();
+        const sales = await SalesProduct.findAll({include: [{model:Product, as: 'products'}]});
         return sales;
     },
+
+    
+    
 
     async checkCustomer(id) {
         const customer = await User.findByPk(+id);
@@ -56,17 +59,24 @@ const salesService = {
             
     //     const product = await Sale.findByPk(createdSale.dataValues.id);    
     //     products.map(({ saleId, productId, quantity }) => product.setProduct({ 
-            //      saleId: Number(saleId),
-            //      productId: Number(productId),
-            //    quantity: Number(quantity),
+    //              saleId: Number(saleId),
+    //              productId: Number(productId),
+    //            quantity: Number(quantity),
     //         }));   
     //     return createdSale;
     // },
 
     create: async (body) => {
-        const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = body;
+        const { 
+            userId,
+            sellerId, 
+            totalPrice,
+            deliveryAddress,
+            deliveryNumber,
+            products 
+        } = body;
 
-        const createdPost = await sequelize.transaction(async (t) => {
+        const createdSale = await sequelize.transaction(async (t) => {
           const sale = await Sale.create({
             userId, sellerId, totalPrice, deliveryAddress, deliveryNumber,
           }, { transaction: t });
@@ -80,7 +90,7 @@ const salesService = {
           )), { transaction: t });
           return sale;
         });
-        return createdPost;
+        return createdSale;
       },
 
     async findOne(id) {
