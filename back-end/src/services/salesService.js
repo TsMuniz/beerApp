@@ -20,8 +20,7 @@ const salesService = {
         if (error) { throw new Error(error.message, { cause: 400 }); }
     },
 
-    async findAll() {    
-
+    async findAll() {
         const sales = await SalesProduct.findAll({
             include: [{
                 model: Product,
@@ -34,9 +33,6 @@ const salesService = {
 
         return sales;
     },
-
-    
-    
 
     async checkCustomer(id) {
         const customer = await User.findByPk(+id);
@@ -55,8 +51,6 @@ const salesService = {
         }
     },
 
-
-
     async create(body) {
         const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = body;
         
@@ -74,7 +68,6 @@ const salesService = {
         
         return createdSale;
     },
-
 
     async findOne(id) {
         const sale = await Sale.findByPk(id);
