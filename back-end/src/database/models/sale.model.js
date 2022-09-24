@@ -41,16 +41,16 @@ const Sale = (sequelize, DataTypes) => {
     }
   },
   {
-    tablename: 'sales',
+    tableName: 'sales',
     timestamps: false, 
     underscored: true
   }
 );  
 
-  Sale.associate = ({ User, Product }) => {
+  Sale.associate = ({ User, SalesProduct }) => {
     Sale.belongsTo(User, { foreignKey: 'userId', as: 'user'});
     Sale.belongsTo(User, { foreignKey: 'sellerId', as: 'seller'});
-    // Sale.hasMany(Product, {foreignKey: "saleId"})
+    Sale.hasMany(SalesProduct, { foreignKey: "saleId" })
   };
   
   return Sale;
