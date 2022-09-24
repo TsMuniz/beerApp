@@ -21,13 +21,15 @@ const salesService = {
     },
 
     async findAll() {
-        const sales = await SalesProduct.findAll({
+        const sales = await Sale.findAll({
+            attributes: { exclude: ['sellerId'] }, 
             include: [{
-                model: Product,
-                as: 'products',
-            }, {
-                model: Sale,
-                as: 'sales',
+                model: SalesProduct,
+                as: 'products',                
+                attributes: { exclude: ['saleId', 'productId'] },                            
+                include: [{
+                    model: Product,
+                }],
             }],
         });
 
@@ -53,7 +55,8 @@ const salesService = {
 
     async create(body) {
         const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = body;
-        
+        this.checkCustomer(userId);
+        this.checkSeller(sellerId);
         const createdSale = await sequelize.transaction(async (t) => {
             const sale = await Sale.create({
                 userId, sellerId, totalPrice, deliveryAddress, deliveryNumber,
