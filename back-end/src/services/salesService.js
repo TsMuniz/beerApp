@@ -2,7 +2,7 @@ const Joi = require('joi');
 const { sequelize } = require('../database/models');
 const { Sale, User, SalesProduct, Product } = require('../database/models');
 
-const saleStatus = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
+// const saleStatus = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
 
 const salesService = {
     async validateSaleBody(body) {
@@ -12,7 +12,6 @@ const salesService = {
           totalPrice: Joi.number().required(),
           deliveryAddress: Joi.string().required(),
           deliveryNumber: Joi.number().required(),
-          status: Joi.string().allow(...saleStatus).required(),
         });
     
         const { error } = schema.validate(body);
@@ -56,7 +55,6 @@ const salesService = {
         const { userId, sellerId, deliveryAddress, deliveryNumber, products } = body;
         this.checkCustomer(userId); this.checkSeller(sellerId);
         const totalPrice = products.reduce((acc, product) => acc + Number(product.price), 0);
-        console.log('price', totalPrice);
         const createdSale = await sequelize.transaction(async (t) => {
             const sale = await Sale.create({
                 userId,
@@ -77,7 +75,16 @@ const salesService = {
     },
 
     async findOne(id) {
-        const sale = await Sale.findByPk(id);
+        const sale = await Sale.findByPk(id, {
+            include: [{
+                model: SalesProduct,
+                as: 'products',                
+                attributes: { exclude: ['saleId', 'productId'] },                            
+                include: [{
+                    model: Product,
+                }],
+            }],
+        });
         return sale;
     },
     
@@ -89,9 +96,10 @@ const salesService = {
     },
     
     async delete(id) {
-        const sale = await Sale.destroy({
-            where: id,
-        });
+        const sale = await this.findOne(id);
+        if (!sale) throw new Error('Not found', { cause: 404 });
+       
+        await Sale.destroy({ where: { id } });
         return sale;
     },
 };
