@@ -53,7 +53,8 @@ const salesService = {
 
     async create(body) {
         const { userId, sellerId, deliveryAddress, deliveryNumber, products } = body;
-        this.checkCustomer(userId); this.checkSeller(sellerId);
+        await this.checkCustomer(userId); 
+        await this.checkSeller(sellerId);
         const totalPrice = products.reduce((acc, product) => acc + Number(product.price), 0);
         const createdSale = await sequelize.transaction(async (t) => {
             const sale = await Sale.create({
@@ -85,10 +86,13 @@ const salesService = {
                 }],
             }],
         });
+        if (!sale) throw new Error('Not Found', { cause: 404 });
         return sale;
     },
     
     async update(id, obj) {
+        await this.findOne(id);
+
         const updatedSale = await Sale.update({ ...obj }, { 
             where: { id }, 
         });
@@ -97,7 +101,6 @@ const salesService = {
     
     async delete(id) {
         const sale = await this.findOne(id);
-        if (!sale) throw new Error('Not found', { cause: 404 });
        
         await Sale.destroy({ where: { id } });
         return sale;
