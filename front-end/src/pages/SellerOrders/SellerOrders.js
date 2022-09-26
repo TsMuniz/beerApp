@@ -1,9 +1,6 @@
-/* eslint-disable react/jsx-indent */
-/* eslint-disable react/jsx-indent-props */
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import OrderStatusCard from '../../componentes/OrderstatusCard/OrderStatusCard';
-import AuthContext from '../../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import api from '../../helpers/api';
 
 export default function SellerOrders() {
@@ -14,7 +11,7 @@ export default function SellerOrders() {
   useEffect(() => {
     api.get(`/sales/by-seller/${sellerId}`)
       .then((response) => setOrders(response.data));
-  }, []);
+  }, [sellerId]);
   return (
     <div>
       {orders && (orders.map(({
@@ -22,7 +19,8 @@ export default function SellerOrders() {
         status,
         totalPrice,
         saleDate,
-        deliveryAddress }, index) => (
+        deliveryAddress,
+      }, index) => (
         <OrderStatusCard
           key={ index }
           id={ id }
