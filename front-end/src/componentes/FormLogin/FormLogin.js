@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import api from '../../helpers/api';
 
 function FormLogin() {
@@ -23,7 +23,7 @@ function FormLogin() {
     } validateLogin();
   }, [email, password]);
 
-  // async function redirectUser(user) {
+  // async function redirectUser() {
   //   console.log(user);
   //   switch (user.role) {
   //   case 'customer':
@@ -40,8 +40,6 @@ function FormLogin() {
   //   }
   // }
 
-  console.log(user); // so pro lint nao reclamar
-
   async function handleSubmit(event) {
     try {
       event.preventDefault();
@@ -57,6 +55,12 @@ function FormLogin() {
       } return setErrorMessage(false);
     }
   }
+
+  const navigate = useNavigate();
+  const routeChange = () => {
+    const path = '/register';
+    navigate(path);
+  };
 
   return (
     isLogged ? (
@@ -89,13 +93,16 @@ function FormLogin() {
         <button
           type="button"
           data-testid="common_login__button-register"
+          onClick={ routeChange }
         >
           Ainda não tenho conta
         </button>
         <p data-testid="common_login__element-invalid-email">
           { errorMessage }
         </p>
+        <p>{ user }</p>
       </form>)
+  // linha 103 pro lint nao reclamar
   );
 }
 
