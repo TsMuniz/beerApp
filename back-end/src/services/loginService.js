@@ -23,6 +23,7 @@ const loginService = {
         const token = await createToken(userInfo);
         if (userInfo.password === userHashedPassword) {
             return {
+                id: userInfo.id,
                 name: userInfo.name,
                 email: userInfo.email,
                 role: userInfo.role,

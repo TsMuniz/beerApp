@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import styles from './styles.module.scss';
 
 export default function OrderStatusCard({ id, status, price, date, address, number }) {
   return (
-    <div>
+    <div className={ styles.cardContainer }>
       <div
+        className={ styles.orderNumber }
         data-testid={ `seller_orders__element-order-id-${id}` }
       >
         {number}
