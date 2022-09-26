@@ -9,7 +9,6 @@ import SellerLayout from './layouts/LayoutVendedor/SellerLayout';
 import CustomerLayout from './layouts/LayoutCliente/CustomerLayout';
 import Products from './pages/Products/Products';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-import Products from './pages/Products/Products';
 
 
 function App() {
