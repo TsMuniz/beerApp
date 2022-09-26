@@ -24,7 +24,7 @@ function FormLogin() {
 
   const login = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/login', { email, password });
+      const response = await axios.get('http://localhost:3001/login', { email, password });
 
       if (response.status === HTTP_OK) {
         setIsLogged(true);
