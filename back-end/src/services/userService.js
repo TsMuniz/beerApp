@@ -23,6 +23,8 @@ const userService = {
     async create(body) {
         const { password, name, email, role } = body;
         const hashedPassword = md5(password); 
+        const findExist = await User.findOne({ where: { email } });
+        if (findExist) throw new Error('Usuario ja existente', { cause: 409 });
         const createdUser = await User.create({ name, email, role, password: hashedPassword });
         if (createdUser) return createdUser;
     },

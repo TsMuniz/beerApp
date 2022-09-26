@@ -12,13 +12,16 @@ function FormRegister() {
   const [role, setRole] = React.useState('customer');
   const [user, setUser] = React.useState([]);
 
-  const MIN = 6;
+  const MIN_PASSWORD = 6;
+  const MIN_NAME = 12;
   const HTTP_CREATED = 201;
 
   useEffect(() => {
     function validateLogin() {
       const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
-      if (emailRegex.test(email) && password.length >= MIN) {
+      if (emailRegex.test(email)
+      && password.length >= MIN_PASSWORD
+      && name.length >= MIN_NAME) {
         return setIsDisableBtn(false);
       } return setIsDisableBtn(true);
     } validateLogin();
@@ -42,7 +45,7 @@ function FormRegister() {
 
   return (
     isLogged ? (
-      <Navigate to="/customer" />
+      <Navigate to="/customer/products" />
     ) : (
       <form onSubmit={ handleSubmit }>
         <input
