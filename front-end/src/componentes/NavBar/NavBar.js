@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ButtonLogout from '../Buttons/ButtonLogout';
-import NavBarLink from '../NavBarLink/NavBarLink';
 
-function NavBar({ userName }) {
+function NavBar({ userName, children }) {
   return (
     <div>
-      <NavBarLink name="Produtos" path="/customer/products" />
-      <NavBarLink name="Meus Pedidos" path="/customer/products" />
-      {/* rota ainda nao foi criada */}
+      {children}
       <p>{ userName }</p>
       <ButtonLogout dataTestId="oi" />
     </div>
@@ -17,6 +14,7 @@ function NavBar({ userName }) {
 
 NavBar.propTypes = {
   userName: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default NavBar;
