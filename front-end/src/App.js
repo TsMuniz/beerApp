@@ -7,7 +7,6 @@ import AdminLayout from './layouts/LayoutAdministrador/AdminLayout';
 import SellerLayout from './layouts/LayoutVendedor/SellerLayout';
 import CustomerLayout from './layouts/LayoutCliente/CustomerLayout';
 
-
 function App() {
   return (
     <Routes>
