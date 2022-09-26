@@ -6,8 +6,10 @@ import NavBarLink from '../../componentes/NavBarLink/NavBarLink';
 export default function SellerLayout() {
   return (
     <>
-      <NavBar>
-        <NavBarLink name="Pedidos" />
+      <NavBar
+        userName="thiago"
+      >
+        <NavBarLink name="Pedidos" path="/seller/orders" />
       </NavBar>
       <Outlet />
     </>
