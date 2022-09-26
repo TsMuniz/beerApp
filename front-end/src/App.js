@@ -2,12 +2,15 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
+
 import PrivateRoutes from './utils/PrivateRoutes';
 import AdminLayout from './layouts/LayoutAdministrador/AdminLayout';
 import SellerLayout from './layouts/LayoutVendedor/SellerLayout';
 import CustomerLayout from './layouts/LayoutCliente/CustomerLayout';
 import Products from './pages/Products/Products';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import Products from './pages/Products/Products';
+
 
 function App() {
   return (
@@ -24,6 +27,7 @@ function App() {
       <Route exact path="/" element={ <Navigate to="/login" replace /> } />
       <Route path="/register" element={ <Cadastro /> } />
       <Route path="*" element={ <NotFoundPage /> } />
+
 
     </Routes>
   );
