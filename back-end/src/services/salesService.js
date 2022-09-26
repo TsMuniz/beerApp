@@ -1,7 +1,8 @@
 const Joi = require('joi');
-const { Sale } = require('../database/models');
+const { sequelize } = require('../database/models');
+const { Sale, User, SalesProduct, Product } = require('../database/models');
 
-const saleStatus = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
+// const saleStatus = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
 
 const salesService = {
     async validateSaleBody(body) {
@@ -9,9 +10,8 @@ const salesService = {
           userId: Joi.number().required(),
           sellerId: Joi.number().required(),
           totalPrice: Joi.number().required(),
-          deliveryAdress: Joi.string().required(),
+          deliveryAddress: Joi.string().required(),
           deliveryNumber: Joi.number().required(),
-          status: Joi.string().allow(...saleStatus).required(),
         });
     
         const { error } = schema.validate(body);
@@ -20,21 +20,79 @@ const salesService = {
     },
 
     async findAll() {
-        const sales = await Sale.findAll();
+        const sales = await Sale.findAll({
+            attributes: { exclude: ['sellerId'] }, 
+            include: [{
+                model: SalesProduct,
+                as: 'products',                
+                attributes: { exclude: ['saleId', 'productId'] },                            
+                include: [{
+                    model: Product,
+                }],
+            }],
+        });
+
         return sales;
     },
 
+    async checkCustomer(id) {
+        const customer = await User.findByPk(+id);
+        if (!customer) throw new Error('Not Found', { cause: 404 });
+        if (customer.dataValues.role !== 'customer') { 
+            throw new Error('Forneça a id de um cliente!', { cause: 401 }); 
+        }
+    },
+
+    async checkSeller(id) {
+        const seller = await User.findByPk(+id);
+        if (!seller) throw new Error('Not Found', { cause: 404 });
+        if (seller.dataValues.role !== 'seller') { 
+            throw new Error('Forneça a id de um vendedor!', { cause: 401 }); 
+        }
+    },
+
     async create(body) {
-        const createdSale = await Sale.create({ ...body });
+        const { userId, sellerId, deliveryAddress, deliveryNumber, products } = body;
+        await this.checkCustomer(userId); 
+        await this.checkSeller(sellerId);
+        const totalPrice = products.reduce((acc, product) => acc + Number(product.price), 0);
+        const createdSale = await sequelize.transaction(async (t) => {
+            const sale = await Sale.create({
+                userId,
+                sellerId,
+                totalPrice,
+                deliveryAddress,
+                deliveryNumber,
+            }, { transaction: t });
+
+            await SalesProduct.bulkCreate(products.map(({ productId, quantity }) => ({ 
+                saleId: sale.id, productId, quantity, 
+            })), { transaction: t });
+            
+            return sale;
+        });
+        
         return createdSale;
     },
 
     async findOne(id) {
-        const sale = await Sale.findByPk(id);
+        const sale = await Sale.findByPk(id, {
+            include: [{
+                model: SalesProduct,
+                as: 'products',                
+                attributes: { exclude: ['saleId', 'productId'] },                            
+                include: [{
+                    model: Product,
+                }],
+            }],
+        });
+        if (!sale) throw new Error('Not Found', { cause: 404 });
         return sale;
     },
     
     async update(id, obj) {
+        await this.findOne(id);
+
         const updatedSale = await Sale.update({ ...obj }, { 
             where: { id }, 
         });
@@ -42,9 +100,9 @@ const salesService = {
     },
     
     async delete(id) {
-        const sale = await Sale.destroy({
-            where: id,
-        });
+        const sale = await this.findOne(id);
+       
+        await Sale.destroy({ where: { id } });
         return sale;
     },
 };

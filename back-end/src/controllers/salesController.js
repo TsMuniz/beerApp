@@ -7,7 +7,7 @@ const salesController = {
     },
     async create(req, res) {
         const sale = req.body;
-        await salesService.validateSaleBody(sale);
+        // await salesService.validateSaleBody(sale);
         const createdSale = await salesService.create(sale);
         return res.status(201).json(createdSale);
     },
