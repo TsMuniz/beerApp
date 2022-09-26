@@ -34,10 +34,10 @@ SalesProduct.associate = ({Sale, Product}) => {
     });
     
     SalesProduct.belongsTo(Product, { 
-        foreignKey: 'productId', 
+        foreignKey: 'productId', as: 'product'
     });
     SalesProduct.belongsTo(Sale, { 
-        foreignKey: 'saleId', as: 'sales' 
+        foreignKey: 'saleId', as: 'sale' 
     })
 };
     return SalesProduct;
