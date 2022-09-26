@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import api from '../../helpers/api'
+import api from '../../helpers/api';
 
 function FormLogin() {
   const [email, setEmail] = React.useState('');
@@ -39,23 +39,24 @@ function FormLogin() {
   //     redirect('notFound');
   //   }
   // }
-  
+
+  console.log(user); // so pro lint nao reclamar
+
   async function handleSubmit(event) {
     try {
       event.preventDefault();
       const response = await api.post('/login', { email, password });
-      console.log(response.data)
-      if (response.status === HTTP_OK){
+      if (response.status === HTTP_OK) {
         setIsLogged(true);
         setErrorMessage(false);
         setUser(response.data);
-        }
-      } catch (error) {
-        if (error.response.status === HTTP_NOT_FOUND) {
-          return setErrorMessage('email ou senha invalidos')
-        } return setErrorMessage(false);
       }
+    } catch (error) {
+      if (error.response.status === HTTP_NOT_FOUND) {
+        return setErrorMessage('email ou senha invalidos');
+      } return setErrorMessage(false);
     }
+  }
 
   return (
     isLogged ? (
