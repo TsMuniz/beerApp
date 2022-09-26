@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FormLogin() {
+function FormRegister() {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isDisableBtn, setIsDisableBtn] = React.useState(true);
@@ -60,4 +60,4 @@ function FormLogin() {
   );
 }
 
-export default FormLogin;
+export default FormRegister;

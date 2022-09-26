@@ -28,6 +28,7 @@ const salesService = {
                 attributes: { exclude: ['saleId', 'productId'] },                            
                 include: [{
                     model: Product,
+                    as: 'product',
                 }],
             }],
         });
