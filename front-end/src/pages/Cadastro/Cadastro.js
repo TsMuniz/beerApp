@@ -1,13 +1,13 @@
 import React from 'react';
 import FormRegister from '../../componentes/FormRegister/FormRegister';
 
-function Login() {
+function Register() {
   return (
     <>
-      <p>Oi</p>
+      <p>oi</p>
       <FormRegister />
     </>
   );
 }
 
-export default Login;
+export default Register;
