@@ -4,17 +4,20 @@ import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
 import PrivateRoutes from './utils/PrivateRoutes';
 import AdminLayout from './layouts/LayoutAdministrador/AdminLayout';
-import SellerLayout from './layouts/LayoutVendedor/SellerLayout';
+import SellerLayout from './layouts/LayoutVendedor/SellerOrders';
 import CustomerLayout from './layouts/LayoutCliente/CustomerLayout';
 import Products from './pages/Products/Products';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import SellerOrders from './pages/SellerOrders/SellerOrders';
 
 function App() {
   return (
     <Routes>
       <Route element={ <PrivateRoutes /> }>
         <Route path="/admin" element={ <AdminLayout /> } />
-        <Route path="/seller" element={ <SellerLayout /> } />
+        <Route path="/seller" element={ <SellerLayout /> }>
+          <Route path="orders" element={ <SellerOrders /> } />
+        </Route>
         <Route path="/customer" element={ <CustomerLayout /> }>
           <Route path="products" element={ <Products /> } />
         </Route>
