@@ -2,18 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ButtonLogout from '../Buttons/ButtonLogout';
 
-function NavBar({ userName, children }) {
+function NavBar({ children }) {
+  const { name } = JSON.parse(localStorage.getItem('user'));
+
   return (
     <div>
       {children}
-      <p>{ userName }</p>
+      <p>{ name }</p>
       <ButtonLogout dataTestId="oi" />
     </div>
   );
 }
 
 NavBar.propTypes = {
-  userName: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
 
