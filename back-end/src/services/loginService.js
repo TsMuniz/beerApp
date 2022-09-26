@@ -7,7 +7,7 @@ const loginService = {
     async validateLoginBody(body) {
         const schema = Joi.object({
           email: Joi.string().email().required(),
-          password: Joi.string().min(8).required(),
+          password: Joi.string().min(6).required(),
         });
     
         const { error } = schema.validate(body);
@@ -20,9 +20,14 @@ const loginService = {
             throw new Error('Not Found', { cause: 404 });
         }
         const userHashedPassword = md5(user.password);
-        const token = createToken(userInfo);
+        const token = await createToken(userInfo);
         if (userInfo.password === userHashedPassword) {
-            return token;
+            return {
+                name: userInfo.name,
+                email: userInfo.email,
+                role: userInfo.role,
+                token,
+            };
         }
         throw new Error('Unauthorized', { cause: 401 });
     },

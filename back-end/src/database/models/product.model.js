@@ -7,14 +7,17 @@ const Product = (sequelize, DataTypes) => {
         type: DataTypes.STRING(200),
         field: 'url_image'
       },       
+
     },
     {
-      tablename: 'products',
+      tableName: 'products',
       timestamps: false, 
       underscored: true
     }
 );  
-
+    Product.associate = ({ SalesProduct }) => {
+        Product.hasMany(SalesProduct, { foreignKey: 'productId', as: 'sales' });
+    };
     return Product;
 };
   
