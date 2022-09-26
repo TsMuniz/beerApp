@@ -1,17 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import OrderStatusCard from '../../componentes/OrderstatusCard/OrderStatusCard';
 import { AuthContext } from '../../contexts/AuthContext';
 import api from '../../helpers/api';
 
 export default function SellerOrders() {
-  const auth = useContext(AuthContext);
-  const sellerId = auth?.id || 2;
+  const { auth } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
-  console.log(orders);
+
   useEffect(() => {
-    api.get(`/sales/by-seller/${sellerId}`)
+    const sellerId = auth.id;
+
+    api.get(`/sales/by-seller/${+sellerId}`)
       .then((response) => setOrders(response.data));
-  }, [sellerId]);
+  }, [auth]);
+
   return (
     <div>
       {orders && (orders.map(({
