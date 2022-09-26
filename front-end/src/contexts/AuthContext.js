@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types';
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-  // const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(null);
+  const value = React.useMemo(() => ({
+    auth, setAuth,
+  }), [auth]);
 
   return (
-    <AuthContext.Provider value>
+    <AuthContext.Provider value={ value }>
       {children}
     </AuthContext.Provider>
   );
