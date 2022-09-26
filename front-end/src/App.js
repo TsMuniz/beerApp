@@ -12,11 +12,12 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 function App() {
   return (
     <Routes>
-      <Route element={ <PrivateRoutes /> } />
-      <Route path="/admin" element={ <AdminLayout /> } />
-      <Route path="/seller" element={ <SellerLayout /> } />
-      <Route path="/customer" element={ <CustomerLayout /> }>
-        <Route path="products" element={ <Products /> } />
+      <Route element={ <PrivateRoutes /> }>
+        <Route path="/admin" element={ <AdminLayout /> } />
+        <Route path="/seller" element={ <SellerLayout /> } />
+        <Route path="/customer" element={ <CustomerLayout /> }>
+          <Route path="products" element={ <Products /> } />
+        </Route>
       </Route>
 
       <Route path="/login" element={ <Login /> } />
