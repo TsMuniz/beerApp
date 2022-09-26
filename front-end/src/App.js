@@ -10,7 +10,6 @@ import CustomerLayout from './layouts/LayoutCliente/CustomerLayout';
 import Products from './pages/Products/Products';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
-
 function App() {
   return (
     <Routes>
