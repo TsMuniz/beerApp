@@ -35,6 +35,21 @@ const salesService = {
 
         return sales;
     },
+    async findBySeller(sellerId) {
+        const salesByRole = await Sale.findAll({ where: { sellerId },
+        attributes: { exclude: ['sellerId'] }, 
+        include: [{
+            model: SalesProduct,
+            as: 'products',                
+            attributes: { exclude: ['saleId', 'productId'] },                            
+            include: [{
+                model: Product,
+                as: 'product',
+            }],
+        }] });
+
+        return salesByRole;
+    },
 
     async checkCustomer(id) {
         const customer = await User.findByPk(+id);
