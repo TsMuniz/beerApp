@@ -9,4 +9,15 @@ async function createToken(user) {
     return token;
 }
 
-module.exports = { secret, createToken };
+const readToken = async (token) => {
+    if (!token) throw new Error('Token not found', { cause: 401 });
+  
+    try {
+      const { data } = jwt.verify(token, secret);
+      return data;
+    } catch (error) {
+        throw new Error('Expired or invalid token', { cause: 401 });
+    }
+};
+
+module.exports = { secret, createToken, readToken };

@@ -16,9 +16,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         references: {
-          // Informa a tabela da referência da associação
           model: 'users',
-          // Informa a coluna da referência que é a chave correspondente
           key: 'id',
         },
       },
@@ -29,9 +27,7 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
         references: {
-          // Informa a tabela da referência da associação
           model: 'users',
-          // Informa a coluna da referência que é a chave correspondente
           key: 'id',
         },
       },
