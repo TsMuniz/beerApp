@@ -10,7 +10,7 @@ function Products() {
   const navigate = useNavigate();
 
   const getProducts = async () => {
-    const { data } = await api.get('/products');
+    const { data } = await api.get('products');
     console.log(data);
     setProducts(data);
   };
