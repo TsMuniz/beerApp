@@ -42,7 +42,7 @@ function FormRegister() {
 
   return (
     isLogged ? (
-      <Navigate to="/customer" />
+      <Navigate to="/customer/products" />
     ) : (
       <form onSubmit={ handleSubmit }>
         <input
