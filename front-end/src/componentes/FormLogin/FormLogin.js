@@ -60,7 +60,7 @@ function FormLogin() {
 
   return (
     isLogged ? (
-      <Navigate to="/customer/products" />
+      <Navigate to="/customer" />
     ) : (
       <form onSubmit={ handleSubmit }>
         <input
