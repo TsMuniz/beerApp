@@ -12,9 +12,7 @@ const userController = {
         return res.status(201).json(userCreated);
     },
     async createUser(req, res) {
-        await userService.validateRegisterBody(req.body);
-        const { role } = req.authData;
-        const user = { ...req.body, role };
+        const user = await userService.validateRegisterBody(req.body);
         const userCreated = await userService.create(user);
         return res.status(201).json(userCreated);
     },

@@ -14,7 +14,7 @@ async function createToken(user) {
 const readToken = async (token) => {
     let data;
     jwt.verify(token, secret, (_err, decoded) => {
-      data = decoded;
+      data = decoded.data;
     });
     return data;
 };
