@@ -9,6 +9,7 @@ import CustomerLayout from './layouts/LayoutCliente/CustomerLayout';
 import Products from './pages/Products/Products';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import SellerOrders from './pages/SellerOrders/SellerOrders';
+import OrderDetails from './pages/OrderDetails/OrderDetails';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/admin" element={ <AdminLayout /> } />
         <Route path="/seller" element={ <SellerLayout /> }>
           <Route path="orders" element={ <SellerOrders /> } />
+          <Route path="orders/:id" element={ <OrderDetails /> } />
         </Route>
         <Route path="/customer" element={ <CustomerLayout /> }>
           <Route path="products" element={ <Products /> } />
