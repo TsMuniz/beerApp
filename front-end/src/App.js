@@ -12,7 +12,6 @@ import SellerOrders from './pages/SellerOrders/SellerOrders';
 import OrderDetails from './pages/OrderDetails/OrderDetails';
 import Management from './pages/Management/Management';
 
-
 function App() {
   return (
     <Routes>
