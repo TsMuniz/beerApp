@@ -13,7 +13,7 @@ function NavBar({ children }) {
       >
         { name }
       </p>
-      <ButtonLogout data-testid="customer_products__element-navbar-link-logout" />
+      <ButtonLogout datatestid="customer_products__element-navbar-link-logout" />
     </div>
   );
 }

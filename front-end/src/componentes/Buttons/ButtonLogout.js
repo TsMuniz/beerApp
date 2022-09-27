@@ -2,16 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function ButtonLogout({ dataTestId }) {
+function ButtonLogout({ datatestid }) {
   return (
-    <Link to="/" data-testid={ dataTestId }>
+    <Link to="/" data-testid={ datatestid }>
       Sair
     </Link>
   );
 }
 
 ButtonLogout.propTypes = {
-  dataTestId: PropTypes.string.isRequired,
+  datatestid: PropTypes.string.isRequired,
 };
 
 export default ButtonLogout;
