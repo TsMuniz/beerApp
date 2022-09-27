@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 
 export default function NavBarLink({ name, path }) {
   return (
-    <Link to={ path }>
+    <Link
+      dataTestId="customer_products__element-navbar-link-orders"
+      to={ path }
+    >
       <button
         type="button"
       >
