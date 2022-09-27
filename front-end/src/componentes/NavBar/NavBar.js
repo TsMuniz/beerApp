@@ -7,13 +7,11 @@ function NavBar({ children }) {
 
   return (
     <div>
-      {children}
-      <p
-        data-testid="customer_products__element-navbar-user-full-name"
-      >
+      { children }
+      <p data-testid="customer_products__element-navbar-user-full-name">
         { name }
       </p>
-      <ButtonLogout datatestid="customer_products__element-navbar-link-logout" />
+      <ButtonLogout />
     </div>
   );
 }
