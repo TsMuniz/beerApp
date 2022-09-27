@@ -53,6 +53,7 @@ function FormLogin() {
       if (response.status === HTTP_OK) {
         setErrorMessage(false);
         setAuth(response.data);
+        localStorage.setItem('user', JSON.stringify(response.data));
         redirectUser(response.data.role);
       }
     } catch (error) {
