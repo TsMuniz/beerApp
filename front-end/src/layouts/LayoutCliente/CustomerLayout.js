@@ -7,15 +7,15 @@ export default function CustomerLayout() {
   return (
     <>
       <NavBar>
-        <NavBarLink 
-        name="Produtos" 
-        path="/customer/products"
-        dataTestId="customer_products__element-navbar-link-products" 
+        <NavBarLink
+          name="Produtos"
+          path="/customer/products"
+          dataTestId="customer_products__element-navbar-link-products"
         />
-        <NavBarLink 
-        name="Meus Pedidos" 
-        path="/customer/products" 
-        dataTestId="customer_products__element-navbar-link-orders"
+        <NavBarLink
+          name="Meus Pedidos"
+          path="/customer/products"
+          dataTestId="customer_products__element-navbar-link-orders"
         />
       </NavBar>
       <Outlet />
