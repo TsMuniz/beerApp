@@ -14,8 +14,9 @@ export default function OrderDetails() {
     api.get(`/sales/${+orderId.id}`)
       .then((response) => setOrder(response.data));
   }, [orderId]);
-  // status, date, orderNumber, children, totalPrice
-  // position, description, quantity, unityValue, subTotal
+  if (!order?.id) {
+    return null;
+  }
   return (
     <OrderDetailsTableWrapper
       orderNumber={ order.id }

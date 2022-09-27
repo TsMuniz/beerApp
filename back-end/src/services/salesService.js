@@ -1,7 +1,7 @@
 const Joi = require('joi');
 const { sequelize } = require('../database/models');
 const { Sale, User, SalesProduct, Product } = require('../database/models');
-
+const getTotalPrice = require('../utils/getTotalPrice');
 // const saleStatus = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
 
 const salesService = {
@@ -69,9 +69,9 @@ const salesService = {
 
     async create(body) {
         const { userId, sellerId, deliveryAddress, deliveryNumber, products } = body;
-        await this.checkCustomer(userId); 
+        await this.checkCustomer(userId);
         await this.checkSeller(sellerId);
-        const totalPrice = products.reduce((acc, product) => acc + Number(product.price), 0);
+        const totalPrice = getTotalPrice(products);
         const createdSale = await sequelize.transaction(async (t) => {
             const sale = await Sale.create({
                 userId,
