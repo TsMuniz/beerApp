@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { format } from 'date-fns';
 import OrderDetailsTable from '../../componentes/OrderDetailsTable/OrderDetailsTable';
 // eslint-disable-next-line max-len
 import OrderDetailsTableWrapper from '../../componentes/OrderDetailsTableWrapper/OrderDetailsTableWrapper';
@@ -21,7 +22,7 @@ export default function OrderDetails() {
       orderNumber={ order.id }
       totalPrice={ order.totalPrice }
       status={ order.status }
-      date={ order.saleDate }
+      date={ format(Date.parse(order.saleDate), 'dd/MM/yyyy') }
     >
       <thead>
         <td>
