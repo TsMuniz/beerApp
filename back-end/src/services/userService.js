@@ -7,7 +7,6 @@ const userService = {
         const schema = Joi.object({
           email: Joi.string().email().required(),
           password: Joi.string().min(6).required(),
-          role: Joi.string().required(),
           name: Joi.string().min(12).required(), 
         });
     
@@ -20,8 +19,8 @@ const userService = {
         return userList;
     },
 
-    async create(body) {
-        const { password, name, email, role } = body;
+    async create(user) {
+        const { password, name, email, role } = user;
         const hashedPassword = md5(password); 
         const findExist = await User.findOne({ where: { email } });
         if (findExist) throw new Error('Usuario ja existente', { cause: 409 });

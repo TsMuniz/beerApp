@@ -9,8 +9,7 @@ function FormRegister() {
   const [isDisableBtn, setIsDisableBtn] = React.useState(true);
   const [errorMessage, setErrorMessage] = React.useState(false);
   const [isLogged, setIsLogged] = React.useState(false);
-  const [role, setRole] = React.useState('customer');
-  const [user, setUser] = React.useState([]);
+  // const [user, setUser] = React.useState([]);
 
   const MIN_PASSWORD = 6;
   const MIN_NAME = 12;
@@ -30,11 +29,11 @@ function FormRegister() {
   async function handleSubmit(event) {
     try {
       event.preventDefault();
-      const response = await api.post('/register', { name, email, role, password });
+      const response = await api.post('/register', { name, email, password });
       if (response.status === HTTP_CREATED) {
         setIsLogged(true);
         setErrorMessage(false);
-        setUser(response.data);
+        // setUser(response.data);
       }
     } catch (error) {
       if (error.response.status) {
@@ -82,9 +81,7 @@ function FormRegister() {
         <p data-testid="common_register__element-invalid_register">
           {errorMessage}
         </p>
-        <p>{ [user, setRole] }</p>
       </form>)
-    // linha 83 pro lint nao reclamar
   );
 }
 
