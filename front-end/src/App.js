@@ -9,12 +9,15 @@ import CustomerLayout from './layouts/LayoutCliente/CustomerLayout';
 import Products from './pages/Products/Products';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import SellerOrders from './pages/SellerOrders/SellerOrders';
+import Management from './pages/Management/Management';
 
 function App() {
   return (
     <Routes>
       <Route element={ <PrivateRoutes /> }>
-        <Route path="/admin" element={ <AdminLayout /> } />
+        <Route path="/admin" element={ <AdminLayout /> }>
+          <Route path="manage" element={ <Management /> } />
+        </Route>
         <Route path="/seller" element={ <SellerLayout /> }>
           <Route path="orders" element={ <SellerOrders /> } />
         </Route>
