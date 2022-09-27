@@ -5,9 +5,17 @@ const userController = {
         const userList = await userService.findAll();
         return res.status(200).json(userList);
     },
-    async create(req, res) {
+    async createUserCustomer(req, res) {
         await userService.validateRegisterBody(req.body);
-        const userCreated = await userService.create(req.body);
+        const user = { ...req.body, role: 'customer' };
+        const userCreated = await userService.create(user);
+        return res.status(201).json(userCreated);
+    },
+    async createUser(req, res) {
+        await userService.validateRegisterBody(req.body);
+        const { role } = req.authData;
+        const user = { ...req.body, role };
+        const userCreated = await userService.create(user);
         return res.status(201).json(userCreated);
     },
     async findOne(req, res) {
