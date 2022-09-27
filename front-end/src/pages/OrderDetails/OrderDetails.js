@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import OrderDetailsTable from '../../componentes/OrderDetailsTable/OrderDetailsTable';
-// eslint-disable-next-line max-len
-import OrderDetailsTableWrapper from '../../componentes/OrderDetailsTableWrapper/OrderDetailsTableWrapper';
+import OrderDetailsTableWrapper from '../../componentes/ODTW/OrderDetailsTableWrapper';
 import api from '../../helpers/api';
 
 export default function OrderDetails() {
