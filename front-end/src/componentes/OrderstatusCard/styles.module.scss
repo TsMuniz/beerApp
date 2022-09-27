@@ -1,0 +1,11 @@
+.cardContainer {
+  text-decoration: none;
+  display: flex;
+  border: 1px solid;
+  height: 100px;
+  width: 300px;
+
+  .orderNumber{
+    width: 25%;
+  }
+}

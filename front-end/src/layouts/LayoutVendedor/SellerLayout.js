@@ -7,7 +7,10 @@ export default function SellerLayout() {
   return (
     <>
       <NavBar>
-        <NavBarLink name="Pedidos" />
+        <NavBarLink
+          name="Pedidos"
+          path="/seller/orders"
+        />
       </NavBar>
       <Outlet />
     </>
