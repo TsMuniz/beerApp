@@ -11,7 +11,7 @@ function NavBar({ children }) {
       <p
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        { userName }
+        { name }
       </p>
       <ButtonLogout data-testid="customer_products__element-navbar-link-logout" />
     </div>
