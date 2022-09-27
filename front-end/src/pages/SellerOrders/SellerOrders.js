@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import OrderStatusCard from '../../componentes/OrderstatusCard/OrderStatusCard';
 import { AuthContext } from '../../contexts/AuthContext';
 import api from '../../helpers/api';
@@ -25,19 +24,15 @@ export default function SellerOrders() {
         saleDate,
         deliveryAddress,
       }, index) => (
-        <Link
+        <OrderStatusCard
           key={ index }
-          to={ `/seller/orders/${id}` }
-        >
-          <OrderStatusCard
-            id={ id }
-            number={ id }
-            status={ status }
-            date={ saleDate }
-            price={ totalPrice }
-            address={ deliveryAddress }
-          />
-        </Link>
+          id={ id }
+          number={ id }
+          status={ status }
+          date={ saleDate }
+          price={ totalPrice }
+          address={ deliveryAddress }
+        />
       )))}
     </div>
   );

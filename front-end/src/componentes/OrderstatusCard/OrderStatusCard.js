@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
 
 export default function OrderStatusCard({ id, status, price, date, address, number }) {
   return (
-    <div className={ styles.cardContainer }>
+    <Link
+      to={ `/seller/orders/${id}` }
+      className={ styles.cardContainer }
+    >
       <div
         className={ styles.orderNumber }
         data-testid={ `seller_orders__element-order-id-${id}` }
@@ -19,25 +23,25 @@ export default function OrderStatusCard({ id, status, price, date, address, numb
             {status}
           </span>
           <span
-            data-testid={ `seller_orders__element-order-date-id-${id}` }
+            data-testid={ `seller_orders__element-order-date-${id}` }
           >
             {date}
           </span>
           <span
-            data-testid={ `seller_orders__element-card-price-id-${id}` }
+            data-testid={ `seller_orders__element-card-price-${id}` }
           >
             {price}
           </span>
         </div>
         <div>
           <span
-            data-testid={ `seller_orders__element-card-address-id-${id}` }
+            data-testid={ `seller_orders__element-card-address-${id}` }
           >
             {address}
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
