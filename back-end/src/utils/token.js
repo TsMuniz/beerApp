@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const secret = 'batatinha123';
+
+const secret = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf8' });
+
 
 async function createToken(user) {
     const { email, password, role } = user;
@@ -10,14 +12,12 @@ async function createToken(user) {
 }
 
 const readToken = async (token) => {
-    if (!token) throw new Error('Token not found', { cause: 401 });
-  
-    try {
-      const { data } = jwt.verify(token, secret);
-      return data;
-    } catch (error) {
-        throw new Error('Expired or invalid token', { cause: 401 });
-    }
+    let data;
+    jwt.verify(token, secret, (_err, decoded) => {
+      data = decoded.data;
+    });
+    return data;
+
 };
 
 module.exports = { secret, createToken, readToken };

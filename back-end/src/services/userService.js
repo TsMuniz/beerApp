@@ -5,13 +5,15 @@ const { User } = require('../database/models');
 const userService = {
     async validateRegisterBody(body) {
         const schema = Joi.object({
-          email: Joi.string().email().required(),
-          password: Joi.string().min(6).required(),
-          name: Joi.string().min(12).required(), 
-        });
+            name: Joi.string().min(12).required(),
+            email: Joi.string().email().required(),
+            role: Joi.string().default('customer'),
+            password: Joi.string().min(6).required(),
+          });
     
-        const { error } = schema.validate(body);
+        const { error, value } = schema.validate(body);
         if (error) { throw new Error(error.message, { cause: 400 }); }
+        return value;
     },
 
     async findAll() {
