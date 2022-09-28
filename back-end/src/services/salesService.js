@@ -108,28 +108,32 @@ const salesService = {
         return sale;
     },
     
-    async changeStatus(id, status, token) {
-        console.log(typeof status);
-        const { role } = await readToken(token);
+    async changeStatus(saleId, status, token) {
+        const { role, id } = await readToken(token);
+        const sale = await this.findOne(id);
+        if (sale.sellerId !== id) throw new Error('Not your order', { cause: 409 });
         if (role !== 'seller') throw new Error('Unauthorized', { cause: 401 });
+
         const newStatus = ['Preparando', 'Em Trânsito'];
+
         if (status === '1' || status === '0') {
             const updatedSale = await Sale.update({ status: newStatus[+status] }, { 
-                where: { id }, 
+                where: { id: saleId }, 
             });
             return updatedSale;
         }
     },
 
-    async finishOrder(id, status, token) {
-        const { role } = await readToken(token);
+    async finishOrder(saleId, token) {
+        const { role, id } = await readToken(token);
+        const sale = await this.findOne(id);
+        if (sale.userId !== id) throw new Error('Not your order', { cause: 409 });
         if (role !== 'customer') throw new Error('Unauthorized', { cause: 401 });
-        if (status === 'Entregue') {
-            const updatedSale = await Sale.update({ status }, { 
-                where: { id }, 
-            });
-            return updatedSale;
-        }
+        
+        const updatedSale = await Sale.update({ status: 'Entregue' }, { 
+            where: { id: saleId }, 
+        });
+        return updatedSale;
     },
     
     async delete(id) {

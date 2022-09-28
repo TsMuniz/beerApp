@@ -32,9 +32,8 @@ const salesController = {
     },
     async finishOrder(req, res) {
         const { id } = req.params;
-        const { status } = req.query;
         const { authorization } = req.headers;        
-        const updatedSale = await salesService.finishOrder(id, status, authorization);
+        const updatedSale = await salesService.finishOrder(id, authorization);
         return res.status(200).json(updatedSale);
     },
     async delete(req, res) {

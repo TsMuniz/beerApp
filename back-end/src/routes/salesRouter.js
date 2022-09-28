@@ -6,7 +6,7 @@ const salesRoute = Router();
 
 salesRoute.delete('/:id', salesController.delete);
 salesRoute.patch('/changeStatus/:id/', salesController.changeStatus);
-salesRoute.put('/finishOrder/:id/', salesController.finishOrder);
+salesRoute.patch('/finishOrder/:id', salesController.finishOrder);
 salesRoute.post('/', salesController.create);
 salesRoute.get('/by-seller/:id', salesController.findBySeller);
 salesRoute.get('/', salesController.findAll);
