@@ -1,10 +1,10 @@
 import React from 'react';
-import FormRegisterUser from '../../componentes/Forms/FormRegisterUser';
+import AdminFormRegister from '../../componentes/Forms/AdminFormRegister';
 
 function Management() {
   return (
     <div>
-      <FormRegisterUser />
+      <AdminFormRegister />
     </div>
   );
 }

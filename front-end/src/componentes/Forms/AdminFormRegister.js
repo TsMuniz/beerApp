@@ -1,19 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import api from '../../helpers/api';
+import { registerErrMsg } from '../../helpers/errorMessages';
 import httpStatus from '../../helpers/httpStatus';
 
 const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const MIN_PASSWORD = 6;
 const MIN_NAME = 12;
 
-function FormRegisterUser() {
+function AdminFormRegister() {
   const { auth } = useContext(AuthContext);
 
   const [name, setname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('customer');
   const [isInvalidRegister, setIsInvalidRegister] = useState(false);
   const [isDisableBtn, setIsDisableBtn] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -39,14 +40,13 @@ function FormRegisterUser() {
         headers: { Authorization: auth.token },
       },
     );
-    if (response.status === httpStatus.CREATED) {
-      setIsInvalidRegister(false);
-    } else { setIsInvalidRegister(true); }
 
-    if (response.status === httpStatus.BAD_REQUEST) {
-      setErrorMessage('Dados inválidos');
-    } else if (response.status === httpStatus.CONFLICT) {
-      setErrorMessage('Usuário já cadastrado');
+    const invalidRegistration = response.status !== httpStatus.CREATED;
+    setIsInvalidRegister(invalidRegistration);
+
+    if (invalidRegistration) {
+      const errMsg = registerErrMsg[response.status] || 'Error!!!';
+      setErrorMessage(errMsg);
     }
   }
 
@@ -68,6 +68,7 @@ function FormRegisterUser() {
             id="input-name"
             placeholder="Nome e sobrenome"
             data-testid="admin_manage__input-name"
+            value={ name }
             onChange={ ({ target }) => { setname(target.value); } }
           />
         </label>
@@ -79,6 +80,7 @@ function FormRegisterUser() {
             id="input-email"
             placeholder="Ex: email@email.com"
             data-testid="admin_manage__input-email"
+            value={ email }
             onChange={ ({ target }) => { setEmail(target.value); } }
           />
         </label>
@@ -90,6 +92,7 @@ function FormRegisterUser() {
             id="input-password"
             placeholder="******"
             data-testid="admin_manage__input-password"
+            value={ password }
             onChange={ ({ target }) => { setPassword(target.value); } }
           />
         </label>
@@ -99,11 +102,11 @@ function FormRegisterUser() {
             name="role"
             id="input-role"
             data-testid="admin_manage__select-role"
-            defaultValue="seller"
+            value={ role }
             onChange={ ({ target }) => { setRole(target.value); } }
           >
-            <option value="seller">Cliente</option>
-            <option value="customer">Vendedor(a)</option>
+            <option value="customer">Cliente</option>
+            <option value="seller">Vendedor(a)</option>
           </select>
         </label>
         <button
@@ -118,4 +121,4 @@ function FormRegisterUser() {
   );
 }
 
-export default FormRegisterUser;
+export default AdminFormRegister;
