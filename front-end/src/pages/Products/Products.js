@@ -92,12 +92,12 @@ function Products() {
             >
               -
             </button>
-            <div
+            <input
               type="text"
               data-testid={ `customer_products__input-card-quantity-${product.id}` }
-            >
-              {findQuantity(product.id) }
-            </div>
+              value={ findQuantity(product.id) }
+
+            />
             <button
               type="button"
               data-testid={ `customer_products__button-card-add-item-${product.id}` }

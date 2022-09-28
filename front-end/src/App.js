@@ -11,6 +11,7 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import SellerOrders from './pages/SellerOrders/SellerOrders';
 import OrderDetails from './pages/OrderDetails/OrderDetails';
 import Management from './pages/Management/Management';
+import Checkout from './pages/checkout/Checkout';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         </Route>
         <Route path="/customer" element={ <CustomerLayout /> }>
           <Route path="products" element={ <Products /> } />
+          <Route path="checkout" element={ <Checkout /> } />
         </Route>
       </Route>
       <Route path="/login" element={ <Login /> } />
