@@ -13,6 +13,7 @@ app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.use('/sales', salesRoute);
 app.use('/products', productRouter);
+app.use('/images', express.static('public'));
 
 app.use((error, _req, res, _next) => {
     const { cause, message } = error;
