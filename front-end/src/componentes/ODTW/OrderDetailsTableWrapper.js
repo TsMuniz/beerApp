@@ -7,32 +7,40 @@ export default function OrderDetailsTableWrapper(
   return (
     <div>
       <div>
-        <span>
+        <span
+          data-testid="seller_order_details__element-order-details-label-order-id"
+        >
           Pedido
           {orderNumber}
         </span>
-        <span>
+        <span
+          data-testid="seller_order_details__element-order-details-label-order-date"
+        >
           {date}
         </span>
-        <span>
+        <span
+          data-testid="seller_order_details__element-order-details-label-delivery-status"
+        >
           {status}
         </span>
         <button
+          data-testid="seller_order_details__button-preparing-check"
           onClick={ setPreparing }
           type="button"
         >
           PREPARAR PEDIDO
         </button>
         <button
+          data-testid="seller_order_details__button-dispatch-check"
           onClick={ setDelivery }
           type="button"
         >
           SAIU PARA ENTREGA
         </button>
       </div>
-      <div>
+      <table>
         {children}
-      </div>
+      </table>
       <span>
         {totalPrice}
       </span>
