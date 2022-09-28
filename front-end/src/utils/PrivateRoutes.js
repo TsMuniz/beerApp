@@ -1,9 +1,9 @@
 import { Outlet, Navigate } from 'react-router-dom';
-
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 export default function PrivateRoutes() {
-  const auth = { token: true }; // esta feito assim pois ainda nao alinhei com resto do pessoal sobre como vamos enviar isto pra ca no formulario de login
+  const { auth } = useContext(AuthContext);
 
   return auth.token ? <Outlet /> : <Navigate to="/" />;
 }
