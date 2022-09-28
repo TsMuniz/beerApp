@@ -4,13 +4,20 @@ import './BotaoVerdeEscuro.css';
 
 function botaoVerdeEscuro({ placeholder, click }) {
   return (
+
     <button
       className="botaoVerdeEscuro"
       type="button"
       onClick={ click }
     >
-      <p>{placeholder}</p>
+      <p
+        data-testid="customer_products__checkout-bottom-value"
+      >
+        VerCarrinho:
+        {placeholder}
+      </p>
     </button>
+
   );
 }
 
