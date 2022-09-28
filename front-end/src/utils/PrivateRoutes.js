@@ -4,6 +4,9 @@ import { AuthContext } from '../contexts/AuthContext';
 
 export default function PrivateRoutes() {
   const { auth } = useContext(AuthContext);
+  const { token } = JSON.parse(localStorage.getItem('user'));
 
-  return auth.token ? <Outlet /> : <Navigate to="/" />;
+  const isAuth = auth.token || token;
+
+  return isAuth ? <Outlet /> : <Navigate to="/" />;
 }
