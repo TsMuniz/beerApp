@@ -18,4 +18,4 @@ const readToken = async (token) => {
     return data;
 };
 
-module.exports = { secret, createToken, readToken };
+module.exports = { createToken, readToken };

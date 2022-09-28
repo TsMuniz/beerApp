@@ -23,11 +23,18 @@ const salesController = {
         const sale = await salesService.findOne(id);
         return res.status(200).json(sale);
     },
-    async update(req, res) {
+    async changeStatus(req, res) {
         const { id } = req.params;
-        const sale = req.body;
-        await salesService.validateSaleBody(sale);
-        const updatedSale = await salesService.update(id, sale);
+        const { status } = req.query;
+        const { authorization } = req.headers;        
+        const updatedSale = await salesService.changeStatus(id, status, authorization);
+        return res.status(200).json(updatedSale);
+    },
+    async finishOrder(req, res) {
+        const { id } = req.params;
+        const { status } = req.query;
+        const { authorization } = req.headers;        
+        const updatedSale = await salesService.finishOrder(id, status, authorization);
         return res.status(200).json(updatedSale);
     },
     async delete(req, res) {
