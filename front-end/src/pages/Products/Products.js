@@ -61,10 +61,9 @@ function Products() {
     navigate('/customer/checkout');
   };
 
-  if (!products.length && !productsWithQuantity.length) return null;
   return (
     <div className={ styles.container }>
-      {products.map((product, index) => (
+      {products.map?.((product, index) => (
         <div
           className={ styles.cardContainer }
           key={ index }
