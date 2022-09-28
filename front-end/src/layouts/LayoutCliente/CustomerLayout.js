@@ -2,10 +2,11 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import NavBar from '../../componentes/NavBar/NavBar';
 import NavBarLink from '../../componentes/NavBarLink/NavBarLink';
+import CartProvider from '../../contexts/CartContext';
 
 export default function CustomerLayout() {
   return (
-    <>
+    <CartProvider>
       <NavBar>
         <NavBarLink
           name="Produtos"
@@ -14,11 +15,11 @@ export default function CustomerLayout() {
         />
         <NavBarLink
           name="Meus Pedidos"
-          path="/customer/products"
+          path="/customer/checkout"
           dataTestId="customer_products__element-navbar-link-orders"
         />
       </NavBar>
       <Outlet />
-    </>
+    </CartProvider>
   );
 }
