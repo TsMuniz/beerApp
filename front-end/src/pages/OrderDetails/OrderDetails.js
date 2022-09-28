@@ -9,11 +9,25 @@ export default function OrderDetails() {
   const orderId = useParams();
 
   const [order, setOrder] = useState({});
-  console.log(order);
   useEffect(() => {
     api.get(`/sales/${+orderId.id}`)
       .then((response) => setOrder(response.data));
   }, [orderId]);
+  const handleDelivery = async () => {
+    try {
+      await api.patch(`sales/changeStatus/${orderId.id}/?status=1`);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const handlePreparing = async () => {
+    try {
+      await api.patch(`sales/changeStatus/${orderId.id}/?status=0`);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   if (!order?.id) {
     return null;
   }
@@ -23,6 +37,8 @@ export default function OrderDetails() {
       totalPrice={ order.totalPrice }
       status={ order.status }
       date={ format(Date.parse(order.saleDate), 'dd/MM/yyyy') }
+      setDelivery={ handleDelivery }
+      setPreparing={ handlePreparing }
     >
       <thead>
         <td>
@@ -32,7 +48,7 @@ export default function OrderDetails() {
           Descricao
         </td>
         <td>
-          quantidade
+          Quantidade
         </td>
         <td>
           Valor Unitario
@@ -41,7 +57,7 @@ export default function OrderDetails() {
           Sub Total
         </td>
       </thead>
-      {order.id && (order.products.map((product, index) => (
+      {order.products.map?.((product, index) => (
         <OrderDetailsTable
           key={ index }
           position={ index + 1 }
@@ -50,7 +66,7 @@ export default function OrderDetails() {
           unityValue={ product.product.price }
           subTotal={ (product.product.price * product.quantity).toFixed(2) }
         />
-      )))}
+      ))}
     </OrderDetailsTableWrapper>
   );
 }
