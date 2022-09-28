@@ -10,6 +10,7 @@ export default function SellerLayout() {
         <NavBarLink
           name="Pedidos"
           path="/seller/orders"
+          dataTestId="customer_products__element-navbar-link-products"
         />
       </NavBar>
       <Outlet />
