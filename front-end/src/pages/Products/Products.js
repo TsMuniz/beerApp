@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import api from '../../helpers/api';
 import BotaoVerdeEscuro from '../../componentes/BotaoVerdeEscuro/BotaoVerdeEscuro';
+import { CartContext } from '../../contexts/CartContext';
 
 function Products() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [products, setProducts] = React.useState([]);
   const [productsWithQuantity, setProductsWithQuantity] = React.useState([]);
-
+  const { setCart, cart } = useContext(CartContext);
+  console.log(cart);
   const getProducts = async () => {
     const { data } = await api.get('/products');
     setProducts(data);
@@ -49,6 +51,13 @@ function Products() {
     const totalPrice = productsWithQuantity
       .reduce((acc, { price, quantity }) => acc + (+price * quantity), 0);
     return totalPrice.toFixed(2);
+  };
+
+  const handleSetCart = () => {
+    console.log('click');
+    const itemsInCart = productsWithQuantity
+      .filter(({ quantity }) => quantity !== 0);
+    setCart(itemsInCart);
   };
 
   if (!products.length && !productsWithQuantity.length) return null;
@@ -94,11 +103,16 @@ function Products() {
           </button>
         </div>
       ))}
-
+      <button
+        onClick={ handleSetCart }
+        type="button"
+      >
+        click
+      </button>
       <BotaoVerdeEscuro
+        onClick={ handleSetCart }
         placeholder={ `Ver Carrinho: R$ ${getTotalPrice()}` }
         data-testid="customer_products__checkout-bottom-value"
-        onClick={ () => navigate('/customer/checkout') }
       />
     </>
   );
