@@ -37,7 +37,6 @@ export default function OrderDetailsTable(
         {subTotal}
       </td>
     </tr>
-
   );
 }
 

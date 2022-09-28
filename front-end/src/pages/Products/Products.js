@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../helpers/api';
 import BotaoVerdeEscuro from '../../componentes/BotaoVerdeEscuro/BotaoVerdeEscuro';
@@ -7,11 +7,10 @@ import { CartContext } from '../../contexts/CartContext';
 import styles from './styles.module.scss';
 
 function Products() {
-  const navigate = useNavigate();
-  const containerREf = useRef(null);
   const [products, setProducts] = React.useState([]);
   const { setCart } = useContext(CartContext);
   const [input, setInput] = React.useState({});
+  const navigate = useNavigate();
   const getProducts = async () => {
     const { data } = await api.get('/products');
     setProducts(data);
@@ -21,7 +20,7 @@ function Products() {
     const { name, value } = target;
     return setInput({ ...input, [name]: +value });
   };
-  console.log(input);
+
   React.useEffect(() => {
     getProducts();
   }, []);
@@ -61,7 +60,7 @@ function Products() {
   };
 
   return (
-    <div className={ styles.container } ref={ containerREf }>
+    <div className={ styles.container }>
       {products.map?.((product, index) => (
         <div
           className={ styles.cardContainer }
@@ -113,8 +112,8 @@ function Products() {
 
       <BotaoVerdeEscuro
         click={ handleSetCart }
-        placeholder={ `Ver Carrinho: R$ ${getTotalPrice()}` }
-        data-testid="customer_products__checkout-bottom-value"
+        placeholder={ getTotalPrice() }
+        data-testid="customer_products__button-cart"
       />
     </div>
   );
