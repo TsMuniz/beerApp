@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 import api from '../../helpers/api';
 import httpStatus from '../../helpers/httpStatus';
 
@@ -7,6 +8,8 @@ const MIN_PASSWORD = 6;
 const MIN_NAME = 12;
 
 function FormRegisterUser() {
+  const { auth } = useContext(AuthContext);
+
   const [name, setname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -29,9 +32,12 @@ function FormRegisterUser() {
   async function handleSubmit(event) {
     event.preventDefault();
     const response = await api.post(
-      '/register',
+      '/register/admin',
       { name, email, role, password },
-      { validateStatus: (status) => status },
+      {
+        validateStatus: (status) => status,
+        headers: { Authorization: `Bearer ${auth.token}` },
+      },
     );
     if (response.status === httpStatus.CREATED) {
       setIsInvalidRegister(false);
