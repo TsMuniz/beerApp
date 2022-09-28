@@ -1,6 +1,6 @@
 .AddressComponent {
   border: solid 1px rgb(160, 159, 159);
-  box-shadow: 0 7px 3px 0 rgb(160, 159, 159), 0 10px 20px 0 rgb(163, 162, 162);
+  box-shadow: 0 7px 3px 0 rgb(160, 159, 159) , 0 10px 20px 0 rgb(163, 162, 162);
   margin-left: 5%;
   padding: 4px;
   width: 90%;
