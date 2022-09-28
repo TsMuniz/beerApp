@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import api from '../../helpers/api';
 import BotaoVerdeEscuro from '../../componentes/BotaoVerdeEscuro/BotaoVerdeEscuro';
 import { CartContext } from '../../contexts/CartContext';
+import styles from './styles.module.scss';
 
 function Products() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [products, setProducts] = React.useState([]);
   const [productsWithQuantity, setProductsWithQuantity] = React.useState([]);
-  const { setCart, cart } = useContext(CartContext);
-  console.log(cart);
+  const { setCart } = useContext(CartContext);
   const getProducts = async () => {
     const { data } = await api.get('/products');
     setProducts(data);
@@ -23,7 +23,7 @@ function Products() {
     setProductsWithQuantity(products.map((product) => ({ ...product, quantity: 0 })));
   }, [products]);
 
-  const bb = (type, product) => {
+  const changeProductsQuantity = (type, product) => {
     const productPosition = productsWithQuantity
       .findIndex(({ id }) => id === product.id);
     const aux = productsWithQuantity[productPosition];
@@ -58,13 +58,17 @@ function Products() {
     const itemsInCart = productsWithQuantity
       .filter(({ quantity }) => quantity !== 0);
     setCart(itemsInCart);
+    navigate('/customer/checkout');
   };
 
   if (!products.length && !productsWithQuantity.length) return null;
   return (
-    <>
+    <div className={ styles.container }>
       {products.map((product, index) => (
-        <div key={ index }>
+        <div
+          className={ styles.cardContainer }
+          key={ index }
+        >
           <p
             data-testid={ `customer_products__element-card-title-${product.id}` }
           >
@@ -81,40 +85,37 @@ function Products() {
             width="100px"
             data-testid={ `customer_products__img-card-bg-image-${product.id}` }
           />
-          <button
-            type="button"
-            data-testid={ `customer_products__button-card-add-item-${product.id}` }
-            onClick={ () => bb('increment', product) }
-          >
-            +
-          </button>
-          <div
-            type="text"
-            data-testid={ `customer_products__input-card-quantity-${product.id}` }
-          >
-            {findQuantity(product.id) }
+          <div className={ styles.QuantityButtonContainer }>
+            <button
+              type="button"
+              data-testid={ `customer_products__button-card-rm-item-${product.id}` }
+              onClick={ () => changeProductsQuantity('decrement', product) }
+            >
+              -
+            </button>
+            <div
+              type="text"
+              data-testid={ `customer_products__input-card-quantity-${product.id}` }
+            >
+              {findQuantity(product.id) }
+            </div>
+            <button
+              type="button"
+              data-testid={ `customer_products__button-card-add-item-${product.id}` }
+              onClick={ () => changeProductsQuantity('increment', product) }
+            >
+              +
+            </button>
           </div>
-          <button
-            type="button"
-            data-testid={ `customer_products__button-card-rm-item-${product.id}` }
-            onClick={ () => bb('decrement', product) }
-          >
-            -
-          </button>
         </div>
       ))}
-      <button
-        onClick={ handleSetCart }
-        type="button"
-      >
-        click
-      </button>
+
       <BotaoVerdeEscuro
-        onClick={ handleSetCart }
+        click={ handleSetCart }
         placeholder={ `Ver Carrinho: R$ ${getTotalPrice()}` }
         data-testid="customer_products__checkout-bottom-value"
       />
-    </>
+    </div>
   );
 }
 
