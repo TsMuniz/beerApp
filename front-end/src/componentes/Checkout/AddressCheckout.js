@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../helpers/api';
 
 function Address() {
-  const [address, setAddress] = useState({ addres: '', addresNumber: '' });
+  const [address, setAddress] = useState({ address: '', addressNumber: '' });
   const [vendedor, setVendedor] = useState({ all: [], select: '' });
+  const navigate = useNavigate();
 
   const registerSeller = async (sale, token) => {
-    const response = await api.post('/sale', sale, {
+    const response = await api.post('/user', sale, {
       headers: {
         Authorization: token,
       },
@@ -15,13 +17,15 @@ function Address() {
   };
 
   const getSellers = async () => {
-    const response = await api.get('/getsellers');
+    const response = await api.get('/user');
+    // console.log(response);
     return response.data;
   };
 
   useEffect(() => {
     const vendedores = async () => {
       const seller = await getSellers();
+      console.log(seller);
       setVendedor({ all: seller, select: seller[0].id });
     };
     vendedores();
@@ -38,8 +42,8 @@ function Address() {
       userId: '',
       sellerId: vendedor.select,
       totalPrice: Number(total),
-      deliveryAddress: addresUser.addres,
-      deliveryNumber: addresUser.addresNumber,
+      deliveryAddress: address.address,
+      deliveryNumber: address.addressNumber,
       saleDate: new Date(),
       status: 'Pendente',
     };

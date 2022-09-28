@@ -21,7 +21,7 @@ function Products() {
     const { name, value } = target;
     return setInput({ ...input, [name]: +value });
   };
-  console.log(input);
+  // console.log(input);
   React.useEffect(() => {
     getProducts();
   }, []);
