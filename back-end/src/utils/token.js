@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 
-const secretKey = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf8', flag: 'r' });
-const secret = secretKey.split('=')[1] || 'batatinha123';
+const secret = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf8' });
 
 async function createToken(user) {
     const { email, password, role } = user;
