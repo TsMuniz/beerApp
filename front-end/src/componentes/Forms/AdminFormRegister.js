@@ -3,6 +3,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import api from '../../helpers/api';
 import { registerErrMsg } from '../../helpers/errorMessages';
 import httpStatus from '../../helpers/httpStatus';
+import './Form.css';
 
 const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const MIN_PASSWORD = 6;
@@ -59,9 +60,9 @@ function AdminFormRegister() {
           </p>
         )
       }
-      <form onSubmit={ handleSubmit }>
+      <form onSubmit={ handleSubmit } className="form admin-form">
         <label htmlFor="input-name">
-          Nome
+          <span className="field-name">Nome</span>
           <input
             type="text"
             name="name"
@@ -73,7 +74,7 @@ function AdminFormRegister() {
           />
         </label>
         <label htmlFor="input-email">
-          Email
+          <span className="field-name">Email</span>
           <input
             type="text"
             name="email"
@@ -85,7 +86,7 @@ function AdminFormRegister() {
           />
         </label>
         <label htmlFor="input-password">
-          Senha
+          <span className="field-name">Senha</span>
           <input
             type="password"
             name="password"
@@ -97,7 +98,7 @@ function AdminFormRegister() {
           />
         </label>
         <label htmlFor="input-role">
-          Tipo
+          <span className="field-name">Tipo</span>
           <select
             name="role"
             id="input-role"
@@ -113,6 +114,7 @@ function AdminFormRegister() {
           type="submit"
           data-testid="admin_manage__button-register"
           disabled={ isDisableBtn }
+          className="btn-register"
         >
           Cadastrar
         </button>
