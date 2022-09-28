@@ -1,10 +1,11 @@
 import React from 'react';
-import FormRegisterUser from '../../componentes/Forms/FormRegisterUser';
+import AdminFormRegister from '../../componentes/Forms/AdminFormRegister';
+import './Management.css';
 
 function Management() {
   return (
-    <div>
-      <FormRegisterUser />
+    <div className="management-page">
+      <AdminFormRegister />
     </div>
   );
 }

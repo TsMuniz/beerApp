@@ -1,0 +1,51 @@
+.form {
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
+.admin-form {
+  align-items: center;
+  box-shadow: 0 3px 10px #b5b5b5;
+  justify-content: center;
+  padding: 10px;
+}
+
+.form label {
+  display: inline-flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.field-name {
+  margin: 0 3px;
+}
+
+.form input, .form select, .form button {
+  border-radius: 5px;
+  height: 32px;
+  outline: none;
+}
+
+.form input, .form select {
+  background-color: white;
+  border: 1px solid rgb(138, 138, 138);
+  color: black;
+  font: inherit;
+  margin-top: 5px;
+  padding: 0 5px;
+  width: 250px;
+}
+
+.form button {
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
+  margin: 8px;
+  padding: 0 8px;
+}
+
+.btn-register {
+  background: #036b52;
+  color: white;
+}
