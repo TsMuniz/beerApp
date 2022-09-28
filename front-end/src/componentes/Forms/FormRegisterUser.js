@@ -36,7 +36,7 @@ function FormRegisterUser() {
       { name, email, role, password },
       {
         validateStatus: (status) => status,
-        headers: { Authorization: `${auth.token}` },
+        headers: { Authorization: `Bearer ${auth.token}` },
       },
     );
     if (response.status === httpStatus.CREATED) {
