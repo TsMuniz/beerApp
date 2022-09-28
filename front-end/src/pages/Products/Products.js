@@ -50,7 +50,7 @@ function Products() {
   const getTotalPrice = () => {
     const totalPrice = productsWithQuantity
       .reduce((acc, { price, quantity }) => acc + (+price * quantity), 0);
-    return totalPrice.toFixed(2);
+    return totalPrice.toFixed(2).replace('.', ',');
   };
 
   const handleSetCart = () => {
