@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const { sequelize } = require('../database/models');
 const { Sale, User, SalesProduct, Product } = require('../database/models');
+const { readToken } = require('../utils/token');
 const getTotalPrice = require('../utils/getTotalPrice');
 // const saleStatus = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
 
@@ -107,11 +108,30 @@ const salesService = {
         return sale;
     },
     
-    async update(id, obj) {
-        await this.findOne(id);
+    async changeStatus(saleId, status, token) {
+        const { role, id } = await readToken(token);
+        const sale = await this.findOne(id);
+        if (sale.sellerId !== id) throw new Error('Not your order', { cause: 409 });
+        if (role !== 'seller') throw new Error('Unauthorized', { cause: 401 });
 
-        const updatedSale = await Sale.update({ ...obj }, { 
-            where: { id }, 
+        const newStatus = ['Preparando', 'Em Trânsito'];
+
+        if (status === '1' || status === '0') {
+            const updatedSale = await Sale.update({ status: newStatus[+status] }, { 
+                where: { id: saleId }, 
+            });
+            return updatedSale;
+        }
+    },
+
+    async finishOrder(saleId, token) {
+        const { role, id } = await readToken(token);
+        const sale = await this.findOne(id);
+        if (sale.userId !== id) throw new Error('Not your order', { cause: 409 });
+        if (role !== 'customer') throw new Error('Unauthorized', { cause: 401 });
+        
+        const updatedSale = await Sale.update({ status: 'Entregue' }, { 
+            where: { id: saleId }, 
         });
         return updatedSale;
     },
