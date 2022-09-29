@@ -2,7 +2,8 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../helpers/api';
-import BotaoVerdeEscuro from '../../componentes/BotaoVerdeEscuro/BotaoVerdeEscuro';
+import BotaoVerdeEscuro
+  from '../../componentes/Buttons/BotaoVerdeEscuro/BotaoVerdeEscuro';
 import { CartContext } from '../../contexts/CartContext';
 import styles from './styles.module.scss';
 
