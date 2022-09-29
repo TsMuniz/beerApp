@@ -5,6 +5,12 @@ const userController = {
         const userList = await userService.findAll();
         return res.status(200).json(userList);
     },
+
+    async findSellers(_req, res) {
+        const sellerList = await userService.findSellers();
+        return res.status(200).json(sellerList);
+    },
+
     async createUserCustomer(req, res) {
         await userService.validateRegisterBody(req.body);
         const user = { ...req.body, role: 'customer' };
