@@ -10,6 +10,7 @@ function Products() {
   const [products, setProducts] = React.useState([]);
   const { setCart } = useContext(CartContext);
   const [input, setInput] = React.useState({});
+  const [checkoutDisable, setCheckoutDisable] = React.useState(true);
   const navigate = useNavigate();
   const getProducts = async () => {
     const { data } = await api.get('/products');
@@ -24,6 +25,17 @@ function Products() {
   React.useEffect(() => {
     getProducts();
   }, []);
+
+  React.useEffect(() => {
+    const productsWithQuantity = products.map((product) => {
+      const quantity = input[product.id] || 0;
+      return { ...product, quantity };
+    });
+    const totalPrice = productsWithQuantity
+      .reduce((acc, { price, quantity }) => acc + (+price * quantity), 0);
+    console.log(totalPrice);
+    if (totalPrice > 0) setCheckoutDisable(false);
+  });
 
   const changeProductsQuantity = (type, product) => {
     if (input[product.id] === 0 && type === 'decrement') {
@@ -113,7 +125,7 @@ function Products() {
       <BotaoVerdeEscuro
         click={ handleSetCart }
         placeholder={ getTotalPrice() }
-        data-testid="customer_products__button-cart"
+        isDisabled={ checkoutDisable }
       />
     </div>
   );
