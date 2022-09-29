@@ -1,12 +1,9 @@
 import React from 'react';
-import FormLogin from '../../componentes/FormLogin/FormLogin';
+import FormLogin from '../../componentes/Forms/FormLogin';
 
 function Login() {
   return (
-    <>
-      <p>oi</p>
-      <FormLogin />
-    </>
+    <FormLogin />
   );
 }
 

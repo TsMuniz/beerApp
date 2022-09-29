@@ -1,12 +1,9 @@
 import React from 'react';
-import FormRegister from '../../componentes/FormRegister/FormRegister';
+import FormRegister from '../../componentes/Forms/FormRegister';
 
 function Register() {
   return (
-    <>
-      <p>oi</p>
-      <FormRegister />
-    </>
+    <FormRegister />
   );
 }
 

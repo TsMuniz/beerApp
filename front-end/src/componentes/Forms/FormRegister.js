@@ -9,7 +9,6 @@ function FormRegister() {
   const [isDisableBtn, setIsDisableBtn] = React.useState(true);
   const [errorMessage, setErrorMessage] = React.useState(false);
   const [isLogged, setIsLogged] = React.useState(false);
-  // const [user, setUser] = React.useState([]);
 
   const MIN_PASSWORD = 6;
   const MIN_NAME = 12;
