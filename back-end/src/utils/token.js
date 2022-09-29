@@ -4,8 +4,8 @@ const fs = require('fs');
 const secret = fs.readFileSync('jwt.evaluation.key', { encoding: 'utf8' });
 
 async function createToken(user) {
-    const { email, password, role } = user;
-    const payload = { data: { email, password, role } };
+    const { role, id } = user;
+    const payload = { data: { id, role } };
     const token = jwt.sign(payload, secret);
     return token;
 }
@@ -18,4 +18,4 @@ const readToken = async (token) => {
     return data;
 };
 
-module.exports = { secret, createToken, readToken };
+module.exports = { createToken, readToken };
