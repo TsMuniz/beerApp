@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../../helpers/api';
+import './AddressCheckout.css';
 
 function Address() {
-  const [address, setAddress] = useState({ addres: '', addresNumber: '' });
+  const [address, setAddress] = useState({ address: '', addressNumber: '' });
   const [vendedor, setVendedor] = useState({ all: [], select: '' });
+  const navigate = useNavigate();
 
   const registerSeller = async (sale, token) => {
-    const response = await api.post('/sale', sale, {
+    const response = await api.post('/user', sale, {
       headers: {
         Authorization: token,
       },
@@ -15,13 +18,15 @@ function Address() {
   };
 
   const getSellers = async () => {
-    const response = await api.get('/getsellers');
+    const response = await api.get('/user');
+    // console.log(response);
     return response.data;
   };
 
   useEffect(() => {
     const vendedores = async () => {
       const seller = await getSellers();
+      console.log(seller);
       setVendedor({ all: seller, select: seller[0].id });
     };
     vendedores();
@@ -38,8 +43,8 @@ function Address() {
       userId: '',
       sellerId: vendedor.select,
       totalPrice: Number(total),
-      deliveryAddress: addresUser.addres,
-      deliveryNumber: addresUser.addresNumber,
+      deliveryAddress: address.address,
+      deliveryNumber: address.addressNumber,
       saleDate: new Date(),
       status: 'Pendente',
     };
@@ -50,41 +55,57 @@ function Address() {
 
   return (
     <>
-      Detalhes e Endereço para Entrega
-      <p>P. Vendedora Responsável:</p>
-      <select
-        data-testid="customer_checkout__select-seller"
-      >
-        {vendedor.all.length !== 0 && vendedor.all.map((vend, index) => (
-          <option
-            key={ index }
-            value={ vend.name }
+      <h3 className="AddressTitle">Detalhes e Endereço para Entrega</h3>
+      <div className="AddressComponent">
+        <div className="AddressFlex">
+          <div className="AddressContent">
+            <p>P. Vendedora Responsável:</p>
+            <select
+              data-testid="customer_checkout__select-seller"
+              className="AddressInput"
+            >
+              {vendedor.all.length !== 0 && vendedor.all.map((vend, index) => (
+                <option
+                  key={ index }
+                  value={ vend.name }
+                >
+                  {vend.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="AddressContent">
+            <p>Endereço</p>
+            <input
+              type="text"
+              name="addres"
+              className="AddressInput"
+              data-testid="customer_checkout__input-address"
+              onChange={ handleAddress }
+            />
+          </div>
+          <div className="AddressContent">
+            <p>Número</p>
+            <input
+              data-testid="customer_checkout__input-address-number"
+              type="number"
+              className="AddressInput"
+              name="addresNumber"
+              onChange={ handleAddress }
+            />
+          </div>
+        </div>
+        <div className="AddressContent">
+          <button
+            data-testid="customer_checkout__button-submit-order"
+            type="button"
+            className="AddressButton"
+            onClick={ handleButtonSubmitOrder }
           >
-            {vend.name}
-          </option>
-        ))}
-      </select>
-      <p>Endereço</p>
-      <input
-        type="text"
-        name="addres"
-        data-testid="customer_checkout__input-address"
-        onChange={ handleAddress }
-      />
-      <p>Número</p>
-      <input
-        data-testid="customer_checkout__input-address-number"
-        type="number"
-        name="addresNumber"
-        onChange={ handleAddress }
-      />
-      <button
-        data-testid="customer_checkout__button-submit-order"
-        type="button"
-        onClick={ handleButtonSubmitOrder }
-      >
-        Finalizar Pedido
-      </button>
+            <b>FINALIZAR PEDIDO</b>
+          </button>
+        </div>
+      </div>
     </>
   );
 }
