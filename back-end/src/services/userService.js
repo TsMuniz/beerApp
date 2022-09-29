@@ -36,6 +36,11 @@ const userService = {
         throw new Error('Not Found', { cause: 404 });
     },
 
+    async findSellers() {
+        const sellerList = await User.findAll({ where: { role: 'seller' } });
+        return sellerList;
+    },
+
     async delete(id) {
         const product = await this.findOne(id);
 
