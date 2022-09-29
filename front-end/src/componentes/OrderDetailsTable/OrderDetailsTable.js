@@ -4,11 +4,6 @@ import React from 'react';
 export default function OrderDetailsTable(
   { position, description, quantity, unityValue, subTotal },
 ) {
-  const handleRemove = (id) => {
-    const remove = cart.filter((item) => item.id !== id);
-    setCart(remove);
-    localStorage.setItem('cart', JSON.stringify(remove));
-  };
   return (
 
     <tbody>
@@ -41,16 +36,6 @@ export default function OrderDetailsTable(
           table-sub-total-${subTotal}` }
         >
           {subTotal}
-        </td>
-        <td>
-          <button
-            className="bg-verdeClaro text-textoLight"
-            type="button"
-            data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-            onClick={ () => handleRemove(product?.id) }
-          >
-            REMOVER
-          </button>
         </td>
       </tr>
 
