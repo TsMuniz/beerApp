@@ -34,7 +34,6 @@ function Products() {
     });
     const totalPrice = productsWithQuantity
       .reduce((acc, { price, quantity }) => acc + (+price * quantity), 0);
-    console.log(totalPrice);
     if (totalPrice > 0) setCheckoutDisable(false);
   }, [input]);
 
