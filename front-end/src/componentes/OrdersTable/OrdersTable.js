@@ -5,15 +5,15 @@ import { CartContext } from '../../contexts/CartContext';
 export default function OrdersTable({ prefixId }) {
   const { cart, setCart } = useContext(CartContext);
 
-  const handleRemove = (id) => {
+  const handleRemove = ({ id }) => {
     const remove = cart.filter((item) => item.id !== id);
     setCart(remove);
     localStorage.setItem('cart', JSON.stringify(remove));
   };
 
-  const getSubValue = (quantity, unityValue) => {
-    const subValue = Number(quantity) * Number(unityValue);
-    return subValue.toFixed(2).replace('.', ',');
+  const getSubTotal = (quantity, unityValue) => {
+    const subTotal = quantity * unityValue;
+    return subTotal.toFixed(2).replace('.', ',');
   };
 
   return (
@@ -22,7 +22,7 @@ export default function OrdersTable({ prefixId }) {
         <tr>
           <th>Item</th>
           <th>Descrição</th>
-          <th>quantidade</th>
+          <th>Quantidade</th>
           <th>Valor unitário</th>
           <th>Sub-total</th>
           <th>Remover item</th>
@@ -31,7 +31,7 @@ export default function OrdersTable({ prefixId }) {
       <tbody>
         {
           cart.map((product, index) => {
-            const { id, name, quantity, price: unityValue } = product;
+            const { name, quantity, price: unityValue } = product;
             return (
               <tr key={ index }>
                 <td
@@ -60,14 +60,14 @@ export default function OrdersTable({ prefixId }) {
                     `${prefixId}__element-order-table-unit-price-${index}`
                   }
                 >
-                  {unityValue}
+                  { unityValue.replace('.', ',') }
                 </td>
                 <td
                   data-testid={
                     `${prefixId}__element-order-table-sub-total-${index}`
                   }
                 >
-                  { getSubValue() }
+                  { getSubTotal(quantity, unityValue) }
                 </td>
                 <td>
                   <button
@@ -75,7 +75,7 @@ export default function OrdersTable({ prefixId }) {
                     data-testid={
                       `${prefixId}__element-order-table-remove-${index}`
                     }
-                    onClick={ () => handleRemove(id) }
+                    onClick={ () => handleRemove(product) }
                   >
                     REMOVER
                   </button>
