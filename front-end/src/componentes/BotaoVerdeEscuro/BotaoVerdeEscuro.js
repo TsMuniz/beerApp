@@ -12,11 +12,13 @@ function botaoVerdeEscuro({ placeholder, click, isDisabled }) {
       onClick={ click }
       data-testid="customer_products__button-cart"
     >
+      <p>
+        VerCarrinho:  R$
+      </p>
       <p
         data-testid="customer_products__checkout-bottom-value"
       >
-        VerCarrinho:  R$
-        {placeholder}
+        {(placeholder.toFixed(2)).replace('.', ',')}
       </p>
     </button>
 
