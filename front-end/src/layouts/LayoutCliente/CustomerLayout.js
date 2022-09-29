@@ -15,7 +15,7 @@ export default function CustomerLayout() {
         />
         <NavBarLink
           name="Meus Pedidos"
-          path="/customer/checkout"
+          path="/customer/orders"
           dataTestId="customer_products__element-navbar-link-orders"
         />
       </NavBar>

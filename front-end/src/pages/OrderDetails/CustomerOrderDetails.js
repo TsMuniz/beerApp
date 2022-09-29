@@ -1,32 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
-import SellerOrderDetailsTable
-  from '../../componentes/OrderDetailsTable/SellerOrderDetailsTable';
-import SellerOrderDetailsTableWrapper
-  from '../../componentes/ODTW/SellerOrderDetailsTableWrapper';
+import CustomerOrderDetailsTable
+  from '../../componentes/OrderDetailsTable/CustomerOrderDetailsTable';
+import CustomerOrderDetailsTableWrapper
+  from '../../componentes/ODTW/CustomerOrderDetailsTableWrapper';
 import api from '../../helpers/api';
 
-export default function OrderDetails() {
+export default function CustomerOrderDetails() {
   const orderId = useParams();
 
   const [order, setOrder] = useState({});
+  const [disabled, setDisabled] = useState(false);
   useEffect(() => {
     api.get(`/sales/${+orderId.id}`)
       .then((response) => setOrder(response.data));
   }, [orderId]);
 
-  console.log(order)
-  const handleDelivery = async () => {
+  const handleDelivered = async () => {
     try {
-      await api.patch(`sales/changeStatus/${orderId.id}/?status=1`);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-  const handlePreparing = async () => {
-    try {
-      await api.patch(`sales/changeStatus/${orderId.id}/?status=0`);
+      await api.patch(`sales/changeStatus/${orderId.id}/?status=2`);
+      setDisabled(true);
     } catch (error) {
       console.log(error.message);
     }
@@ -36,13 +30,13 @@ export default function OrderDetails() {
     return null;
   }
   return (
-    <SellerOrderDetailsTableWrapper
+    <CustomerOrderDetailsTableWrapper
       orderNumber={ order.id }
       totalPrice={ order.totalPrice }
       status={ order.status }
       date={ format(Date.parse(order.saleDate), 'dd/MM/yyyy') }
-      setDelivery={ handleDelivery }
-      setPreparing={ handlePreparing }
+      disable={ disabled }
+      setDelivered={ handleDelivered }
     >
       <thead>
         <td>Item</td>
@@ -53,7 +47,7 @@ export default function OrderDetails() {
       </thead>
       <tbody>
         {order.products.map?.((product, index) => (
-          <SellerOrderDetailsTable
+          <CustomerOrderDetailsTable
             key={ index }
             position={ index + 1 }
             description={ product.product.name }
@@ -63,6 +57,6 @@ export default function OrderDetails() {
           />
         ))}
       </tbody>
-    </SellerOrderDetailsTableWrapper>
+    </CustomerOrderDetailsTableWrapper>
   );
 }

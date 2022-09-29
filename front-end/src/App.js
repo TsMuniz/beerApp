@@ -9,7 +9,9 @@ import CustomerLayout from './layouts/LayoutCliente/CustomerLayout';
 import Products from './pages/Products/Products';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import SellerOrders from './pages/SellerOrders/SellerOrders';
+import CustomerOrders from './pages/CustomerOrders/CustomerOrders';
 import OrderDetails from './pages/OrderDetails/OrderDetails';
+import CustomerOrderDetails from './pages/OrderDetails/CustomerOrderDetails';
 import Management from './pages/Management/Management';
 import Checkout from './pages/Checkout/Checkout';
 
@@ -25,6 +27,8 @@ function App() {
           <Route path="orders/:id" element={ <OrderDetails /> } />
         </Route>
         <Route path="/customer" element={ <CustomerLayout /> }>
+          <Route path="orders" element={ <CustomerOrders /> } />
+          <Route path="orders/:id" element={ <CustomerOrderDetails /> } />
           <Route path="products" element={ <Products /> } />
           <Route path="checkout" element={ <Checkout /> } />
         </Route>

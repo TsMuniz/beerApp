@@ -1,24 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CartContext } from '../../contexts/CartContext';
 import api from '../../helpers/api';
 import './AddressCheckout.css';
 
-function Address() {
-  const [address, setAddress] = useState({ address: '', addressNumber: '' });
+function AddressCheckout() {
+  const [address, setAddress] = useState('');
+  const [addressNumber, setAddressNumber] = useState('');
   const [vendedor, setVendedor] = useState({ all: [], select: '' });
   const navigate = useNavigate();
+  const { cart } = useContext(CartContext);
 
-  const registerSeller = async (sale, token) => {
-    const response = await api.post('/user', sale, {
-      headers: {
-        Authorization: token,
-      },
-    });
+  const getTotalPrice = () => {
+    const totalPrice = cart
+      .reduce((acc) => acc + Number(cart.price) * Number(cart.quantity), 0);
+    return totalPrice.toFixed(2);
+  };
+
+  const registerSale = async (pedido) => {
+    const response = await api.post('/sales', pedido);
     return response.data;
   };
 
   const getSellers = async () => {
-    const response = await api.get('/user');
+    const response = await api.get('/user/sellers');
     // console.log(response);
     return response.data;
   };
@@ -26,30 +31,23 @@ function Address() {
   useEffect(() => {
     const vendedores = async () => {
       const seller = await getSellers();
-      console.log(seller);
       setVendedor({ all: seller, select: seller[0].id });
     };
     vendedores();
   }, []);
 
-  const handleAddress = ({ target }) => {
-    const { value, name } = target;
-    setAddress({ ...address, [name]: value });
-  };
+  const getUserId = JSON.parse(localStorage.getItem('user'));
 
   const handleButtonSubmitOrder = async () => {
-    const total = handleTotal();
-    const pedido = {
-      userId: '',
+    const saleId = cart.map((prod) => ({ productId: prod.id, quantity: prod.quantity }));
+    const { id } = await registerSale({
+      userId: getUserId.id,
       sellerId: vendedor.select,
-      totalPrice: Number(total),
-      deliveryAddress: address.address,
-      deliveryNumber: address.addressNumber,
-      saleDate: new Date(),
-      status: 'Pendente',
-    };
-    const cartIds = cart.map((prod) => ({ id: prod.id, qty: prod.qty }));
-    const { id } = await registerSeller({ pedido, cartIds }, token);
+      totalPrice: getTotalPrice(),
+      deliveryAddress: address,
+      deliveryNumber: addressNumber,
+      products: saleId,
+    });
     navigate(`/customer/orders/${id}`);
   };
 
@@ -81,7 +79,7 @@ function Address() {
               name="addres"
               className="AddressInput"
               data-testid="customer_checkout__input-address"
-              onChange={ handleAddress }
+              onChange={ ({ target }) => { setAddress(target.value); } }
             />
           </div>
           <div className="AddressContent">
@@ -91,7 +89,7 @@ function Address() {
               type="number"
               className="AddressInput"
               name="addresNumber"
-              onChange={ handleAddress }
+              onChange={ ({ target }) => { setAddressNumber(target.value); } }
             />
           </div>
         </div>
@@ -110,4 +108,4 @@ function Address() {
   );
 }
 
-export default Address;
+export default AddressCheckout;

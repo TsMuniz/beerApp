@@ -2,7 +2,7 @@ const Joi = require('joi');
 const { sequelize } = require('../database/models');
 const { Sale, User, SalesProduct, Product } = require('../database/models');
 const { readToken } = require('../utils/token');
-const getTotalPrice = require('../utils/getTotalPrice');
+// const getTotalPrice = require('../utils/getTotalPrice');
 // const saleStatus = ['Pendente', 'Preparando', 'Em Trânsito', 'Entregue'];
 
 const salesService = {
@@ -13,6 +13,10 @@ const salesService = {
           totalPrice: Joi.number().required(),
           deliveryAddress: Joi.string().required(),
           deliveryNumber: Joi.number().required(),
+          products: Joi.object({
+            productId: Joi.number().required(),
+            quantity: Joi.number().required(),
+          }),
         });
     
         const { error } = schema.validate(body);
@@ -69,10 +73,10 @@ const salesService = {
     },
 
     async create(body) {
-        const { userId, sellerId, deliveryAddress, deliveryNumber, products } = body;
+        const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, products } = body;
         await this.checkCustomer(userId);
         await this.checkSeller(sellerId);
-        const totalPrice = getTotalPrice(products);
+        // const totalPrice = getTotalPrice(products);
         const createdSale = await sequelize.transaction(async (t) => {
             const sale = await Sale.create({
                 userId,
@@ -85,10 +89,8 @@ const salesService = {
             await SalesProduct.bulkCreate(products.map(({ productId, quantity }) => ({ 
                 saleId: sale.id, productId, quantity, 
             })), { transaction: t });
-            
             return sale;
         });
-        
         return createdSale;
     },
 
