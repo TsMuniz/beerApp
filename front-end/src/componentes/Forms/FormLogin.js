@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import api from '../../helpers/api';
+import './Form.css';
 
 function FormLogin() {
   const [email, setEmail] = React.useState('');
@@ -64,41 +65,56 @@ function FormLogin() {
   }
 
   return (
-    <form onSubmit={ handleSubmit }>
-      <input
-        type="text"
-        name="email"
-        placeholder="Ex: email@email.com"
-        data-testid="common_login__input-email"
-        onChange={ ({ target }) => { setEmail(target.value); } }
-        value={ email }
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="******"
-        data-testid="common_login__input-password"
-        onChange={ ({ target }) => { setPassword(target.value); } }
-        value={ password }
-      />
-      <button
-        type="submit"
-        disabled={ isDisableBtn }
-        data-testid="common_login__button-login"
-      >
-        LOGIN
-      </button>
-      <button
-        type="button"
-        data-testid="common_login__button-register"
-        onClick={ routeChange }
-      >
-        Ainda não tenho conta
-      </button>
-      <p data-testid="common_login__element-invalid-email">
-        { errorMessage }
-      </p>
-    </form>
+    <div className="FlexContainer">
+
+      <form onSubmit={ handleSubmit } className="Form LoginForm">
+        <label htmlFor="input-email" className="FormField">
+          <span className="FormFieldName">Email</span>
+          <input
+            type="text"
+            name="email"
+            id="input-email"
+            placeholder="Ex: email@email.com"
+            data-testid="common_login__input-email"
+            className="FormFieldInput"
+            onChange={ ({ target }) => { setEmail(target.value); } }
+            value={ email }
+          />
+        </label>
+        <label htmlFor="input-password" className="FormField">
+          <span className="FormFieldName">Senha</span>
+          <input
+            type="password"
+            name="password"
+            id="input-password"
+            placeholder="******"
+            data-testid="common_login__input-password"
+            className="FormFieldInput"
+            onChange={ ({ target }) => { setPassword(target.value); } }
+            value={ password }
+          />
+        </label>
+        <button
+          type="submit"
+          disabled={ isDisableBtn }
+          data-testid="common_login__button-login"
+          className="Button ButtonLogin"
+        >
+          LOGIN
+        </button>
+        <button
+          type="button"
+          data-testid="common_login__button-register"
+          className="Button ButtonRegister"
+          onClick={ routeChange }
+        >
+          Ainda não tenho conta
+        </button>
+        <p data-testid="common_login__element-invalid-email">
+          { errorMessage }
+        </p>
+      </form>
+    </div>
   );
 }
 

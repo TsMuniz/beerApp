@@ -60,49 +60,53 @@ function AdminFormRegister() {
           </p>
         )
       }
-      <form onSubmit={ handleSubmit } className="form admin-form">
-        <label htmlFor="input-name">
-          <span className="field-name">Nome</span>
+      <form onSubmit={ handleSubmit } className="Form AdminForm">
+        <label htmlFor="input-name" className="FormField">
+          <span className="FormFieldName">Nome</span>
           <input
             type="text"
             name="name"
             id="input-name"
             placeholder="Nome e sobrenome"
             data-testid="admin_manage__input-name"
+            className="FormFieldInput"
             value={ name }
             onChange={ ({ target }) => { setname(target.value); } }
           />
         </label>
-        <label htmlFor="input-email">
-          <span className="field-name">Email</span>
+        <label htmlFor="input-email" className="FormField">
+          <span className="FormFieldName">Email</span>
           <input
             type="text"
             name="email"
             id="input-email"
             placeholder="Ex: email@email.com"
             data-testid="admin_manage__input-email"
+            className="FormFieldInput"
             value={ email }
             onChange={ ({ target }) => { setEmail(target.value); } }
           />
         </label>
-        <label htmlFor="input-password">
-          <span className="field-name">Senha</span>
+        <label htmlFor="input-password" className="FormField">
+          <span className="FormFieldName">Senha</span>
           <input
             type="password"
             name="password"
             id="input-password"
             placeholder="******"
             data-testid="admin_manage__input-password"
+            className="FormFieldInput"
             value={ password }
             onChange={ ({ target }) => { setPassword(target.value); } }
           />
         </label>
-        <label htmlFor="input-role">
-          <span className="field-name">Tipo</span>
+        <label htmlFor="input-role" className="FormField">
+          <span className="FormFieldName">Tipo</span>
           <select
             name="role"
             id="input-role"
             data-testid="admin_manage__select-role"
+            className="FormFieldInput"
             value={ role }
             onChange={ ({ target }) => { setRole(target.value); } }
           >
@@ -114,7 +118,7 @@ function AdminFormRegister() {
           type="submit"
           data-testid="admin_manage__button-register"
           disabled={ isDisableBtn }
-          className="btn-register"
+          className="Button ButtonRegister"
         >
           Cadastrar
         </button>
