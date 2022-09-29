@@ -11,7 +11,6 @@ function botaoVerdeEscuro({ placeholder, click, isDisabled }) {
       type="button"
       onClick={ click }
       data-testid="customer_products__button-cart"
-      disabled={ isDisabled }
     >
       <p
         data-testid="customer_products__checkout-bottom-value"

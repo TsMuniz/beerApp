@@ -5,7 +5,6 @@ import api from '../../helpers/api';
 import BotaoVerdeEscuro from '../../componentes/BotaoVerdeEscuro/BotaoVerdeEscuro';
 import { CartContext } from '../../contexts/CartContext';
 import styles from './styles.module.scss';
-import formatToPrice from '../../helpers/formatToPrice';
 
 function Products() {
   const [products, setProducts] = React.useState([]);
@@ -36,7 +35,7 @@ function Products() {
       .reduce((acc, { price, quantity }) => acc + (+price * quantity), 0);
     console.log(totalPrice);
     if (totalPrice > 0) setCheckoutDisable(false);
-  });
+  }, [input]);
 
   const changeProductsQuantity = (type, product) => {
     if (input[product.id] === 0 && type === 'decrement') {
