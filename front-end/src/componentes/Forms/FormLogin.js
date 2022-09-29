@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 import api from '../../helpers/api';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import './Form.css';
 
 function FormLogin() {
@@ -59,7 +60,7 @@ function FormLogin() {
       }
     } catch (error) {
       if (error.response.status) {
-        return setErrorMessage('email ou senha invalidos');
+        return setErrorMessage('Email ou senha inválidos');
       } return setErrorMessage(false);
     }
   }
@@ -110,9 +111,13 @@ function FormLogin() {
         >
           Ainda não tenho conta
         </button>
-        <p data-testid="common_login__element-invalid-email">
-          { errorMessage }
-        </p>
+        {
+          errorMessage && (
+            <ErrorMessage dataTestId="common_login__element-invalid-email">
+              { errorMessage }
+            </ErrorMessage>
+          )
+        }
       </form>
     </div>
   );

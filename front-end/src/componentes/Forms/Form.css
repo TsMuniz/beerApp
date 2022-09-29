@@ -62,14 +62,14 @@
   padding: 0 8px;
 }
 
-.Button:disabled {
-  background: #bfd3ce;
-  border: 2px solid #a3c7be;
-  color: #66978b;
-}
-
 .LoginForm .Button, .RegisterForm .Button {
   margin: 15px 5px 5px;
+}
+
+.ButtonLogin {
+  background-color: white;
+  border: 2px solid #036b52;
+  color: #036b52;
 }
 
 .ButtonRegister {
@@ -81,9 +81,9 @@
   background: #0c8365;
 }
 
-.ButtonLogin {
-  background-color: white;
-  border: 2px solid #036b52;
-  color: #036b52;
+.Button:disabled {
+  background: #bfd3ce;
+  border: 2px solid #a3c7be;
+  color: #66978b;
 }
 

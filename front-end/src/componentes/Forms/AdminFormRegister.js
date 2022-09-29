@@ -3,6 +3,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import api from '../../helpers/api';
 import { registerErrMsg } from '../../helpers/errorMessages';
 import httpStatus from '../../helpers/httpStatus';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import './Form.css';
 
 const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
@@ -55,9 +56,9 @@ function AdminFormRegister() {
     <>
       {
         isInvalidRegister && (
-          <p data-testid="admin_manage__element-invalid-register">
+          <ErrorMessage dataTestId="admin_manage__element-invalid-register">
             { errorMessage }
-          </p>
+          </ErrorMessage>
         )
       }
       <form onSubmit={ handleSubmit } className="Form AdminForm">

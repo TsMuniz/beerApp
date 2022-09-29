@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import api from '../../helpers/api';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import './Form.css';
 
 function FormRegister() {
@@ -37,7 +38,7 @@ function FormRegister() {
       }
     } catch (error) {
       if (error.response.status) {
-        return setErrorMessage('Dados mal inseridos ou usuário ja registrado.');
+        return setErrorMessage('Usuário já registrado.');
       } return setErrorMessage(false);
     }
   }
@@ -95,9 +96,13 @@ function FormRegister() {
           >
             CADASTRAR
           </button>
-          <p data-testid="common_register__element-invalid_register">
-            {errorMessage}
-          </p>
+          {
+            errorMessage && (
+              <ErrorMessage dataTestId="common_register__element-invalid_register">
+                { errorMessage }
+              </ErrorMessage>
+            )
+          }
         </form>
       </div>)
   );
