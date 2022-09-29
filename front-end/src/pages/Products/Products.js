@@ -5,12 +5,12 @@ import api from '../../helpers/api';
 import BotaoVerdeEscuro from '../../componentes/BotaoVerdeEscuro/BotaoVerdeEscuro';
 import { CartContext } from '../../contexts/CartContext';
 import styles from './styles.module.scss';
-import formatToPrice from '../../helpers/formatToPrice';
 
 function Products() {
   const [products, setProducts] = React.useState([]);
   const { setCart, setTotalPrice } = useContext(CartContext);
   const [input, setInput] = React.useState({});
+  const [checkoutDisable, setCheckoutDisable] = React.useState(true);
   const navigate = useNavigate();
   const getProducts = async () => {
     const { data } = await api.get('/products');
@@ -26,6 +26,17 @@ function Products() {
   React.useEffect(() => {
     getProducts();
   }, []);
+
+  React.useEffect(() => {
+    const productsWithQuantity = products.map((product) => {
+      const quantity = input[product.id] || 0;
+      return { ...product, quantity };
+    });
+    const totalPrice = productsWithQuantity
+      .reduce((acc, { price, quantity }) => acc + (+price * quantity), 0);
+    console.log(totalPrice);
+    if (totalPrice > 0) setCheckoutDisable(false);
+  }, [input]);
 
   const changeProductsQuantity = (type, product) => {
     if (input[product.id] === 0 && type === 'decrement') {
@@ -114,8 +125,8 @@ function Products() {
       ))}
       <BotaoVerdeEscuro
         click={ handleSetCart }
-        placeholder={ formatToPrice(getTotalPrice()) }
-        isDisabled={ products.length === 0 }
+        placeholder={ getTotalPrice() }
+        isDisabled={ checkoutDisable }
       />
     </div>
   );
