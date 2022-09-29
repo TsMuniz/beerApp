@@ -35,7 +35,7 @@ function Products() {
     const totalPrice = productsWithQuantity
       .reduce((acc, { price, quantity }) => acc + (+price * quantity), 0);
     if (totalPrice > 0) setCheckoutDisable(false);
-  }, [input]);
+  }, [input, products]);
 
   const changeProductsQuantity = (type, product) => {
     if (input[product.id] === 0 && type === 'decrement') {
