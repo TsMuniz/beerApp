@@ -5,7 +5,7 @@ export const CartContext = createContext();
 
 export default function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
-  const [totalPrice, setTotalPrice] = useState('');
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const value = React.useMemo(() => ({
     cart, setCart, totalPrice, setTotalPrice,

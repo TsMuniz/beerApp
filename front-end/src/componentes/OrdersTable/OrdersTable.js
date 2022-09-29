@@ -1,19 +1,16 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { CartContext } from '../../contexts/CartContext';
+import formatToPrice from '../../helpers/formatToPrice';
 
 export default function OrdersTable({ prefixId }) {
-  const { cart, setCart } = useContext(CartContext);
+  const { cart, setCart, setTotalPrice, totalPrice } = useContext(CartContext);
 
-  const handleRemove = ({ id }) => {
-    const remove = cart.filter((item) => item.id !== id);
-    setCart(remove);
-    localStorage.setItem('cart', JSON.stringify(remove));
-  };
-
-  const getSubTotal = (quantity, unityValue) => {
-    const subTotal = quantity * unityValue;
-    return subTotal.toFixed(2).replace('.', ',');
+  const handleRemove = (id, subTotal) => {
+    const items = cart.filter((item) => item.id !== id);
+    setTotalPrice(totalPrice - subTotal);
+    setCart(items);
+    localStorage.setItem('cart', JSON.stringify(items));
   };
 
   return (
@@ -31,7 +28,8 @@ export default function OrdersTable({ prefixId }) {
       <tbody>
         {
           cart.map((product, index) => {
-            const { name, quantity, price: unityValue } = product;
+            const { id, name, quantity, price: unityValue } = product;
+            const subTotal = quantity * unityValue;
             return (
               <tr key={ index }>
                 <td
@@ -67,7 +65,7 @@ export default function OrdersTable({ prefixId }) {
                     `${prefixId}__element-order-table-sub-total-${index}`
                   }
                 >
-                  { getSubTotal(quantity, unityValue) }
+                  { formatToPrice(subTotal) }
                 </td>
                 <td>
                   <button
@@ -75,7 +73,7 @@ export default function OrdersTable({ prefixId }) {
                     data-testid={
                       `${prefixId}__element-order-table-remove-${index}`
                     }
-                    onClick={ () => handleRemove(product) }
+                    onClick={ () => handleRemove(id, subTotal) }
                   >
                     REMOVER
                   </button>

@@ -5,6 +5,7 @@ import api from '../../helpers/api';
 import BotaoVerdeEscuro from '../../componentes/BotaoVerdeEscuro/BotaoVerdeEscuro';
 import { CartContext } from '../../contexts/CartContext';
 import styles from './styles.module.scss';
+import formatToPrice from '../../helpers/formatToPrice';
 
 function Products() {
   const [products, setProducts] = React.useState([]);
@@ -45,7 +46,7 @@ function Products() {
     });
     const totalPrice = productsWithQuantity
       .reduce((acc, { price, quantity }) => acc + (+price * quantity), 0);
-    return totalPrice.toFixed(2).replace('.', ',');
+    return totalPrice;
   };
 
   const handleSetCart = () => {
@@ -112,8 +113,8 @@ function Products() {
       ))}
       <BotaoVerdeEscuro
         click={ handleSetCart }
-        placeholder={ getTotalPrice() }
-        data-testid="customer_products__button-cart"
+        placeholder={ formatToPrice(getTotalPrice()) }
+        isDisabled={ products.length === 0 }
       />
     </div>
   );
