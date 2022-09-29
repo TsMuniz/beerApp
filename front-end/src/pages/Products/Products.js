@@ -5,10 +5,11 @@ import api from '../../helpers/api';
 import BotaoVerdeEscuro from '../../componentes/BotaoVerdeEscuro/BotaoVerdeEscuro';
 import { CartContext } from '../../contexts/CartContext';
 import styles from './styles.module.scss';
+import formatToPrice from '../../helpers/formatToPrice';
 
 function Products() {
   const [products, setProducts] = React.useState([]);
-  const { setCart } = useContext(CartContext);
+  const { setCart, setTotalPrice } = useContext(CartContext);
   const [input, setInput] = React.useState({});
   const [checkoutDisable, setCheckoutDisable] = React.useState(true);
   const navigate = useNavigate();
@@ -57,7 +58,7 @@ function Products() {
     });
     const totalPrice = productsWithQuantity
       .reduce((acc, { price, quantity }) => acc + (+price * quantity), 0);
-    return totalPrice.toFixed(2).replace('.', ',');
+    return totalPrice;
   };
 
   const handleSetCart = () => {
@@ -68,6 +69,7 @@ function Products() {
     const itemsInCart = productsWithQuantity
       .filter(({ quantity }) => quantity !== 0);
     setCart(itemsInCart);
+    setTotalPrice(getTotalPrice());
     navigate('/customer/checkout');
   };
 
@@ -121,7 +123,6 @@ function Products() {
           </div>
         </div>
       ))}
-
       <BotaoVerdeEscuro
         click={ handleSetCart }
         placeholder={ getTotalPrice() }
