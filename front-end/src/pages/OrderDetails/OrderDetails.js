@@ -38,7 +38,6 @@ export default function OrderDetails() {
   return (
     <SellerOrderDetailsTableWrapper
       orderNumber={ order.id }
-      totalPrice={ order.totalPrice }
       status={ order.status }
       date={ format(Date.parse(order.saleDate), 'dd/MM/yyyy') }
       setDelivery={ handleDelivery }

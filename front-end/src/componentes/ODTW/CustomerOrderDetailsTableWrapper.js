@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TotalPrice from '../Checkout/TotalPrice';
 
 export default function CustomerOrderDetailsTableWrapper(
-  { status, date, orderNumber, children, totalPrice, setDelivered, disable },
+  { status, date, orderNumber, children, setDelivered, disable },
 ) {
   return (
     <div>
@@ -34,9 +35,7 @@ export default function CustomerOrderDetailsTableWrapper(
         </button>
       </div>
       { children }
-      <span>
-        {totalPrice}
-      </span>
+      <TotalPrice testIdPrefix="seller_order_details" />
     </div>
   );
 }
@@ -48,5 +47,4 @@ CustomerOrderDetailsTableWrapper.propTypes = {
   orderNumber: PropTypes.string.isRequired,
   setDelivered: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
-  totalPrice: PropTypes.string.isRequired,
 };

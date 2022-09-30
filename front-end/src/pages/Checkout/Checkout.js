@@ -7,7 +7,7 @@ export default function Checkout() {
   return (
     <div>
       <CustomerCheckoutTable />
-      <TotalPrice prefixId="customer_checkout" />
+      <TotalPrice testIdPrefix="customer_checkout" />
       <Address />
     </div>
   );

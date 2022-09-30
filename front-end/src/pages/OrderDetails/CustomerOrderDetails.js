@@ -32,7 +32,6 @@ export default function CustomerOrderDetails() {
   return (
     <CustomerOrderDetailsTableWrapper
       orderNumber={ order.id }
-      totalPrice={ order.totalPrice }
       status={ order.status }
       date={ format(Date.parse(order.saleDate), 'dd/MM/yyyy') }
       disable={ disabled }

@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import TotalPrice from '../Checkout/TotalPrice';
 
 export default function SellerOrderDetailsTableWrapper(
-  { status, date, orderNumber, children, totalPrice, setPreparing, setDelivery },
+  { status, date, orderNumber, children, setPreparing, setDelivery },
 ) {
   console.log(status);
   return (
@@ -42,11 +43,7 @@ export default function SellerOrderDetailsTableWrapper(
         </button>
       </div>
       {children}
-      <span
-        data-testid="seller_order_details__element-order-total-price"
-      >
-        {totalPrice.replace('.', ',')}
-      </span>
+      <TotalPrice testIdPrefix="seller_order_details" />
     </div>
   );
 }
@@ -58,5 +55,4 @@ SellerOrderDetailsTableWrapper.propTypes = {
   setDelivery: PropTypes.func.isRequired,
   setPreparing: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
-  totalPrice: PropTypes.string.isRequired,
 };
