@@ -1,51 +1,89 @@
-.form {
+.FlexContainer {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+.Form {
   display: flex;
   font-size: 0.9rem;
   font-weight: 400;
 }
 
-.admin-form {
+.LoginForm, .RegisterForm {
+  background-color: #e3ecea;
+  border: 1px solid  #b1c2be;
+  border-radius: 5px;
+  flex-direction: column;
+  padding: 10px;
+  width: fit-content;
+}
+
+.AdminForm {
   align-items: center;
   box-shadow: 0 3px 10px #b5b5b5;
   justify-content: center;
   padding: 10px;
 }
 
-.form label {
+.FormField {
   display: inline-flex;
   flex-direction: column;
   margin: 5px;
 }
 
-.field-name {
+.FormFieldName {
   margin: 0 3px;
 }
 
-.form input, .form select, .form button {
+.FormFieldInput, .Button {
   border-radius: 5px;
   height: 32px;
   outline: none;
 }
 
-.form input, .form select {
+.FormFieldInput {
   background-color: white;
   border: 1px solid rgb(138, 138, 138);
   color: black;
   font: inherit;
+  height: 32px;
   margin-top: 5px;
   padding: 0 5px;
   width: 250px;
 }
 
-.form button {
+.Button {
   border: none;
   font-family: inherit;
   font-size: 1rem;
+  height: 36px;
   margin: 8px;
   padding: 0 8px;
 }
 
-.btn-register {
+.LoginForm .Button, .RegisterForm .Button {
+  margin: 15px 5px 5px;
+}
+
+.ButtonLogin {
+  background-color: white;
+  border: 2px solid #036b52;
+  color: #036b52;
+}
+
+.ButtonRegister {
   background: #036b52;
   color: white;
+}
+
+.ButtonRegister:hover {
+  background: #0c8365;
+}
+
+.Button:disabled {
+  background: #bfd3ce;
+  border: 2px solid #a3c7be;
+  color: #66978b;
 }
