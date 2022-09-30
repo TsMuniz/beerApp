@@ -41,9 +41,9 @@ export default function SellerOrderDetailsTable(
 }
 
 SellerOrderDetailsTable.propTypes = {
-  description: PropTypes.number.isRequired,
-  position: PropTypes.string.isRequired,
-  quantity: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  position: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
   subTotal: PropTypes.string.isRequired,
   unityValue: PropTypes.string.isRequired,
 };

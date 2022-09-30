@@ -50,6 +50,7 @@ function FormLogin() {
     try {
       event.preventDefault();
       const response = await api.post('/login', { email, password });
+      console.log('response', response);
       if (response.status === HTTP_OK) {
         setErrorMessage(false);
         setAuth(response.data);
@@ -57,6 +58,7 @@ function FormLogin() {
         redirectUser(response.data.role);
       }
     } catch (error) {
+      console.log(error);
       if (error.response.status) {
         return setErrorMessage('email ou senha invalidos');
       } return setErrorMessage(false);
