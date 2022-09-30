@@ -1,5 +1,5 @@
 import React from 'react';
-import OrderDetailsTable from '../OrderDetailsTable/OrderDetailsTable';
+import SellerOrderDetailsTable from '../OrderDetailsTable/SellerOrderDetailsTable';
 
 function TableCheckout() {
   return (
@@ -14,7 +14,7 @@ function TableCheckout() {
           <th>Remover Item</th>
         </tr>
       </thead>
-      <OrderDetailsTable />
+      <SellerOrderDetailsTable />
     </table>
   );
 }

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default function OrderDetailsTableWrapper(
+export default function SellerOrderDetailsTableWrapper(
   { status, date, orderNumber, children, totalPrice, setPreparing, setDelivery },
 ) {
   return (
@@ -48,7 +48,7 @@ export default function OrderDetailsTableWrapper(
   );
 }
 
-OrderDetailsTableWrapper.propTypes = {
+SellerOrderDetailsTableWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   date: PropTypes.string.isRequired,
   orderNumber: PropTypes.string.isRequired,
