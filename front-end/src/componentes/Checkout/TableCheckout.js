@@ -1,18 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
-import { CartContext } from '../../contexts/CartContext';
-import formatToPrice from '../../helpers/formatToPrice';
+import React from 'react';
+import SellerOrderDetailsTable from '../OrderDetailsTable/SellerOrderDetailsTable';
 
-export default function TableCheckout({ prefixId }) {
-  const { cart, setCart, setTotalPrice, totalPrice } = useContext(CartContext);
-
-  const handleRemove = (id, subTotal) => {
-    const items = cart.filter((item) => item.id !== id);
-    setTotalPrice(totalPrice - subTotal);
-    setCart(items);
-    localStorage.setItem('cart', JSON.stringify(items));
-  };
-
+function TableCheckout() {
   return (
     <table>
       <thead>
@@ -20,73 +9,14 @@ export default function TableCheckout({ prefixId }) {
           <th>Item</th>
           <th>Descrição</th>
           <th>Quantidade</th>
-          <th>Valor unitário</th>
+          <th>Valor Unitário</th>
           <th>Sub-total</th>
-          <th>Remover item</th>
+          <th>Remover Item</th>
         </tr>
       </thead>
-      <tbody>
-        {
-          cart.map((product, index) => {
-            const { id, name, quantity, price: unityValue } = product;
-            const subTotal = quantity * unityValue;
-            return (
-              <tr key={ index }>
-                <td
-                  data-testid={
-                    `${prefixId}__element-order-table-item-number-${index}`
-                  }
-                >
-                  {index + 1}
-                </td>
-                <td
-                  data-testid={
-                    `${prefixId}__element-order-table-name-${index}`
-                  }
-                >
-                  {name}
-                </td>
-                <td
-                  data-testid={
-                    `${prefixId}__element-order-table-quantity-${index}`
-                  }
-                >
-                  {quantity}
-                </td>
-                <td
-                  data-testid={
-                    `${prefixId}__element-order-table-unit-price-${index}`
-                  }
-                >
-                  { unityValue.replace('.', ',') }
-                </td>
-                <td
-                  data-testid={
-                    `${prefixId}__element-order-table-sub-total-${index}`
-                  }
-                >
-                  { formatToPrice(subTotal) }
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    data-testid={
-                      `${prefixId}__element-order-table-remove-${index}`
-                    }
-                    onClick={ () => handleRemove(id, subTotal) }
-                  >
-                    REMOVER
-                  </button>
-                </td>
-              </tr>
-            );
-          })
-        }
-      </tbody>
+      <SellerOrderDetailsTable />
     </table>
   );
 }
 
-TableCheckout.propTypes = {
-  prefixId: PropTypes.string.isRequired,
-};
+export default TableCheckout;

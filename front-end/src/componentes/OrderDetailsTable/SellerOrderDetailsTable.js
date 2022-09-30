@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default function OrderDetailsTable(
+export default function SellerOrderDetailsTable(
   { position, description, quantity, unityValue, subTotal },
 ) {
   return (
@@ -40,7 +40,7 @@ export default function OrderDetailsTable(
   );
 }
 
-OrderDetailsTable.propTypes = {
+SellerOrderDetailsTable.propTypes = {
   description: PropTypes.number.isRequired,
   position: PropTypes.string.isRequired,
   quantity: PropTypes.string.isRequired,
