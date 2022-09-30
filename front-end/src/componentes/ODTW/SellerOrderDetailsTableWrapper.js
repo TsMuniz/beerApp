@@ -41,9 +41,7 @@ export default function SellerOrderDetailsTableWrapper(
           SAIU PARA ENTREGA
         </button>
       </div>
-      <table>
-        {children}
-      </table>
+      {children}
       <span
         data-testid="seller_order_details__element-order-total-price"
       >

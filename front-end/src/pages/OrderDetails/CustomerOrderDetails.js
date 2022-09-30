@@ -38,25 +38,7 @@ export default function CustomerOrderDetails() {
       disable={ disabled }
       setDelivered={ handleDelivered }
     >
-      <thead>
-        <td>Item</td>
-        <td>Descricao</td>
-        <td>Quantidade</td>
-        <td>Valor Unitario</td>
-        <td>Sub Total</td>
-      </thead>
-      <tbody>
-        {order.products.map?.((product, index) => (
-          <CustomerOrderDetailsTable
-            key={ index }
-            position={ index + 1 }
-            description={ product.product.name }
-            quantity={ product.quantity }
-            unityValue={ product.product.price }
-            subTotal={ (product.product.price * product.quantity).toFixed(2) }
-          />
-        ))}
-      </tbody>
+      <CustomerOrderDetailsTable orders={ order.products } />
     </CustomerOrderDetailsTableWrapper>
   );
 }

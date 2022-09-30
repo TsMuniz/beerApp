@@ -33,9 +33,7 @@ export default function CustomerOrderDetailsTableWrapper(
           ENTREGUE
         </button>
       </div>
-      <table>
-        {children}
-      </table>
+      { children }
       <span>
         {totalPrice}
       </span>

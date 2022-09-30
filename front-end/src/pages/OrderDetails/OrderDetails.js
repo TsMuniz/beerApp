@@ -44,25 +44,7 @@ export default function OrderDetails() {
       setDelivery={ handleDelivery }
       setPreparing={ handlePreparing }
     >
-      <thead>
-        <td>Item</td>
-        <td>Descricao</td>
-        <td>Quantidade</td>
-        <td>Valor Unitario</td>
-        <td>Sub Total</td>
-      </thead>
-      <tbody>
-        {order.products.map?.((product, index) => (
-          <SellerOrderDetailsTable
-            key={ index }
-            position={ index + 1 }
-            description={ product.product.name }
-            quantity={ product.quantity }
-            unityValue={ product.product.price }
-            subTotal={ (product.product.price * product.quantity).toFixed(2) }
-          />
-        ))}
-      </tbody>
+      <SellerOrderDetailsTable orders={ order.products } />
     </SellerOrderDetailsTableWrapper>
   );
 }
