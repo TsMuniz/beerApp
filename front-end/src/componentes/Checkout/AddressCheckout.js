@@ -11,11 +11,9 @@ function AddressCheckout() {
   const navigate = useNavigate();
   const { cart } = useContext(CartContext);
 
-  const getTotalPrice = () => {
-    const totalPrice = cart
-      .reduce((acc) => acc + Number(cart.price) * Number(cart.quantity), 0);
-    return totalPrice.toFixed(2);
-  };
+  const totalPrice = cart
+    .reduce((acc, cartx) => acc + Number(cartx.price) * Number(cartx.quantity), 0)
+    .toFixed(2);
 
   const registerSale = async (pedido) => {
     const response = await api.post('/sales', pedido);
@@ -43,7 +41,7 @@ function AddressCheckout() {
     const { id } = await registerSale({
       userId: getUserId.id,
       sellerId: vendedor.select,
-      totalPrice: getTotalPrice(),
+      totalPrice,
       deliveryAddress: address,
       deliveryNumber: addressNumber,
       products: saleId,

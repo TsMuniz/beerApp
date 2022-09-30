@@ -16,7 +16,6 @@ export default function OrderDetails() {
       .then((response) => setOrder(response.data));
   }, [orderId]);
 
-  console.log(order)
   const handleDelivery = async () => {
     try {
       await api.patch(`sales/changeStatus/${orderId.id}/?status=1`);

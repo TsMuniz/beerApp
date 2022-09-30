@@ -13,11 +13,11 @@ const salesService = {
           totalPrice: Joi.number().required(),
           deliveryAddress: Joi.string().required(),
           deliveryNumber: Joi.number().required(),
-          products: Joi.object({
+          products: Joi.array().items({
             productId: Joi.number().required(),
             quantity: Joi.number().required(),
-          }),
-        });
+        }),
+    });
     
         const { error } = schema.validate(body);
 
