@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import SellerOrderDetailsTable
-  from '../../componentes/OrderDetailsTable/SellerOrderDetailsTable';
+  from '../../componentes/Tables/SellerOrderDetailsTable';
 import SellerOrderDetailsTableWrapper
   from '../../componentes/ODTW/SellerOrderDetailsTableWrapper';
 import api from '../../helpers/api';

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import CustomerOrderDetailsTable
-  from '../../componentes/OrderDetailsTable/CustomerOrderDetailsTable';
+  from '../../componentes/Tables/CustomerOrderDetailsTable';
 import CustomerOrderDetailsTableWrapper
   from '../../componentes/ODTW/CustomerOrderDetailsTableWrapper';
 import api from '../../helpers/api';

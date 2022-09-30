@@ -9,35 +9,35 @@ export default function TableRowItems(
     <>
       <td
         data-testid={
-          `${testIdPrefix}__element-order-table-item-number-${itemNumber}`
+          `${testIdPrefix}__element-order-table-item-number-${itemNumber - 1}`
         }
       >
         { itemNumber }
       </td>
       <td
         data-testid={
-          `${testIdPrefix}__element-order-table-name-${description}`
+          `${testIdPrefix}__element-order-table-name-${itemNumber - 1}`
         }
       >
         { description }
       </td>
       <td
         data-testid={
-          `${testIdPrefix}__element-order-table-quantity-${quantity}`
+          `${testIdPrefix}__element-order-table-quantity-${itemNumber - 1}`
         }
       >
         { quantity }
       </td>
       <td
         data-testid={
-          `${testIdPrefix}__element-order-table-unit-price-${unityValue}`
+          `${testIdPrefix}__element-order-table-unit-price-${itemNumber - 1}`
         }
       >
         { unityValue }
       </td>
       <td
         data-testid={
-          `${testIdPrefix}__element-order-table-sub-total-${subTotal}`
+          `${testIdPrefix}__element-order-table-sub-total-${itemNumber - 1}`
         }
       >
         { formatToPrice(subTotal) }
