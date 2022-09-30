@@ -1,5 +1,5 @@
 import React from 'react';
-import TotalPrice from '../../componentes/OrdersTable/TotalPrice';
+import TotalPrice from '../../componentes/Checkout/TotalPrice';
 import Address from '../../componentes/Checkout/AddressCheckout';
 import CustomerCheckoutTable from '../../componentes/Tables/CustomerCheckoutTable';
 
