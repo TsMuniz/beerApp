@@ -6,6 +6,7 @@ import CustomerOrderDetailsTable
 import CustomerOrderDetailsTableWrapper
   from '../../componentes/ODTW/CustomerOrderDetailsTableWrapper';
 import api from '../../helpers/api';
+import OrderTotalPrice from '../../componentes/OrderTotalPrice';
 
 export default function CustomerOrderDetails() {
   const orderId = useParams();
@@ -38,6 +39,9 @@ export default function CustomerOrderDetails() {
       setDelivered={ handleDelivered }
     >
       <CustomerOrderDetailsTable orders={ order.products } />
+      <OrderTotalPrice userType="customer">
+        { order.totalPrice }
+      </OrderTotalPrice>
     </CustomerOrderDetailsTableWrapper>
   );
 }

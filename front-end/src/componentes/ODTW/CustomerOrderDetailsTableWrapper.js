@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TotalPrice from '../Checkout/TotalPrice';
 
 export default function CustomerOrderDetailsTableWrapper(
   { status, date, orderNumber, children, setDelivered, disable },
@@ -35,7 +34,6 @@ export default function CustomerOrderDetailsTableWrapper(
         </button>
       </div>
       { children }
-      <TotalPrice testIdPrefix="seller_order_details" />
     </div>
   );
 }
