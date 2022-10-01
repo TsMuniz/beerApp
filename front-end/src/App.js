@@ -10,10 +10,10 @@ import Products from './pages/Products/Products';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import SellerOrders from './pages/SellerOrders/SellerOrders';
 import CustomerOrders from './pages/CustomerOrders/CustomerOrders';
-import OrderDetails from './pages/OrderDetails/OrderDetails';
 import CustomerOrderDetails from './pages/OrderDetails/CustomerOrderDetails';
 import Management from './pages/Management/Management';
 import Checkout from './pages/Checkout/Checkout';
+import SellerOrderDetails from './pages/OrderDetails/SellerOrderDetails';
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
         </Route>
         <Route path="/seller" element={ <SellerLayout /> }>
           <Route path="orders" element={ <SellerOrders /> } />
-          <Route path="orders/:id" element={ <OrderDetails /> } />
+          <Route path="orders/:id" element={ <SellerOrderDetails /> } />
         </Route>
         <Route path="/customer" element={ <CustomerLayout /> }>
           <Route path="orders" element={ <CustomerOrders /> } />
