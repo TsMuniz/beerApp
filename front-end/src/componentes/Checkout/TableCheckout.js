@@ -1,7 +1,18 @@
-import React from 'react';
-import SellerOrderDetailsTable from '../OrderDetailsTable/SellerOrderDetailsTable';
+import React, { useContext } from 'react';
+import { CartContext } from '../../contexts/CartContext';
+import formatToPrice from '../../helpers/formatToPrice';
 
 function TableCheckout() {
+  const prefixId = 'customer_checkout';
+  const { cart, setCart, setTotalPrice, totalPrice } = useContext(CartContext);
+
+  const handleRemove = (id, subTotal) => {
+    const items = cart.filter((item) => item.id !== id);
+    setTotalPrice(totalPrice - subTotal);
+    setCart(items);
+    localStorage.setItem('cart', JSON.stringify(items));
+  };
+
   return (
     <table>
       <thead>
@@ -14,7 +25,64 @@ function TableCheckout() {
           <th>Remover Item</th>
         </tr>
       </thead>
-      <SellerOrderDetailsTable />
+      <tbody>
+        {
+          cart.map((product, index) => {
+            const { id, name, quantity, price: unityValue } = product;
+            const subTotal = quantity * unityValue;
+            return (
+              <tr key={ index }>
+                <td
+                  data-testid={
+                    `${prefixId}__element-order-table-item-number-${index}`
+                  }
+                >
+                  {index + 1}
+                </td>
+                <td
+                  data-testid={
+                    `${prefixId}__element-order-table-name-${index}`
+                  }
+                >
+                  {name}
+                </td>
+                <td
+                  data-testid={
+                    `${prefixId}__element-order-table-quantity-${index}`
+                  }
+                >
+                  {quantity}
+                </td>
+                <td
+                  data-testid={
+                    `${prefixId}__element-order-table-unit-price-${index}`
+                  }
+                >
+                  { unityValue.replace('.', ',') }
+                </td>
+                <td
+                  data-testid={
+                    `${prefixId}__element-order-table-sub-total-${index}`
+                  }
+                >
+                  { formatToPrice(subTotal) }
+                </td>
+                <td>
+                  <button
+                    type="button"
+                    data-testid={
+                      `${prefixId}__element-order-table-remove-${index}`
+                    }
+                    onClick={ () => handleRemove(id, subTotal) }
+                  >
+                    REMOVER
+                  </button>
+                </td>
+              </tr>
+            );
+          })
+        }
+      </tbody>
     </table>
   );
 }
