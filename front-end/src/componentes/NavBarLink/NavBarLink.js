@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 
 export default function NavBarLink({ name, path, dataTestId }) {
   return (
-    <Link to={ path } data-testid={ dataTestId }>
+    <Link to={ path }>
       <button
         type="button"
+        data-testid={ dataTestId }
       >
         {name}
       </button>

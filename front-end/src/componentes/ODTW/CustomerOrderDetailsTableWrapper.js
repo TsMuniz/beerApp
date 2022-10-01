@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function CustomerOrderDetailsTableWrapper(
-  { status, date, orderNumber, children, totalPrice, setDelivered, disable },
+  { status, date, orderNumber, children, totalPrice, setDelivered },
 ) {
   return (
     <div>
@@ -25,7 +25,7 @@ export default function CustomerOrderDetailsTableWrapper(
           {status}
         </span>
         <button
-          disabled={ disable }
+          disabled={ status === 'Entregue' }
           data-testid="customer_order_details__button-delivery-check"
           onClick={ setDelivered }
           type="button"
@@ -44,7 +44,6 @@ export default function CustomerOrderDetailsTableWrapper(
 }
 
 CustomerOrderDetailsTableWrapper.propTypes = {
-  disable: PropTypes.bool.isRequired,
   children: PropTypes.node.isRequired,
   date: PropTypes.string.isRequired,
   orderNumber: PropTypes.string.isRequired,

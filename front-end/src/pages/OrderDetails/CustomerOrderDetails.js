@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
@@ -15,11 +16,11 @@ export default function CustomerOrderDetails() {
   useEffect(() => {
     api.get(`/sales/${+orderId.id}`)
       .then((response) => setOrder(response.data));
-  }, [orderId]);
+  }, []);
 
   const handleDelivered = async () => {
     try {
-      await api.patch(`sales/changeStatus/${orderId.id}/?status=2`);
+      await api.patch(`sales/finishOrder/${orderId.id}`);
       setDisabled(true);
     } catch (error) {
       console.log(error.message);
@@ -39,11 +40,13 @@ export default function CustomerOrderDetails() {
       setDelivered={ handleDelivered }
     >
       <thead>
-        <td>Item</td>
-        <td>Descricao</td>
-        <td>Quantidade</td>
-        <td>Valor Unitario</td>
-        <td>Sub Total</td>
+        <tr>
+          <th>Item</th>
+          <th>Descrição</th>
+          <th>Quantidade</th>
+          <th>Valor Unitário</th>
+          <th>Sub Total</th>
+        </tr>
       </thead>
       <tbody>
         {order.products.map?.((product, index) => (

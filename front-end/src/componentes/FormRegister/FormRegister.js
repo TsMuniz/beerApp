@@ -27,8 +27,9 @@ function FormRegister() {
   }, [name, email, password]);
 
   async function handleSubmit(event) {
+    event.preventDefault();
+    console.log(event);
     try {
-      event.preventDefault();
       const response = await api.post('/register', { name, email, password });
       if (response.status === HTTP_CREATED) {
         setIsLogged(true);

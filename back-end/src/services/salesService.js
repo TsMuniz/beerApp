@@ -55,6 +55,21 @@ const salesService = {
         return salesByRole;
     },
 
+    async findByCustomer(userId) {
+        const salesByRole = await Sale.findAll({ where: { userId },
+        include: [{
+            model: SalesProduct,
+            as: 'products',                
+            attributes: { exclude: ['saleId', 'productId'] },                            
+            include: [{
+                model: Product,
+                as: 'product',
+            }],
+        }] });
+
+        return salesByRole;
+    },
+
     async checkCustomer(id) {
         const customer = await User.findByPk(+id);
         if (!customer) throw new Error('Not Found', { cause: 404 });
