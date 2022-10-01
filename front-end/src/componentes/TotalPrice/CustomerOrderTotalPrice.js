@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { CartContext } from '../../contexts/CartContext';
 import formatToPrice from '../../helpers/formatToPrice';
 
-export default function TotalPrice({ testIdPrefix }) {
+export default function CustomerOrderTotalPrice({ testIdPrefix }) {
   const { totalPrice } = useContext(CartContext);
   return (
     <div>
@@ -15,6 +15,6 @@ export default function TotalPrice({ testIdPrefix }) {
   );
 }
 
-TotalPrice.propTypes = {
+CustomerOrderTotalPrice.propTypes = {
   testIdPrefix: PropTypes.string.isRequired,
 };
