@@ -2,7 +2,8 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../helpers/api';
-import BotaoVerdeEscuro from '../../componentes/BotaoVerdeEscuro/BotaoVerdeEscuro';
+import BotaoVerdeEscuro
+  from '../../componentes/Buttons/BotaoVerdeEscuro/BotaoVerdeEscuro';
 import { CartContext } from '../../contexts/CartContext';
 import styles from './styles.module.scss';
 
@@ -34,7 +35,7 @@ function Products() {
     const totalPrice = productsWithQuantity
       .reduce((acc, { price, quantity }) => acc + (+price * quantity), 0);
     if (totalPrice > 0) setCheckoutDisable(false);
-  }, [input]);
+  }, [input, products]);
 
   const changeProductsQuantity = (type, product) => {
     if (input[product.id] === 0 && type === 'decrement') {
