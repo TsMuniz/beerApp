@@ -45,7 +45,7 @@ export default function SellerOrderDetails() {
       setPreparing={ handlePreparing }
     >
       <SellerOrderDetailsTable orders={ order.products } />
-      <SellerOrderTotalPrice totalPrice={ order.totalPrice } />
+      <SellerOrderTotalPrice totalPrice={ Number(order.totalPrice) } />
     </SellerOrderDetailsTableWrapper>
   );
 }

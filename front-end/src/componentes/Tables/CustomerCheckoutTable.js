@@ -42,9 +42,9 @@ export default function CustomerCheckoutTable() {
                   <button
                     type="button"
                     data-testid={
-                      `${prefixId}__element-order-table-remove-${index}`
+                      `customer_checkout__element-order-table-remove-${index}`
                     }
-                    onClick={ () => handleRemove(id, subTotal) }
+                    onClick={ () => handleRemove(product.id, subTotal) }
                   >
                     REMOVER
                   </button>

@@ -16,16 +16,16 @@ export default function OrderDetailsTable({ userType, orders }) {
       </thead>
       <tbody>
         {
-          orders.map((order, index) => {
-            const subTotal = order.price * order.quantity;
+          orders.length > 0 && orders.map(({ product, quantity }, index) => {
+            const subTotal = Number(product.price) * quantity;
             return (
               <tr key={ index }>
                 <TableRowItems
                   testIdPrefix={ `${userType}_order_details` }
                   itemNumber={ index + 1 }
-                  description={ order.name }
-                  quantity={ order.quantity }
-                  unityValue={ order.price }
+                  description={ product.name || '' }
+                  quantity={ quantity }
+                  unityValue={ Number(product.price) || 0 }
                   subTotal={ subTotal }
                 />
               </tr>

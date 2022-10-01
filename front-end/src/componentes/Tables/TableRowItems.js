@@ -33,7 +33,7 @@ export default function TableRowItems(
           `${testIdPrefix}__element-order-table-unit-price-${itemNumber - 1}`
         }
       >
-        { unityValue }
+        { formatToPrice(unityValue) }
       </td>
       <td
         data-testid={
@@ -48,9 +48,9 @@ export default function TableRowItems(
 
 TableRowItems.propTypes = {
   testIdPrefix: PropTypes.string.isRequired,
-  description: PropTypes.number.isRequired,
-  itemNumber: PropTypes.string.isRequired,
-  quantity: PropTypes.string.isRequired,
-  subTotal: PropTypes.string.isRequired,
-  unityValue: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  itemNumber: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
+  subTotal: PropTypes.number.isRequired,
+  unityValue: PropTypes.number.isRequired,
 };

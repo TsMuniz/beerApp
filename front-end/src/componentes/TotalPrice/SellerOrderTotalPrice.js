@@ -14,5 +14,5 @@ export default function SellerOrderTotalPrice({ totalPrice }) {
 }
 
 SellerOrderTotalPrice.propTypes = {
-  totalPrice: PropTypes.string.isRequired,
+  totalPrice: PropTypes.number.isRequired,
 };
