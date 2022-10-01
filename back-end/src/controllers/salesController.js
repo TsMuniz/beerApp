@@ -11,6 +11,12 @@ const salesController = {
         const sales = await salesService.findBySeller(+id);
         return res.status(200).json(sales);
     },
+
+    async findByCustomer(req, res) {
+        const { id } = req.params;
+        const sales = await salesService.findByCustomer(+id);
+        return res.status(200).json(sales);
+    },
     
     async create(req, res) {
         const sale = req.body;

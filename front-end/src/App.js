@@ -27,10 +27,10 @@ function App() {
           <Route path="orders/:id" element={ <SellerOrderDetails /> } />
         </Route>
         <Route path="/customer" element={ <CustomerLayout /> }>
+          <Route path="checkout" element={ <Checkout /> } />
           <Route path="orders" element={ <CustomerOrders /> } />
           <Route path="orders/:id" element={ <CustomerOrderDetails /> } />
           <Route path="products" element={ <Products /> } />
-          <Route path="checkout" element={ <Checkout /> } />
         </Route>
       </Route>
       <Route path="/login" element={ <Login /> } />

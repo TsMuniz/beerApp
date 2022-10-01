@@ -1,19 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import OrderStatusCard from '../../componentes/OrderstatusCard/OrderStatusCard';
-import { AuthContext } from '../../contexts/AuthContext';
 import api from '../../helpers/api';
 
-export default function SellerOrders() {
-  const { auth } = useContext(AuthContext);
+export default function CustomerOrders() {
+  const user = JSON.parse(localStorage.getItem('user'));
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const sellerId = auth.id;
+    const customerId = user.id;
 
-    api.get(`/sales/by-seller/${+sellerId}`)
+    api.get(`/sales/by-customer/${+customerId}`)
       .then((response) => setOrders(response.data));
-  }, [auth]);
+  }, []);
 
   return (
     <div>
@@ -32,6 +31,8 @@ export default function SellerOrders() {
           date={ saleDate }
           price={ totalPrice }
           address={ deliveryAddress }
+          prefixId="customer_orders"
+          redirect="customer"
         />
       )))}
     </div>

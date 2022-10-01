@@ -3,39 +3,47 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
 
-export default function OrderStatusCard({ id, status, price, date, address, number }) {
+export default function OrderStatusCard({ id,
+  status,
+  price,
+  date,
+  address,
+  number,
+  prefixId,
+  redirect,
+}) {
   return (
     <Link
-      to={ `/seller/orders/${id}` }
+      to={ `/${redirect}/orders/${id}` }
       className={ styles.cardContainer }
     >
       <div
         className={ styles.orderNumber }
-        data-testid={ `seller_orders__element-order-id-${id}` }
+        data-testid={ `${prefixId}__element-order-id-${id}` }
       >
         {number}
       </div>
       <div>
         <div>
           <span
-            data-testid={ `seller_orders__element-delivery-status-id-${id}` }
+            data-testid={ `${prefixId}__element-delivery-status-id-${id}` }
           >
             {status}
           </span>
           <span
-            data-testid={ `seller_orders__element-order-date-${id}` }
+            data-testid={ `${prefixId}__element-order-date-${id}` }
           >
             {date}
           </span>
           <span
-            data-testid={ `seller_orders__element-card-price-${id}` }
+            data-testid={ `${prefixId}__element-card-price-${id}` }
           >
             {price}
           </span>
         </div>
         <div>
           <span
-            data-testid={ `seller_orders__element-card-address-${id}` }
+            data-testid={ `${prefixId}__element-card-address-${id}` }
           >
             {address}
           </span>
@@ -46,6 +54,8 @@ export default function OrderStatusCard({ id, status, price, date, address, numb
 }
 
 OrderStatusCard.propTypes = {
+  redirect: PropTypes.string.isRequired,
+  prefixId: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   number: PropTypes.number.isRequired,

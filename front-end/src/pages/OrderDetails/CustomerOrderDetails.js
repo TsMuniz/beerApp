@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
@@ -17,11 +18,11 @@ export default function CustomerOrderDetails() {
   useEffect(() => {
     api.get(`/sales/${+orderId.id}`)
       .then((response) => setOrder(response.data));
-  }, [orderId]);
+  }, []);
 
   const handleDelivered = async () => {
     try {
-      await api.patch(`sales/changeStatus/${orderId.id}/?status=2`);
+      await api.patch(`sales/finishOrder/${orderId.id}`);
       setDisabled(true);
     } catch (error) {
       console.log(error.message);
