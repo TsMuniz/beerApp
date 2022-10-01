@@ -32,6 +32,8 @@ export default function SellerOrders() {
           date={ saleDate }
           price={ totalPrice }
           address={ deliveryAddress }
+          prefixId="seller_orders"
+          redirect="seller"
         />
       )))}
     </div>

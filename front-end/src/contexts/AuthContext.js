@@ -4,7 +4,8 @@ import React, { createContext, useState } from 'react';
 export const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
-  const [auth, setAuth] = useState(null);
+  const user = JSON.parse(localStorage.getItem('user')) || null;
+  const [auth, setAuth] = useState(user);
   const value = React.useMemo(() => ({
     auth, setAuth,
   }), [auth]);

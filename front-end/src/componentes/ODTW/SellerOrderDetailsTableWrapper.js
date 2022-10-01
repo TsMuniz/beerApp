@@ -4,6 +4,7 @@ import React from 'react';
 export default function SellerOrderDetailsTableWrapper(
   { status, date, orderNumber, children, totalPrice, setPreparing, setDelivery },
 ) {
+  console.log(status);
   return (
     <div>
       <div>
@@ -27,6 +28,7 @@ export default function SellerOrderDetailsTableWrapper(
           data-testid="seller_order_details__button-preparing-check"
           onClick={ setPreparing }
           type="button"
+          disabled={ status !== 'Pendente' }
         >
           PREPARAR PEDIDO
         </button>
@@ -34,6 +36,7 @@ export default function SellerOrderDetailsTableWrapper(
           data-testid="seller_order_details__button-dispatch-check"
           onClick={ setDelivery }
           type="button"
+          disabled={ status !== 'Preparando' }
         >
           SAIU PARA ENTREGA
         </button>
@@ -41,8 +44,10 @@ export default function SellerOrderDetailsTableWrapper(
       <table>
         {children}
       </table>
-      <span>
-        {totalPrice}
+      <span
+        data-testid="seller_order_details__element-order-total-price"
+      >
+        {totalPrice.replace('.', ',')}
       </span>
     </div>
   );
@@ -51,7 +56,7 @@ export default function SellerOrderDetailsTableWrapper(
 SellerOrderDetailsTableWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   date: PropTypes.string.isRequired,
-  orderNumber: PropTypes.string.isRequired,
+  orderNumber: PropTypes.number.isRequired,
   setDelivery: PropTypes.func.isRequired,
   setPreparing: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
