@@ -1,13 +1,14 @@
 import React from 'react';
-import TotalPrice from '../../componentes/Checkout/TotalPrice';
 import Address from '../../componentes/Checkout/AddressCheckout';
-import TableCheckout from '../../componentes/Checkout/TableCheckout';
+import CustomerCheckoutTable from '../../componentes/Tables/CustomerCheckoutTable';
+import CustomerOrderTotalPrice
+  from '../../componentes/TotalPrice/CustomerOrderTotalPrice';
 
 export default function Checkout() {
   return (
     <div>
-      <TableCheckout prefixId="customer_checkout" />
-      <TotalPrice prefixId="customer_checkout" />
+      <CustomerCheckoutTable />
+      <CustomerOrderTotalPrice testIdPrefix="customer_checkout" />
       <Address />
     </div>
   );

@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import SellerOrderDetailsTable
-  from '../../componentes/OrderDetailsTable/SellerOrderDetailsTable';
+  from '../../componentes/Tables/SellerOrderDetailsTable';
 import SellerOrderDetailsTableWrapper
   from '../../componentes/ODTW/SellerOrderDetailsTableWrapper';
 import api from '../../helpers/api';
+import SellerOrderTotalPrice from '../../componentes/TotalPrice/SellerOrderTotalPrice';
 
-export default function OrderDetails() {
+export default function SellerOrderDetails() {
   const orderId = useParams();
 
   const [order, setOrder] = useState({});
@@ -38,31 +39,13 @@ export default function OrderDetails() {
   return (
     <SellerOrderDetailsTableWrapper
       orderNumber={ order.id }
-      totalPrice={ order.totalPrice }
       status={ order.status }
       date={ format(Date.parse(order.saleDate), 'dd/MM/yyyy') }
       setDelivery={ handleDelivery }
       setPreparing={ handlePreparing }
     >
-      <thead>
-        <td>Item</td>
-        <td>Descricao</td>
-        <td>Quantidade</td>
-        <td>Valor Unitario</td>
-        <td>Sub Total</td>
-      </thead>
-      <tbody>
-        {order.products.map?.((product, index) => (
-          <SellerOrderDetailsTable
-            key={ index }
-            position={ index + 1 }
-            description={ product.product.name }
-            quantity={ product.quantity }
-            unityValue={ product.product.price }
-            subTotal={ (product.product.price * product.quantity).toFixed(2) }
-          />
-        ))}
-      </tbody>
+      <SellerOrderDetailsTable orders={ order.products } />
+      <SellerOrderTotalPrice totalPrice={ Number(order.totalPrice) } />
     </SellerOrderDetailsTableWrapper>
   );
 }

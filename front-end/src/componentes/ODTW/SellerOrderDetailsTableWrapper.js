@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 export default function SellerOrderDetailsTableWrapper(
-  { status, date, orderNumber, children, totalPrice, setPreparing, setDelivery },
+  { status, date, orderNumber, children, setPreparing, setDelivery },
 ) {
   console.log(status);
   return (
@@ -41,14 +41,7 @@ export default function SellerOrderDetailsTableWrapper(
           SAIU PARA ENTREGA
         </button>
       </div>
-      <table>
-        {children}
-      </table>
-      <span
-        data-testid="seller_order_details__element-order-total-price"
-      >
-        {totalPrice.replace('.', ',')}
-      </span>
+      {children}
     </div>
   );
 }
@@ -60,5 +53,4 @@ SellerOrderDetailsTableWrapper.propTypes = {
   setDelivery: PropTypes.func.isRequired,
   setPreparing: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
-  totalPrice: PropTypes.string.isRequired,
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function CustomerOrderDetailsTableWrapper(
-  { status, date, orderNumber, children, totalPrice, setDelivered },
+  { status, date, orderNumber, children, setDelivered },
 ) {
   return (
     <div>
@@ -33,12 +33,7 @@ export default function CustomerOrderDetailsTableWrapper(
           ENTREGUE
         </button>
       </div>
-      <table>
-        {children}
-      </table>
-      <span>
-        {totalPrice}
-      </span>
+      { children }
     </div>
   );
 }
@@ -49,5 +44,4 @@ CustomerOrderDetailsTableWrapper.propTypes = {
   orderNumber: PropTypes.string.isRequired,
   setDelivered: PropTypes.func.isRequired,
   status: PropTypes.string.isRequired,
-  totalPrice: PropTypes.string.isRequired,
 };
