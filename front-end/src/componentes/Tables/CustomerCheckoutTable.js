@@ -27,7 +27,8 @@ export default function CustomerCheckoutTable() {
       <tbody>
         {
           cart.map((product, index) => {
-            const subTotal = product.price * product.quantity;
+            const subTotal = Number(product.price) * product.quantity;
+            console.log(product);
             return (
               <tr key={ index }>
                 <TableRowItems
@@ -35,7 +36,7 @@ export default function CustomerCheckoutTable() {
                   itemNumber={ index + 1 }
                   description={ product.name }
                   quantity={ product.quantity }
-                  unityValue={ product.price }
+                  unityValue={ Number(product.price) }
                   subTotal={ subTotal }
                 />
                 <td>
