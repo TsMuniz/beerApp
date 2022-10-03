@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './BotaoVerdeEscuro.css';
+import styles from './styles.module.scss';
 
 function botaoVerdeEscuro({ placeholder, click, isDisabled }) {
   return (
 
     <button
       disabled={ isDisabled }
-      className="botaoVerdeEscuro"
+      className={ styles.button }
       type="button"
       onClick={ click }
       data-testid="customer_products__button-cart"

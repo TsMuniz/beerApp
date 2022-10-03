@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ButtonLogout from '../Buttons/ButtonLogout';
+import ButtonLogout from '../Buttons/LogoutButton/ButtonLogout';
 import styles from './styles.module.scss';
 
 function NavBar({ children }) {

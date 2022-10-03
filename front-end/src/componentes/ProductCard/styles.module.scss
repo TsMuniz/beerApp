@@ -45,6 +45,7 @@
 
     .cardBottom {
         display: flex;
+        justify-content: space-evenly;
         flex-grow: 1;
         flex-direction: column;
         align-items: center;
