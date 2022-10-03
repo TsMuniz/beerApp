@@ -26,7 +26,7 @@ function botaoVerdeEscuro({ placeholder, click, isDisabled }) {
 }
 
 botaoVerdeEscuro.propTypes = {
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.number.isRequired,
   isDisabled: PropTypes.bool.isRequired,
 };
 
