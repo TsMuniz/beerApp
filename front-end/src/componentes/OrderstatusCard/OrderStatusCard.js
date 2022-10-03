@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './styles.module.scss';
+import StatusTag from '../StatusTag/StatusTag';
 
 export default function OrderStatusCard({ id,
   status,
@@ -12,6 +13,8 @@ export default function OrderStatusCard({ id,
   prefixId,
   redirect,
 }) {
+  const location = useLocation();
+  console.log(location.pathname);
   return (
     <Link
       to={ `/${redirect}/orders/${id}` }
@@ -21,32 +24,44 @@ export default function OrderStatusCard({ id,
         className={ styles.orderNumber }
         data-testid={ `${prefixId}__element-order-id-${id}` }
       >
+        Pedido
         {number}
       </div>
       <div>
-        <div>
-          <span
+        <div
+          className={ styles.cardLeft }
+        >
+          <StatusTag
             data-testid={ `${prefixId}__element-delivery-status-id-${id}` }
+            Orderstatus={ status }
           >
             {status}
-          </span>
-          <span
-            data-testid={ `${prefixId}__element-order-date-${id}` }
-          >
-            {date}
-          </span>
-          <span
-            data-testid={ `${prefixId}__element-card-price-${id}` }
-          >
-            {price}
-          </span>
+          </StatusTag>
+          <div className={ styles.cardLeftSeparator }>
+            <span
+              data-testid={ `${prefixId}__element-order-date-${id}` }
+            >
+              {date}
+            </span>
+            <span
+              data-testid={ `${prefixId}__element-card-price-${id}` }
+            >
+              R$
+              {' '}
+              {price.replace('.', ',')}
+            </span>
+          </div>
         </div>
         <div>
-          <span
-            data-testid={ `${prefixId}__element-card-address-${id}` }
-          >
-            {address}
-          </span>
+          {
+            location.pathname === 'customer/orders' && (
+              <span
+                data-testid={ `${prefixId}__element-card-address-${id}` }
+              >
+                {address}
+              </span>
+            )
+          }
         </div>
       </div>
     </Link>
