@@ -14,7 +14,6 @@ export default function OrderStatusCard({ id,
   redirect,
 }) {
   const location = useLocation();
-  console.log(location.pathname);
   return (
     <Link
       to={ `/${redirect}/orders/${id}` }
@@ -54,7 +53,7 @@ export default function OrderStatusCard({ id,
         </div>
         <div>
           {
-            location.pathname === 'customer/orders' && (
+            location.pathname === '/seller/orders' && (
               <span
                 data-testid={ `${prefixId}__element-card-address-${id}` }
               >

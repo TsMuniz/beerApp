@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import formatToPrice from '../../helpers/formatToPrice';
+import formatToPrice from '../../../helpers/formatToPrice';
+// import styles from './styles.module.scss';
 
 export default function TableRowItems(
   { testIdPrefix, itemNumber, description, quantity, unityValue, subTotal },
@@ -33,6 +34,8 @@ export default function TableRowItems(
           `${testIdPrefix}__element-order-table-unit-price-${itemNumber - 1}`
         }
       >
+        R$
+        {' '}
         { formatToPrice(unityValue) }
       </td>
       <td
@@ -40,6 +43,8 @@ export default function TableRowItems(
           `${testIdPrefix}__element-order-table-sub-total-${itemNumber - 1}`
         }
       >
+        R$
+        {' '}
         { formatToPrice(subTotal) }
       </td>
     </>
