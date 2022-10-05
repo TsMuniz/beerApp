@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../../../contexts/CartContext';
+import CustomerOrderTotalPrice from '../../TotalPrice/CustomerOrderTotalPrice';
 import TableRowItems from '../TableRowItem/TableRowItems';
 import styles from './styles.module.scss';
 
@@ -63,6 +64,7 @@ export default function CustomerCheckoutTable() {
               );
             })
           }
+          <CustomerOrderTotalPrice testIdPrefix="customer_checkout" />
         </tbody>
       </table>
     </div>
