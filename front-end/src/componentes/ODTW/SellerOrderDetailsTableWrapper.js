@@ -4,7 +4,6 @@ import React from 'react';
 export default function SellerOrderDetailsTableWrapper(
   { status, date, orderNumber, children, setPreparing, setDelivery },
 ) {
-  console.log(status);
   return (
     <div>
       <div>

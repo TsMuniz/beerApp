@@ -22,7 +22,6 @@ function AddressCheckout() {
 
   const getSellers = async () => {
     const response = await api.get('/user/sellers');
-    // console.log(response);
     return response.data;
   };
 
