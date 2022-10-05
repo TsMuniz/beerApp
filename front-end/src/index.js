@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App';
+import Routes from './Routes'
 import AuthProvider from './contexts/AuthContext'
 import './global.css'
 
@@ -9,7 +9,7 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
-          <App />
+          <Routes />
       </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>,
