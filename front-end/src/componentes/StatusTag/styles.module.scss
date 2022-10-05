@@ -1,0 +1,28 @@
+@import '../../vars.scss';
+
+.tagContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $text-dark;
+    margin: 10px;
+    width: 295px;
+    height: 141px;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+}
+.Pendente{
+    background-color: #CCB800BF;
+}
+
+.Entregue{
+    background-color: #00CC9BBF;
+}
+
+.Preparando{
+    background-color: #66CC00BF;
+}
