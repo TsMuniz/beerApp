@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './styles.module.scss';
 
-function botaoVerdeEscuro({ placeholder, click, isDisabled }) {
+export default function CartButton({ placeholder, click, isDisabled }) {
   return (
 
     <button
@@ -25,9 +25,8 @@ function botaoVerdeEscuro({ placeholder, click, isDisabled }) {
   );
 }
 
-botaoVerdeEscuro.propTypes = {
+CartButton.propTypes = {
   placeholder: PropTypes.number.isRequired,
   isDisabled: PropTypes.bool.isRequired,
+  click: PropTypes.func.isRequired,
 };
-
-export default botaoVerdeEscuro;

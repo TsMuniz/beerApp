@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import api from '../../config/api';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import api from '../../../config/api';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import './Form.css';
 
 function FormRegister() {

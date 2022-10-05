@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthContext';
-import api from '../../config/api';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { AuthContext } from '../../../contexts/AuthContext';
+import api from '../../../config/api';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import './Form.css';
 
 function FormLogin() {

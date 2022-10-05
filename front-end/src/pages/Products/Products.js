@@ -2,12 +2,11 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../config/api';
-import BotaoVerdeEscuro
-  from '../../components/Buttons/BotaoVerdeEscuro/BotaoVerdeEscuro';
 import { CartContext } from '../../contexts/CartContext';
 import styles from './styles.module.scss';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import CounterProducts from '../../components/CounterProducts/CounterProducts';
+import CartButton from '../../components/Buttons/CartButton';
 
 function Products() {
   const [products, setProducts] = React.useState([]);
@@ -90,7 +89,7 @@ function Products() {
           />
         </ProductCard>
       ))}
-      <BotaoVerdeEscuro
+      <CartButton
         click={ handleSetCart }
         placeholder={ getTotalPrice() }
         isDisabled={ checkoutDisable }

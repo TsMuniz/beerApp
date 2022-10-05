@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
-import api from '../../config/api';
-import { registerErrMsg } from '../../helpers/errorMessages';
-import httpStatus from '../../helpers/httpStatus';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import { AuthContext } from '../../../contexts/AuthContext';
+import api from '../../../config/api';
+import { registerErrMsg } from '../../../helpers/errorMessages';
+import httpStatus from '../../../helpers/httpStatus';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import './Form.css';
 
 const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
