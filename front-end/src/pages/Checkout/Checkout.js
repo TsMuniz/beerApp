@@ -1,6 +1,6 @@
 import React from 'react';
-import Address from '../../componentes/Checkout/AddressCheckout';
-import CustomerCheckoutTable from '../../componentes/Tables/CustomerCheckoutTable';
+import Address from '../../components/Checkout/AddressCheckout';
+import CustomerCheckoutTable from '../../components/Tables/CustomerCheckoutTable';
 import styles from './styles.module.scss';
 
 export default function Checkout() {

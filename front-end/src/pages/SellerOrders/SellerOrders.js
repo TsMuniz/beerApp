@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { format } from 'date-fns';
 import React, { useContext, useEffect, useState } from 'react';
-import OrderStatusCard from '../../componentes/OrderstatusCard/OrderStatusCard';
+import OrderStatusCard from '../../components/OrderstatusCard/OrderStatusCard';
 import { AuthContext } from '../../contexts/AuthContext';
-import api from '../../helpers/api';
+import api from '../../config/api';
 
 export default function SellerOrders() {
   const { auth } = useContext(AuthContext);

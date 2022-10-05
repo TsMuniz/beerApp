@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
-import api from '../../helpers/api';
+import api from '../../config/api';
 import { registerErrMsg } from '../../helpers/errorMessages';
 import httpStatus from '../../helpers/httpStatus';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';

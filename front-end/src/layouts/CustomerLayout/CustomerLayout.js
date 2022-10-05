@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import NavBar from '../../componentes/NavBar/NavBar';
-import NavBarLink from '../../componentes/NavBarLink/NavBarLink';
+import NavBar from '../../components/NavBar/NavBar';
+import NavBarLink from '../../components/NavBarLink/NavBarLink';
 import CartProvider from '../../contexts/CartContext';
 
 export default function CustomerLayout() {

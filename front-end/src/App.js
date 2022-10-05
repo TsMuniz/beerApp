@@ -1,11 +1,10 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login/Login';
-import Cadastro from './pages/Cadastro/Cadastro';
 import PrivateRoutes from './utils/PrivateRoutes';
-import AdminLayout from './layouts/LayoutAdministrador/AdminLayout';
-import SellerLayout from './layouts/LayoutVendedor/SellerLayout';
-import CustomerLayout from './layouts/LayoutCliente/CustomerLayout';
+import AdminLayout from './layouts/AdminLayout/AdminLayout';
+import SellerLayout from './layouts/SellerLayout/SellerLayout';
+import CustomerLayout from './layouts/CustomerLayout/CustomerLayout';
 import Products from './pages/Products/Products';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import SellerOrders from './pages/SellerOrders/SellerOrders';
@@ -14,6 +13,7 @@ import CustomerOrderDetails from './pages/OrderDetails/CustomerOrderDetails';
 import Management from './pages/Management/Management';
 import Checkout from './pages/Checkout/Checkout';
 import SellerOrderDetails from './pages/OrderDetails/SellerOrderDetails';
+import Register from './pages/register/Register';
 
 function App() {
   return (
@@ -35,7 +35,7 @@ function App() {
       </Route>
       <Route path="/login" element={ <Login /> } />
       <Route exact path="/" element={ <Navigate to="/login" replace /> } />
-      <Route path="/register" element={ <Cadastro /> } />
+      <Route path="/register" element={ <Register /> } />
       <Route path="*" element={ <NotFoundPage /> } />
     </Routes>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminFormRegister from '../../componentes/Forms/AdminFormRegister';
+import AdminFormRegister from '../../components/Forms/AdminFormRegister';
 import './Management.css';
 
 function Management() {

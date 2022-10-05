@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../contexts/CartContext';
-import api from '../../helpers/api';
+import api from '../../config/api';
 import './AddressCheckout.css';
 
 function AddressCheckout() {

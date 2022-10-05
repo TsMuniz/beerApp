@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../helpers/api';
+import api from '../../config/api';
 import BotaoVerdeEscuro
-  from '../../componentes/Buttons/BotaoVerdeEscuro/BotaoVerdeEscuro';
+  from '../../components/Buttons/BotaoVerdeEscuro/BotaoVerdeEscuro';
 import { CartContext } from '../../contexts/CartContext';
 import styles from './styles.module.scss';
-import ProductCard from '../../componentes/ProductCard/ProductCard';
-import CounterProducts from '../../componentes/CounterProducts/CounterProducts';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import CounterProducts from '../../components/CounterProducts/CounterProducts';
 
 function Products() {
   const [products, setProducts] = React.useState([]);

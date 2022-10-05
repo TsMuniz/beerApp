@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import CustomerOrderDetailsTable
-  from '../../componentes/Tables/CustomerOrderDetailsTable';
+  from '../../components/Tables/CustomerOrderDetailsTable';
 import CustomerOrderDetailsTableWrapper
-  from '../../componentes/ODTW/CustomerOrderDetailsTableWrapper';
-import api from '../../helpers/api';
+  from '../../components/ODTW/CustomerOrderDetailsTableWrapper';
+import api from '../../config/api';
 import CustomerOrderTotalPrice
-  from '../../componentes/TotalPrice/CustomerOrderTotalPrice';
+  from '../../components/TotalPrice/CustomerOrderTotalPrice';
 
 export default function CustomerOrderDetails() {
   const orderId = useParams();

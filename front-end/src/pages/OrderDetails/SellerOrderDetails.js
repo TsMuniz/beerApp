@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import SellerOrderDetailsTable
-  from '../../componentes/Tables/SellerOrderDetailsTable';
+  from '../../components/Tables/SellerOrderDetailsTable';
 import SellerOrderDetailsTableWrapper
-  from '../../componentes/ODTW/SellerOrderDetailsTableWrapper';
-import api from '../../helpers/api';
-import SellerOrderTotalPrice from '../../componentes/TotalPrice/SellerOrderTotalPrice';
+  from '../../components/ODTW/SellerOrderDetailsTableWrapper';
+import api from '../../config/api';
+import SellerOrderTotalPrice from '../../components/TotalPrice/SellerOrderTotalPrice';
 
 export default function SellerOrderDetails() {
   const orderId = useParams();
