@@ -12,7 +12,7 @@ function ErrorMessage({ dataTestId, children }) {
 
 ErrorMessage.propTypes = {
   dataTestId: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default ErrorMessage;

@@ -7,7 +7,7 @@ import Unauthorized from '../../pages/UnauthorizedPage';
 
 export default function SellerLayout() {
   const { auth } = useContext(AuthContext);
-  if (auth.role !== 'customer') return <Unauthorized />;
+  if (auth.role !== 'seller') return <Unauthorized />;
 
   return (
     <>
