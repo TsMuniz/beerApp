@@ -5,13 +5,13 @@ import PrivateRoutes from './utils/PrivateRoutes';
 import AdminLayout from './layouts/AdminLayout';
 import SellerLayout from './layouts/SellerLayout';
 import CustomerLayout from './layouts/CustomerLayout';
-import Products from './pages/Products/Products';
+import Products from './pages/Products';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import SellerOrders from './pages/SellerOrders/SellerOrders';
 import CustomerOrders from './pages/CustomerOrders/CustomerOrders';
 import CustomerOrderDetails from './pages/OrderDetails/CustomerOrderDetails';
 import Management from './pages/Management/Management';
-import Checkout from './pages/Checkout/Checkout';
+import Checkout from './pages/Checkout';
 import SellerOrderDetails from './pages/OrderDetails/SellerOrderDetails';
 import Register from './pages/register/Register';
 

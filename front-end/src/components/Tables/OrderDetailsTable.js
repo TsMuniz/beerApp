@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import TableRowItems from './TableRowItem/TableRowItems';
+import TableRowItems from './TableRowItem';
 
 export default function OrderDetailsTable({ userType, orders }) {
   return (

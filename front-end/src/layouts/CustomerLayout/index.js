@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
-import NavBarLink from '../../components/NavBarLink/NavBarLink';
+import NavBarLink from '../../components/NavBarLink';
 import { AuthContext } from '../../contexts/AuthContext';
 import CartProvider from '../../contexts/CartContext';
 import Unauthorized from '../../pages/UnauthorizedPage';

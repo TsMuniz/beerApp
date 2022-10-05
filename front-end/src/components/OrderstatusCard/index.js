@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './styles.module.scss';
-import StatusTag from '../StatusTag/StatusTag';
+import StatusTag from '../StatusTag';
 
 export default function OrderStatusCard({ id,
   status,

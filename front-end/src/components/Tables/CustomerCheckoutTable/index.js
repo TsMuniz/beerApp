@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../../../contexts/CartContext';
 import CustomerOrderTotalPrice from '../../TotalPrice/CustomerOrderTotalPrice';
-import TableRowItems from '../TableRowItem/TableRowItems';
+import TableRowItems from '../TableRowItem';
 import styles from './styles.module.scss';
 
 export default function CustomerCheckoutTable() {

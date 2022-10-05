@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../config/api';
 import { CartContext } from '../../contexts/CartContext';
 import styles from './styles.module.scss';
-import ProductCard from '../../components/ProductCard/ProductCard';
+import ProductCard from '../../components/ProductCard';
 import CounterProducts from '../../components/CounterProducts/CounterProducts';
 import CartButton from '../../components/Buttons/CartButton';
 

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { format } from 'date-fns';
 import React, { useContext, useEffect, useState } from 'react';
-import OrderStatusCard from '../../components/OrderstatusCard/OrderStatusCard';
+import OrderStatusCard from '../../components/OrderstatusCard';
 import { AuthContext } from '../../contexts/AuthContext';
 import api from '../../config/api';
 
