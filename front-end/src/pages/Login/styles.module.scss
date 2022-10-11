@@ -1,0 +1,14 @@
+@import '../../vars';
+
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $backgroud;
+    height: 100vh;
+    img {
+        width: 400px;
+        height: 400px;
+    }
+}
