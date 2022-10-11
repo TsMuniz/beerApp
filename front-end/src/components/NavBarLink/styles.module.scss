@@ -2,7 +2,7 @@
 
 .wrapper {
     cursor: pointer;
-    width: 367px;
+    width: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,5 +27,5 @@
 }
 
 .isActive {
-    background-color: $color-secondary;
+    border-bottom: 8px solid white;
 }

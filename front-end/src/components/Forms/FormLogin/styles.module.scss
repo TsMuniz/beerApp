@@ -1,12 +1,15 @@
 @import '../../../vars';
 
 .form{
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   width: 95%;
   height: 200px;
+  max-width: 400px;
 
   input{
     border: 0;
@@ -14,19 +17,28 @@
     width: 100%;
     height: 35px;
     padding: 6px 8px;
-    &::-moz-placeholder{
-      opacity: 0.9;
-    }
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   }
 
   button{
     background: transparent;
+    font-size: 16px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    cursor: pointer;
     border: 0;
     width: 100%;
     height: 35px;
     background-color: $brown-primary;
     color: $text-light;
     border-radius: 2px;
+    transition: all 0.2s;
+    &:hover{
+      transform: scale(1.01);
+    }
+  }
+
+  .registerBtn {
+    background-color: $brown-secondary;
   }
 }
 

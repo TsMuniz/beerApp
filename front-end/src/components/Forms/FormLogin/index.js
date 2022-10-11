@@ -93,6 +93,7 @@ function FormLogin() {
       <button
         type="button"
         onClick={ routeChange }
+        className={ styles.registerBtn }
       >
         Ainda não tenho conta
       </button>

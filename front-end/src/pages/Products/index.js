@@ -39,8 +39,12 @@ function Products() {
   }, [input, products]);
 
   const changeProductsQuantity = (type, product) => {
-    if (input[product.id] === 0 && type === 'decrement') {
-      return null;
+    if ((input[product.id] === 0
+      && type === 'decrement')
+     || Number.isNaN(input[product.id])
+    ) {
+      console.log(input);
+      return setInput({ ...input, [product.id]: 0 });
     }
     if (!input[product.id] && type === 'increment') {
       return setInput({ ...input, [product.id]: 1 });

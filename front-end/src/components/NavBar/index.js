@@ -4,27 +4,21 @@ import ButtonLogout from '../Buttons/LogoutButton';
 import styles from './styles.module.scss';
 
 function NavBar({ children }) {
-  const { name } = JSON.parse(localStorage.getItem('user'));
-
   return (
     <div
       className={ styles.header }
     >
-      <div
-        className={ styles.separatorLeft }
-      >
-        { children }
-      </div>
-      <div
-        className={ styles.separatorRigth }
-      >
-        <p
-          className={ styles.userName }
-          data-testid="customer_products__element-navbar-user-full-name"
+      <div className={ styles.headerContent }>
+        <div
+          className={ styles.separatorLeft }
         >
-          { name }
-        </p>
-        <ButtonLogout />
+          { children }
+        </div>
+        <div
+          className={ styles.separatorRigth }
+        >
+          <ButtonLogout />
+        </div>
       </div>
     </div>
   );
