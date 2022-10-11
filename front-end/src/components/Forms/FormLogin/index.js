@@ -34,17 +34,11 @@ function FormLogin() {
 
   async function redirectUser(role) {
     switch (role) {
-    case 'customer':
-      navigate('/customer/products');
-      break;
-    case 'seller':
-      navigate('/seller/orders');
-      break;
-    case 'administrator':
-      navigate('/admin/manage');
-      break;
+    case 'customer': return navigate('/customer/products');
+    case 'seller': return navigate('/seller/orders');
+    case 'administrator': return navigate('/admin/manage');
     default:
-      navigate('notFound');
+      navigate('/');
     }
   }
 
@@ -70,51 +64,41 @@ function FormLogin() {
       onSubmit={ handleSubmit }
       className={ styles.form }
     >
-      <label htmlFor="input-email" className="ForField">
-        <span className="FormieldName">Email</span>
-        <input
-          type="text"
-          name="email"
-          id="input-email"
-          placeholder="Ex: email@email.com"
-          data-testid="common_login__input-email"
-          className="FormieldInput"
-          onChange={ ({ target }) => { setEmail(target.value); } }
-          value={ email }
-        />
-      </label>
-      <label htmlFor="input-password" className="FormField">
-        <span className="FormieldName">Senha</span>
-        <input
-          type="password"
-          name="password"
-          id="input-password"
-          placeholder="******"
-          data-testid="common_login__input-password"
-          className="FormieldInput"
-          onChange={ ({ target }) => { setPassword(target.value); } }
-          value={ password }
-        />
-      </label>
+
+      <input
+        type="text"
+        name="email"
+        id="input-email"
+        placeholder="email@email.com"
+        className="FormieldInput"
+        onChange={ ({ target }) => { setEmail(target.value); } }
+        value={ email }
+      />
+
+      <input
+        type="password"
+        name="password"
+        id="input-password"
+        placeholder="********"
+        onChange={ ({ target }) => { setPassword(target.value); } }
+        value={ password }
+      />
+
       <button
         type="submit"
         disabled={ isDisableBtn }
-        data-testid="common_login__button-login"
-        className="Butto ButtnLogin"
       >
         LOGIN
       </button>
       <button
         type="button"
-        data-testid="common_login__button-register"
-        className="Butto ButtonRgister"
         onClick={ routeChange }
       >
         Ainda não tenho conta
       </button>
       {
         errorMessage && (
-          <ErrorMessage dataTestId="common_login__element-invalid-email">
+          <ErrorMessage>
             { errorMessage }
           </ErrorMessage>
         )
