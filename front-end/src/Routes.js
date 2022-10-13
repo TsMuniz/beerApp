@@ -34,7 +34,7 @@ function App() {
         </Route>
       </Route>
       <Route path="/login" element={ <Login /> } />
-      <Route exact path="/" element={ <Navigate to="/login" replace /> } />
+      <Route path="/" element={ <Navigate to="/login" replace /> } />
       <Route path="/register" element={ <Register /> } />
       <Route path="*" element={ <NotFoundPage /> } />
     </Routes>

@@ -1,0 +1,15 @@
+@import '../../vars';
+
+.register{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: $backgroud;
+    height: 100vh;
+    img {
+        width: 330px;
+        height: 330px;
+        filter: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
+    }
+}

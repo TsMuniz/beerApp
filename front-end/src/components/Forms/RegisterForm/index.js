@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import api from '../../../config/api';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
-import './Form.css';
+import styles from './styles.module.scss';
 
 function FormRegister() {
   const [email, setEmail] = React.useState('');
@@ -37,9 +37,8 @@ function FormRegister() {
         // setUser(response.data);
       }
     } catch (error) {
-      if (error.response.status) {
-        return setErrorMessage('Usuário já registrado.');
-      } return setErrorMessage(false);
+      setErrorMessage(false);
+      return setErrorMessage('Usuário já registrado.');
     }
   }
 
@@ -47,64 +46,43 @@ function FormRegister() {
     isLogged ? (
       <Navigate to="/customer/products" />
     ) : (
-      <div className="FlexContainer">
-        <form onSubmit={ handleSubmit } className="Form RegisterForm">
-          <label htmlFor="input-name" className="FormField">
-            <span className="FormFieldName">Nome</span>
-            <input
-              type="text"
-              name="name"
-              placeholder="Seu Nome"
-              id="input-name"
-              data-testid="common_register__input-name"
-              className="FormFieldInput"
-              onChange={ ({ target }) => { setName(target.value); } }
-              value={ name }
-            />
-          </label>
-          <label htmlFor="input-email" className="FormField">
-            <span className="FormFieldName">Email</span>
-            <input
-              type="email"
-              name="email"
-              placeholder="seu-email@site.com.br"
-              data-testid="common_register__input-email"
-              id="input-email"
-              className="FormFieldInput"
-              onChange={ ({ target }) => { setEmail(target.value); } }
-              value={ email }
-            />
-          </label>
-          <label htmlFor="input-password" className="FormField">
-            <span className="FormFieldName">Senha</span>
-            <input
-              type="password"
-              name="password"
-              id="input-password"
-              placeholder="******"
-              data-testid="common_register__input-password"
-              className="FormFieldInput"
-              onChange={ ({ target }) => { setPassword(target.value); } }
-              value={ password }
-            />
-          </label>
-          <button
-            type="submit"
-            disabled={ isDisableBtn }
-            data-testid="common_register__button-register"
-            className="Button ButtonRegister"
-          >
-            CADASTRAR
-          </button>
-          {
-            errorMessage && (
-              <ErrorMessage dataTestId="common_register__element-invalid_register">
-                { errorMessage }
-              </ErrorMessage>
-            )
-          }
-        </form>
-      </div>)
+      <form onSubmit={ handleSubmit } className={ styles.form }>
+        <input
+          type="text"
+          name="name"
+          placeholder="Nome"
+          onChange={ ({ target }) => { setName(target.value); } }
+          value={ name }
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="email@site.com.br"
+          onChange={ ({ target }) => { setEmail(target.value); } }
+          value={ email }
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="*********"
+          onChange={ ({ target }) => { setPassword(target.value); } }
+          value={ password }
+        />
+        <button
+          type="submit"
+          disabled={ isDisableBtn }
+        >
+          CADASTRAR
+        </button>
+        {
+          errorMessage && (
+            <ErrorMessage dataTestId="common_register__element-invalid_register">
+              { errorMessage }
+            </ErrorMessage>
+          )
+        }
+      </form>
+    )
   );
 }
 
