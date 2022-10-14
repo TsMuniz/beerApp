@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const md5 = require('md5');
+const { createToken } = require('../utils/token');
 const { User } = require('../database/models');
 
 const userService = {
@@ -26,8 +27,13 @@ const userService = {
         const hashedPassword = md5(password); 
         const findExist = await User.findOne({ where: { email } });
         if (findExist) throw new Error('Usuario ja existente', { cause: 409 });
-        const createdUser = await User.create({ name, email, role, password: hashedPassword });
-        if (createdUser) return createdUser;
+        
+        const createdUser = await User.create({ 
+            name, email, role, password: hashedPassword });
+            
+        const token = await createToken({ role, id: createdUser.id });
+        
+        if (createdUser) return { ...createdUser.dataValues, token };
     },
 
     async findOne(id) {

@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const md5 = require('md5');
-const { createToken } = require('../utils/token');
 const { User } = require('../database/models');
 
 const loginService = {
@@ -20,15 +19,8 @@ const loginService = {
             throw new Error('Not Found', { cause: 404 });
         }
         const userHashedPassword = md5(user.password);
-        const token = await createToken(userInfo);
         if (userInfo.password === userHashedPassword) {
-            return {
-                id: userInfo.id,
-                name: userInfo.name,
-                email: userInfo.email,
-                role: userInfo.role,
-                token,
-            };
+            return userInfo;
         }
         throw new Error('Unauthorized', { cause: 401 });
     },

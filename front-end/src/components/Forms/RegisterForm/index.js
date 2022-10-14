@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import api from '../../../config/api';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import styles from './styles.module.scss';
@@ -10,11 +11,13 @@ function FormRegister() {
   const [name, setName] = React.useState('');
   const [isDisableBtn, setIsDisableBtn] = React.useState(true);
   const [errorMessage, setErrorMessage] = React.useState(false);
-  const [isLogged, setIsLogged] = React.useState(false);
+  const [redirect, setRedirect] = React.useState(false);
 
   const MIN_PASSWORD = 6;
   const MIN_NAME = 12;
   const HTTP_CREATED = 201;
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     function validateLogin() {
@@ -28,13 +31,16 @@ function FormRegister() {
   }, [name, email, password]);
 
   async function handleSubmit(event) {
+    event.preventDefault();
     try {
-      event.preventDefault();
       const response = await api.post('/register', { name, email, password });
       if (response.status === HTTP_CREATED) {
-        setIsLogged(true);
         setErrorMessage(false);
-        // setUser(response.data);
+        localStorage.setItem('user', JSON.stringify(response.data));
+        const user = JSON.parse(localStorage.getItem('user'));
+        console.log(user);
+        const bb = 3000;
+        setTimeout(() => setRedirect(true), bb);
       }
     } catch (error) {
       setErrorMessage(false);
@@ -42,47 +48,48 @@ function FormRegister() {
     }
   }
 
+  if (redirect) {
+    navigate('/customer/products');
+  }
+
   return (
-    isLogged ? (
-      <Navigate to="/customer/products" />
-    ) : (
-      <form onSubmit={ handleSubmit } className={ styles.form }>
-        <input
-          type="text"
-          name="name"
-          placeholder="Nome"
-          onChange={ ({ target }) => { setName(target.value); } }
-          value={ name }
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="email@site.com.br"
-          onChange={ ({ target }) => { setEmail(target.value); } }
-          value={ email }
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="*********"
-          onChange={ ({ target }) => { setPassword(target.value); } }
-          value={ password }
-        />
-        <button
-          type="submit"
-          disabled={ isDisableBtn }
-        >
-          CADASTRAR
-        </button>
-        {
-          errorMessage && (
-            <ErrorMessage dataTestId="common_register__element-invalid_register">
-              { errorMessage }
-            </ErrorMessage>
-          )
-        }
-      </form>
-    )
+
+    <form onSubmit={ handleSubmit } className={ styles.form }>
+      <input
+        type="text"
+        name="name"
+        placeholder="Nome"
+        onChange={ ({ target }) => { setName(target.value); } }
+        value={ name }
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="email@site.com.br"
+        onChange={ ({ target }) => { setEmail(target.value); } }
+        value={ email }
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="*********"
+        onChange={ ({ target }) => { setPassword(target.value); } }
+        value={ password }
+      />
+      <button
+        type="submit"
+        disabled={ isDisableBtn }
+      >
+        CADASTRAR
+      </button>
+      {
+        errorMessage && (
+          <ErrorMessage dataTestId="common_register__element-invalid_register">
+            { errorMessage }
+          </ErrorMessage>
+        )
+      }
+    </form>
   );
 }
 
