@@ -48,8 +48,10 @@ function FormLogin() {
       const response = await api.post('/login', { email, password });
       if (response.status === HTTP_OK) {
         setErrorMessage(false);
-        setAuth(response.data);
         localStorage.setItem('user', JSON.stringify(response.data));
+        const user = JSON.parse(localStorage.getItem('user'));
+        console.log(user);
+        setAuth(response.data);
         redirectUser(response.data.role);
       }
     } catch (error) {
