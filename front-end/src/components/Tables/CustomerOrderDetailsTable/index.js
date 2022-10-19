@@ -1,5 +1,5 @@
 import React from 'react';
-import OrderDetailsTable from './OrderDetailsTable';
+import OrderDetailsTable from '../OrderDetailsTable';
 
 export default function CustomerOrderDetailsTable(props) {
   return (

@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import TableRowItems from './TableRowItem';
+import TableRowItems from '../TableRowItem';
+import styles from './styles.module.scss';
 
 export default function OrderDetailsTable({ userType, orders }) {
   return (
-    <table>
+    <table className={ styles.table }>
       <thead>
         <tr>
           <th>Item</th>

@@ -4,44 +4,38 @@ import formatToPrice from '../../../helpers/formatToPrice';
 // import styles from './styles.module.scss';
 
 export default function TableRowItems(
-  { testIdPrefix, itemNumber, description, quantity, unityValue, subTotal },
+  { itemNumber, description, quantity, unityValue, subTotal },
 ) {
   return (
     <>
       <td
-        data-testid={
-          `${testIdPrefix}__element-order-table-item-number-${itemNumber - 1}`
-        }
+        data-label="Item"
       >
         { itemNumber }
       </td>
       <td
-        data-testid={
-          `${testIdPrefix}__element-order-table-name-${itemNumber - 1}`
-        }
+        data-label="Descrição"
+
       >
         { description }
       </td>
       <td
-        data-testid={
-          `${testIdPrefix}__element-order-table-quantity-${itemNumber - 1}`
-        }
+        data-label="Quantidade"
+
       >
         { quantity }
       </td>
       <td
-        data-testid={
-          `${testIdPrefix}__element-order-table-unit-price-${itemNumber - 1}`
-        }
+        data-label="Valor Unitário"
+
       >
         R$
         {' '}
         { formatToPrice(unityValue) }
       </td>
       <td
-        data-testid={
-          `${testIdPrefix}__element-order-table-sub-total-${itemNumber - 1}`
-        }
+        data-label="Sub-Total"
+
       >
         R$
         {' '}
@@ -52,7 +46,6 @@ export default function TableRowItems(
 }
 
 TableRowItems.propTypes = {
-  testIdPrefix: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   itemNumber: PropTypes.number.isRequired,
   quantity: PropTypes.number.isRequired,

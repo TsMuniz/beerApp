@@ -17,11 +17,16 @@
     }
     
     .separatorLeft {
-        display: flex;
+        display: none;
+        @media (min-width: 678px) {
+            display: flex;
+            
+        }
     }
     .separatorRigth {
         display: flex;
         align-items: center;       
     }
+
 
 }

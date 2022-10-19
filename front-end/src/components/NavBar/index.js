@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ButtonLogout from '../Buttons/LogoutButton';
 import styles from './styles.module.scss';
+import MobileMenu from '../MobileMenu';
 
 function NavBar({ children }) {
   return (
@@ -9,6 +10,7 @@ function NavBar({ children }) {
       className={ styles.header }
     >
       <div className={ styles.headerContent }>
+        <MobileMenu />
         <div
           className={ styles.separatorLeft }
         >
