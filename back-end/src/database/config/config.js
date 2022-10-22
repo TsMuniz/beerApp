@@ -1,22 +1,38 @@
+// require('dotenv/config')
+
+// const options = {
+//   host: process.env.PGHOST,
+//   port: Number(process.env.PGPORT),
+//   database: process.env.PGDATABASE,    
+//   username: process.env.PGUSER,
+//   password: process.env.PGPASSWORD,
+//   dialect: 'postgres',
+//   define: {
+//     timestamps: true
+//   },
+//   logging: false,
+// };
+
+// module.exports = {
+//   development: {
+//     ...options,
+//   },
+//   test: {
+//     ...options,
+//   },
+//   production: {
+//     ...options,
+//   },
+// };
+
 require('dotenv').config();
 
-const environment = process.env.NODE_ENV || "test";
-
-const suffix = {
-  prod: "",
-  production: "",
-  dev: "-dev",
-  development: "-dev",
-  test: "-test",
-};
-
 const options = {
-  host: process.env.HOSTNAME || process.env.MYSQL_HOST || 'localhost',
-  port: process.env.MYSQL_PORT || '3306',
-  database:
-    `${process.env.MYSQL_DB_NAME || 'delivery-app'}${suffix[environment] || suffix.test}`,
-  username: process.env.MYSQL_USER || 'root',
-  password: process.env.MYSQL_PASSWORD || 'root',
+  host: process.env.MYSQLHOST,
+  port: process.env.MYSQLPORT,
+  database: process.env.MYSQLDATABASE,
+  username: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
   dialect: 'mysql',
   dialectOptions: {
     timezone: 'Z',
